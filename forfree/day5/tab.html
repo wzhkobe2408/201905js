@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>珠峰-唐开放同学</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      list-style: none;
+    }
+    .wrapper {
+      margin: 30px auto;
+      border: 1px solid #000;
+      width: 604px;
+      height: 400px;
+    }
+    .header {
+      border: 1px solid #000;
+    }
+    .clearfix:after {
+      display: block;
+      content: '';
+      visibility: hidden;
+      clear: both; /*清除浮动*/
+    }
+    .header li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .header li:nth-child(2) {
+      border-left: 1px solid #000;
+      border-right: 1px solid #000;
+    }
+    li.active {/*交集选择器：选择标签是li并且带有active类名的，11（1 + 10）*/
+      background: #00b38a;
+    }
+    .wrapper div {
+      display: none;
+      height: 360px;
+      line-height: 360px;
+      font-size: 30px;
+      text-align: center;
+    }
+    div.active {
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+<div class="wrapper" id="wrapper">
+  <ul class="header clearfix" id="header">
+    <li class="active">新闻</li>
+    <li>秒拍</li>
+    <li>综艺</li>
+  </ul>
+  <div class="active">
+    程序员惨遭亲妈拍卖
+  </div>
+  <div>
+    防止脱发秘籍
+  </div>
+  <div>
+    蔡虚坤-你们好讨厌哦
+  </div>
+</div>
+
+<script src="js/3-tab.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>珠峰-隔行变色</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      list-style: none;
+    }
+    ul {
+      margin: 30px auto;
+      width: 600px;
+      border: 1px solid #00b38a;
+    }
+    li {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    .bg0 {
+      background: red;
+    }
+    .bg1 {
+      background: green;
+    }
+   /* li:nth-child(odd) {
+      background: red;
+    }
+    li:nth-child(even) {
+      background: green;
+    }*/
+  </style>
+</head>
+<body>
+<!--ul>li{$item}*10 tab 键-->
+<ul id="box">
+  <li>1item</li>
+  <li>2item</li>
+  <li>3item</li>
+  <li>4item</li>
+  <li>5item</li>
+  <li>6item</li>
+  <li>7item</li>
+  <li>8item</li>
+  <li>9item</li>
+  <li>10item</li>
+</ul>
+<script>
+  var ul = document.getElementById('box');
+  var list = ul.getElementsByTagName('li');
+  for (var i = 0; i < list.length;i++) {
+    /*if (i % 2 === 0) {
+      list[i].className = 'bg0'
+    } else {
+      list[i].className = 'bg1'
+    }*/
+
+    // list[i].className = i % 2 === 0 ? 'bg0' : 'bg1';
+
+    list[i].className = 'bg' + (i % 2); // i = 0的时候 等号右侧计算结果 bg0
+  }
+  // 鼠标移入哪个li，哪个li的背景色变成yellow，移出还要恢复原来的颜色；（用自定义属性）
+  // 鼠标移入：onmouseover
+  // 鼠标移出：onmouseout
+</script>
+</body>
+</html>

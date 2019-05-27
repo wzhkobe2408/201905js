@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>珠峰培训-初识js</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#box {
+			margin: 20px auto;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+<!--1. 行内式引入js-->
+<!--<div id="box" onclick="alert('我被点了一下')"></div>-->
+<div id="box"></div>
+
+<!--2. 内嵌式引入js-->
+<!--<script>
+	var box = document.getElementById('box');
+	box.onclick = function () {
+	  alert('我被点了一下')
+	}
+</script>-->
+<!--3. 外链式引入js文件: 有外链式引入js的script标签，不能再内嵌js代码，写了也不会生效-->
+<script src="js/0-外链式引入js.js">
+	alert('123456789')
+</script>
+<!--
+不管是外链式还是内嵌式，script标签都要写在 body结束标签的前面
+-->
+</body>
+</html>

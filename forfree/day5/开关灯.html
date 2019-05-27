@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    div {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<!--js只能操作行内样式-->
+<div class="light" id="light" style="background: black"></div>
+
+<script>
+  // 1. 操作谁获取谁
+  var box = document.getElementById('light');
+  // 2. 给box绑定点击事件（只有绑了点击事件才有动作）
+  box.onclick = function () {
+    /*  if (box.style.backgroundColor === 'black') {
+        box.style.backgroundColor = 'white'
+      } else {
+        box.style.backgroundColor = 'black'
+      }*/
+    // box.style.backgroundColor === 'black'
+    //   ? box.style.backgroundColor = 'white'
+    //   : box.style.backgroundColor = 'black';
+
+    box.style.backgroundColor = box.style.backgroundColor === 'black' ? 'white' : 'black'; // 三元表达式的返回值特性，当等号右侧是三元表达式的时候，等着三元表达式把值求出来，然后再把这个值赋值给等号左侧。
+  }
+</script>
+</body>
+</html>

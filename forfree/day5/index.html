@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>复习</title>
+  
+</head>
+<body>
+<div id="box">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+
+<script>
+  var box = document.getElementById('box');
+  console.log(box); // null
+  var list = box.getElementsByTagName('li');
+  console.log(list);
+  var secondLi =list[1];
+</script>
+</body>
+</html>

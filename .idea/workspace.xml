@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="305ef71f-b282-4dc7-9931-7054650604ac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/201905js.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/formal/week1/day2/js/0-复习.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal/week1/day2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/formal/week1/day2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal/week1/day2/js/0-复习.js" beforeDir="false" afterPath="$PROJECT_DIR$/formal/week1/day2/js/0-复习.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal/week1/day2/js/1-变量提升.js" beforeDir="false" afterPath="$PROJECT_DIR$/formal/week1/day2/js/1-变量提升.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal/week1/day2/js/2-变量提升-js运行机制.js" beforeDir="false" afterPath="$PROJECT_DIR$/formal/week1/day2/js/2-变量提升-js运行机制.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formal/week1/day2/js/3-变量提升-重复声明.js" beforeDir="false" afterPath="$PROJECT_DIR$/formal/week1/day2/js/3-变量提升-重复声明.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,35 +28,74 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="1" />
+          <entry key="html" value="1" />
+          <entry key="js" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="1" />
+          <entry key="HTML" value="1" />
+          <entry key="JavaScript" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="852" />
+          <entry key="html" value="3" />
+          <entry key="js" value="4509" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="852" />
+          <entry key="HTML" value="3" />
+          <entry key="JavaScript" value="4509" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/0-复习.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/1-变量提升.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="-429">
+              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="n#!!block;n#fe#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/formal/week1/day2/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/2-变量提升-js运行机制.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="54" column="11" lean-forward="true" selection-start-line="54" selection-end-line="55" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/3-变量提升-重复声明.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#!!block;n#fe#0" />
               </folding>
             </state>
           </provider>
@@ -79,6 +118,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/formal/week1/day2/js/0-复习.js" />
+        <option value="$PROJECT_DIR$/formal/week1/day2/js/1-变量提升.js" />
+        <option value="$PROJECT_DIR$/formal/week1/day2/js/2-变量提升-js运行机制.js" />
+        <option value="$PROJECT_DIR$/formal/week1/day2/index.html" />
+        <option value="$PROJECT_DIR$/formal/week1/day2/js/3-变量提升-重复声明.js" />
       </list>
     </option>
   </component>
@@ -131,6 +174,14 @@
               <item name="week1" type="462c0819:PsiDirectoryNode" />
               <item name="day2" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="201905js" type="b2602c69:ProjectViewProjectNode" />
+              <item name="201905js" type="462c0819:PsiDirectoryNode" />
+              <item name="formal" type="462c0819:PsiDirectoryNode" />
+              <item name="week1" type="462c0819:PsiDirectoryNode" />
+              <item name="day2" type="462c0819:PsiDirectoryNode" />
+              <item name="练习" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -292,12 +343,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558955076774</updated>
-      <workItem from="1558955078244" duration="3266000" />
+      <workItem from="1558955078244" duration="11673000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3266000" />
+    <option name="totallyTimeSpent" value="11673000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -331,10 +382,49 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/0-复习.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="2145">
+          <caret line="60" column="20" lean-forward="true" selection-end-line="74" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/1-变量提升.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-429">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#fe#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/2-变量提升-js运行机制.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="54" column="11" lean-forward="true" selection-start-line="54" selection-end-line="55" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/formal/week1/day2/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/formal/week1/day2/js/3-变量提升-重复声明.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#fe#0" />
           </folding>
         </state>
       </provider>

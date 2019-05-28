@@ -7,16 +7,16 @@
 <body>
 
 <script>
-	var a = 100
+	var a = 100;
 	function text() {
-	  var b = 2 * a;
-	  var a = 200;
-	  var c = a / 2;
-	  console.log(b);
-	  console.log(a);
-	  console.log(c);
+	  var b = 2 * a; // undefined * 2 -> NaN ; 当进行数学运算（* / - % ++ -- ....） 时，发现运算符两侧有非数字的值，会自动转成number值，再运算。但是注意 + ,注意只有 加号两侧都是数字时才是求和，+、+=  另一个作用就是字符串拼接。
+	  var a = 200; // a = 200
+	  var c = a / 2; // c = 100;
+	  console.log(b); // NaN
+	  console.log(a); // 200
+	  console.log(c); // 100
 	}
-	text()
+	text();
 </script>
 </body>
 </html>

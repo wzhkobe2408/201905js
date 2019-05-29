@@ -9,12 +9,13 @@
 	var a = 12;
 
 	function fn() {
-		console.log(a);
+		console.log(a); // undefined
 		var a = 20;
-		console.log(a);
+		console.log(a); // 20
 	}
 
-	fn()
+	fn();
+	console.log(a); // 12
 </script>
 </body>
 </html>

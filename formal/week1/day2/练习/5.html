@@ -6,13 +6,16 @@
 </head>
 <body>
 <script>
-	var a = 1000;
+	var a = 1000; // 1000
 	function fe() {
-	  var a = b = 20
+	  // 变量提升：a = undefined
+		b = 20;
+	  var a = b = 20 // 给window增加一个b的属性，值是20；
+		// 当找到顶层作用域window时，会先查看有没有变量b，如果没有再看下window有没有b这个属性，如果有取这个属性。
 	}
 	fe();
-	console.log(window.b);
-	console.log(a);
+	console.log(window.b); // 20
+	console.log(a); // 1000
 </script>
 </body>
 </html>

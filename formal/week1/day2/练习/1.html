@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 
 <script>
-	var a = 12
+  var a = 12; // 12 20
 
-	function fn() {
-		console.log(a) // 12
-		a = 20
-		console.log(a) // 20
-	}
+  function fn() {
+    console.log(a); // 12
+    a = 20; // 全局作用域中的a就变成20
+    console.log(a); // 20
+  }
 
-	fn()
+  fn();
+  console.log(a); // 20
 </script>
 </body>
 </html>

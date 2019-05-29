@@ -8,14 +8,16 @@
 
 <script>
 	function fn(n) {
+	  // n = 10
 	  n = n;
 	  return function(a) {
+	    // a = 1 // 2
 	    a++;
 	    console.log((n += a));
 	  };
 	}
 	var f = fn(10);
-	f(1);
+	f(1); // 12
 </script>
 </body>
 </html>

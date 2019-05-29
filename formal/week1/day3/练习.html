@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  var i = 0;
+
+  function fn(i) {
+
+    return function (n) {
+      console.log(n + i++);
+    }
+  };
+  var f = fn(5);
+  f(10);
+  f(20);
+  fn(8)(12);
+  fn()(18)
+
+
+  var obj = {
+    i: 10,
+    fn: (function () {
+      var i = 0;
+      return function (n) {
+        console.log(n + i++)
+      }
+    })()
+  };
+  var f = obj.fn;
+  f(10);
+  f(20);
+  obj.fn(30);
+  obj.fn(40);
+</script>
+</body>
+</html>

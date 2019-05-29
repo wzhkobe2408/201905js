@@ -8,17 +8,28 @@
 
 <script>
 	var num = 20;
-	var obj = {
+	var obj = { // 对象的花括号不是作用域！对象的属性不是变量。
 		num: 30,
-		fn: (function (num) {
+		fn: (function (num) { // 自执行函数在给obj赋值的过程中就会执行
+		  // 形参赋值：num = 20 // 25
+			// 变量提升：无
 			num += 5;
 			return function () {
+			  // 形参赋值：无 (这个小函数没有形参，即便你传了实参也没人接收)
+				// 变量提升：无
 				console.log(num);
 			};
 		})(num)
 	};
 
-	obj.fn(num);
+	obj.fn(num); // 25
+
+	function sum(a, b) { // 声明函数时的形参是在声明变量
+	  return a + b;
+	}
+	var a = 1;
+	var b = 2;
+	sum(a, b); // 函数执行时实参传变量，实际上是传递变量代表的值
 </script>
 </body>
 </html>

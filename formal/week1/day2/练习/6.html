@@ -7,15 +7,19 @@
 <body>
 <script>
 	function fn(n) {
+	  // 形参赋值：n = 10 // 12 15
+		// 变量提升：无
 	  return function(a) {
+	    // f(1) 形参赋值：a = 1; // 2
+			// f(2) 形参赋值 a = 2; // 3
 	    a++;
 	    n += a;
 	    console.log(n);
 	  };
 	}
 	var f = fn(10);
-	f(1);
-	f(2);
+	f(1); // 12
+	f(2); // 15
 </script>
 </body>
 </html>

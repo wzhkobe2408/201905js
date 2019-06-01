@@ -20,6 +20,9 @@ function teacher(name, age, subject, from = '珠峰') {
 // 构造函数：
 function Teacher(name, age, subject, from) {
 	var address = '河北'; // 这就是一个私有变量，不会添加到实例中。只有通过this.xxx = xxx这种方式才能将属性添加到实例中。
+  function sum(a, b) { // 函数只是私有函数，和实例也没关系
+    return a + b;
+  }
   this.name = name;
   this.age = age;
   this.subject = subject;
@@ -29,7 +32,7 @@ function Teacher(name, age, subject, from) {
   }
 }
 
-let t2 = new Teacher('姜文', 19, 'Architect', '珠峰');
+let t2 = new Teacher('姜文', 19, 'Architect', '珠峰'); // 通过new 调用时获取Teacher类的一个实例
 let t3 = Teacher('任金辉', 19, 'JS');
 console.log(t2); // Teacher 的实例
 console.log(t3); // undefined
@@ -54,7 +57,7 @@ console.log(f); // fn {}
 // 1. 开辟作用域
 // 2. 形参赋值
 // 3. 变量提升
-// 4. 隐式创建一个属于当前这个类的实例对象，然后把this指向这个实例对象。
+// 4. 隐式创建一个属于当前这个类的实例对象，然后把构造函数中的this指向这个实例对象。
 // 5. 执行构造函数中的代码；如果this.xxx = xxx; 就是给实例添加私有属性。
 // 6. 隐式返回这个实例对象，相当于 return this;
 // 7. 销毁栈内存（构造函数的作用域销毁与否和普通函数一样）

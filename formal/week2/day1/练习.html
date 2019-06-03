@@ -11,7 +11,7 @@
 <body>
   <script>
     // 1
-    function Foo() {
+   /* function Foo() {
       this.add = function (x, y) {
         return x + y;
       }
@@ -29,11 +29,11 @@
     var f = new Foo();
     console.log(f);
     console.log(f.add(1, 2));
-    console.log(f.minus(1, 2));
+    console.log(f.minus(1, 2));*/
 
 
     // 3
-    function A() {
+/*    function A() {
       console.log('AAA')
     }
 
@@ -52,11 +52,12 @@
     C.prototype.a = 1;
     A.prototype.say = function() {
       console.log('say');
-      this.a = 1
+      this.a = 15
     };
 
     A.fe = function () {
       console.log('fe')
+      this.a = 12;
     };
 
     console.log(new A().a);
@@ -66,19 +67,17 @@
     const n = new A.prototype.say;
     const m = new A().say;
     console.log(n instanceof A);
-    console.log(n instanceof A.prototype);
+    console.log(n instanceof A.prototype.say);
 
     const a1 = new A;
     const a2 = new A.fe;
     console.log(a1 instanceof A);
-    console.log(a2 instanceof A.fe);
-
+    console.log(a2 instanceof A.fe);*/
 
 
 
     // 4
-    function Fn() {
-      // 给实例添加私有属性
+/*    function Fn() {
       this.x = 100;
       this.y = 200;
       this.getX = function () {
@@ -86,7 +85,7 @@
       }
     }
     Fn.prototype.getX = function () {
-      console.log(this.x); // Fn.prototype.x
+      console.log(this.x);
     };
     Fn.prototype.getY = function () {
       console.log(this.y);
@@ -105,12 +104,12 @@
     console.log(Fn.prototype.__proto__.constructor);
     f1.getX();
     f1.__proto__.getX();
-    f2.getY();
-    Fn.prototype.getY();
+    f2.getY(); // 200
+    Fn.prototype.getY();*/
 
 
-    // 5
-    let n = 10,
+    /*// 5
+    var n = 10,
     obj = {
       n: 20
     };
@@ -125,7 +124,7 @@
     })(obj.n);
     fn(10);
     obj.fn(10);
-    console.log(n, obj.n);
+    console.log(n, obj.n); */
   </script>
 </body>
 

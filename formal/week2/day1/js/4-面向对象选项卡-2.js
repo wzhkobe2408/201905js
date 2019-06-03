@@ -41,8 +41,6 @@ Tab.prototype.queryEle = function () {
   
   // 获取选项卡卡片，并且保存到实例上
   this.cardList = wrapper.querySelectorAll('div');
-  console.log(this.headerList);
-  console.log(this.cardList);
 };
 // 2. 绑定事件的方法
 Tab.prototype.bindEvent = function () {
@@ -50,25 +48,44 @@ Tab.prototype.bindEvent = function () {
   // ? 我们获取来元素对象存哪里了？上一步已经将选项卡头和卡片保存在实例中
   let headerList = this.headerList; // 缓存headerList
 
-  // 事件函数this改变解决方案1：缓存this
-  let that = this; // 此时that缓存的是Tab类的实例
+  // 事件函数this改变解决方案2：箭头函数
   for (let i = 0; i < headerList.length; i++) {
-    headerList[i].onclick = function () {
-      // 这样写有一个问题，这个事件函数中的this是被点击的li，我们希望this是Tab类的实例，因为只有Tab类的实例才能调用clearClass和addClass方法；
+    headerList[i].onclick = () => {
+      // 这样写有一个问题，这个事件函数中的this是被点击的li，我们希望this是Tab类的实例，因为只有Tab类的实例才能调用clearClass和addClass方法；箭头函数的this指向它声明时所在作用域（上级作用域）的this
       // 1. 清除选中样式
-      that.clearClass();
+      this.clearClass();
       // 2. 给被点击的添加选中样式
-      that.addClass(i);
+      this.addClass(i);
     }
   }
 };
 // 3. 移除类名的方法
-Tab.prototype.clearClass = function () {};
+Tab.prototype.clearClass = function () {
+  // 移除所有的选项卡头、卡片的选中样式
+  // ？ 这些元素对象在哪里存着？这些东西是Tab类实例的私有的属性
+  // let headerList = this.headerList;
+  // let cardList = this.cardList;
+
+  let { headerList, cardList } = this; // 和上面的写法等价
+
+  for (let i = 0; i < headerList.length; i++) {
+    headerList[i].className = '';
+    cardList[i].className = '';
+  }
+
+};
 // 4. 添加类名的方法
-Tab.prototype.addClass = function (index) {};
+Tab.prototype.addClass = function (index) {
+  // 给当前被点击的li以及对应的卡片增加选中样式
+  this.headerList[index].className = 'active';
+  this.cardList[index].className = 'active';
+};
 
 let t1 = new Tab({
   el: '#tab1'
 }); // 传入一个配置对象
-// let t2 = new Tab({el: '#tab2'});
+
+let t2 = new Tab({el: '#tab2'});
+
+let t3 = new Tab({el: '#tab3'});
 

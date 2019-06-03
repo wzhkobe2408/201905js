@@ -11,25 +11,25 @@
 <body>
   <script>
     // 1
-   /* function Foo() {
+    function Foo() {
+      // this.xxx 增加的都是实例的私有属性
       this.add = function (x, y) {
         return x + y;
       }
     }
 
-    // 2.
     Foo.prototype.add = function (x, y) {
       return x + y + 10;
-    }
+    };
 
     Object.prototype.minus = function (x, y) {
       return x - y;
-    }
+    };
 
     var f = new Foo();
-    console.log(f);
-    console.log(f.add(1, 2));
-    console.log(f.minus(1, 2));*/
+    console.log(f); // {add: func....}
+    console.log(f.add(1, 2)); // 3 因为f私有属性中有add属性，所以使用私有属性add，不用去原型上面找
+    console.log(f.minus(1, 2)); // -1 f -> Foo.prototype -> Object.prototype 所以使用Object.prototype上的minus
 
 
     // 3
@@ -128,7 +128,7 @@
 
 
     // 6
-    var name = 'window';
+   /* var name = 'window';
     var Tom = {
       name: "Tom",
       show: function () {
@@ -139,10 +139,10 @@
         fun();
       }
     };
-    Tom.wait();
+    Tom.wait();*/
 
     // 7
-    var fullName = 'language';
+   /* var fullName = 'language';
     var obj = {
 	    fullName: 'javascript',
 	    prop: {
@@ -153,10 +153,10 @@
     };
     console.log(obj.prop.getFullName());
     var test = obj.prop.getFullName;
-    console.log(test());
+    console.log(test());*/
 
     // 8.
-    function Foo() {
+   /* function Foo() {
 	    getName = function () {
 		    console.log(1);
 	    };
@@ -171,7 +171,7 @@
     };
     var getName = function () {
 	    console.log(4);
-    };
+    };*/
 
     function getName() {
 	    console.log(5);

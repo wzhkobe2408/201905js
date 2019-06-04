@@ -2,75 +2,54 @@
 * 目标：
 *   1. 理解所有函数都是Function的关系
 *   2. 理解Function和Object的关系
-*
-*
 * */
 
-// Function类：函数类
-// 所有的函数（类、普通函数）都是Function的一个实例
+// 内置类：Array Object RegExp Date Function（函数类）
+// Function 类：所有的函数都是Function类的实例；
 
-// Array Number String Boolean Object Date Function 等
+// 内置类的数据类型：所有的内置类都是一个函数数据类型
+// console.log(typeof Array); // 'function'
+// 所以，所有的内置类都是Function的实例。所以这些内置类有一个__proto__属性，它的值指向Function.prototype
+// console.dir(Array);
+// console.log(Array.__proto__ === Function.prototype); // true 
+// console.dir(Function.prototype); // 有一堆方法：call、apply、bind 等方法，所以只要是函数就能使用这些方法，因为这些方法属于Function.prototype
 
-console.log(typeof Array); // function
-console.log(typeof Number); // function
+// console.dir(Object); // Object 的构造函数，
+// console.log(Object.__proto__ === Function.prototype); // true Object构造函数也是Function类的实例；
+// console.log(Date.__proto__ === Function.prototype); // true
 
-// 实例和类
-// 实例都有一个__proto__ 指向所属类的原型对象
+// console.log(Array instanceof Function); // true
+// console.log(Date instanceof Function); // true
+// console.log(RegExp instanceof Function); // true
+// console.log(Object instanceof Function); // true
 
-// js中所有的函数都是Function的实例，那么内置类的，如Array是函数，所以Array也是Function的实例；
-console.log(Array instanceof Function);
+function sum(a, b) {
+  return a + b;
+}
+// console.log(sum instanceof Function); // true 自定义的函数也是Function的实例；
+// console.log(sum.__proto__ === Function.prototype); // true
 
-// 既然是实例，那么一定也会有原型关系
-console.dir(Array); // 通过打印发现Array也是一个对象，它也有__proto__，根据原型关系，Array的__proto__应该指向的是Function的prototype
+// 2. Function类也有自己的原型prototype
+// console.log(typeof Function); // function
 
-Array.__proto__ === Function.prototype; // true
+console.log(Function.prototype.__proto__ === Object.prototype); // true 说明Function.prototype的__proto__ 属性指向Object的原型（prototype）；
 
-
-console.log(Date instanceof Function); // true
-console.log(Date.__proto__ === Function.prototype); // true
-console.log(RegExp instanceof Function); // true
-console.log(RegExp.__proto__ === Function.prototype); // true
-console.log(Object instanceof Function); // true
+// Object和Function的关系
+// 1. Object是Function的实例，所以 Object.__proto__ 指向Function.prototype
 console.log(Object.__proto__ === Function.prototype); // true
-
-console.log(Function.prototype.__proto__ === Object.prototype); // true
-
-// 因为Object也是一个类，所以也是一个函数，所以也是Function的实例.所以Object.__proto__指向Function.prototype
-// 而Function本身也是一个类，也是一个函数，所以Function也有prototype，而prototype也是一个对象，所以Function.prototype.__proto__ 又指向了 Object.prototype 
-
-// Function 和 Object的关系
-// 1. Object.__proto__ 指向Function.prototype
-console.log(Object.__proto__ === Function.prototype);
-
-// 2. Function.prototype.__proto__ 指向Object.prototype
+// 2. Function是一个类，但是Function.prototype是一个对象，所以Function.prototype也有一个__proto__ 的属性，它的值指向Object.prototype。
 console.log(Function.prototype.__proto__ === Object.prototype);
 
-// 3. 所有的函数都是Function的实例
-console.log(Array instanceof Function);
+// __proto__ 是实例用来找原型的，Object是构造函数，Object.__proto__ 找原型，Object是谁的实例呢，是Function的实例，Object.__proto__找的就是Function的prototype
 
-// 4. 所有的引用数类型（普通对象、实例对象、函数、类、数组、Date）的都是Object这个基类的实例，所以函数也是对象；
+// Function.prototype 是对象，
+// 所以Function.prototype.__proto__是在prototype的原型，
+// 就是在找对象的所属类的原型，对象所属类是Object
+// 所以找到的Object.prototype
 
-console.log(Function instanceof Object);
-console.log(Array instanceof Object);
-console.log(Date instanceof Object);
-let obj = {
-	id: 1
-};
-console.log(obj instanceof Object);
-
-function fn() {
-	console.log('fn')
-}
-fn.name = '珠峰';
-fn.age = 10;
-console.log(fn.age);
-console.log(fn.age);
-
-
-
-
-
-
+// Function 是一个类，也是一个函数，所以Function是自己的实例
+console.log(Function.__proto__ === Function.prototype); // true
+console.log(Function instanceof Function); // true
 
 
 

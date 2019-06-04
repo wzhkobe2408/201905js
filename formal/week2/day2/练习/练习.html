@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+<script>
+  // 1
+  /*  function Foo() {
+      // this.xxx 增加的都是实例的私有属性
+      this.add = function (x, y) {
+        return x + y;
+      }
+    }
+
+    Foo.prototype.add = function (x, y) {
+      return x + y + 10;
+    };
+
+    Object.prototype.minus = function (x, y) {
+      return x - y;
+    };
+
+    var f = new Foo();
+    console.log(f); // {add: func....}
+    console.log(f.add(1, 2)); // 3 因为f私有属性中有add属性，所以使用私有属性add，不用去原型上面找
+    console.log(f.minus(1, 2)); // -1 f -> Foo.prototype -> Object.prototype 所以使用Object.prototype上的minus*/
+
+
+  // 3
+
+  /*function A() {
+    console.log('AAA')
+    // 构造函数只能通过this.xxx = xxx这种方式才能给实例添加时有属性
+  }
+
+  function B(a) {
+    this.a = a; // 给实例添加私有属性a
+  }
+
+  function C(a) {
+    if (a) {
+      this.a = a;
+    }
+  }
+
+  A.prototype.a = 1;
+  B.prototype.a = 1;
+  C.prototype.a = 1;
+  A.prototype.say = function () {
+    console.log('say');
+    this.a = 15
+  };
+
+  A.fe = function () {
+    console.log('fe')
+    this.a = 12;
+  }; // A的实例能够使用的属性或者方法要么是私有，要么是A的原型上公有的属性和方法，A.fe 既不在实例中，也不在原型中。这个时候把A当做一个对象，为它添加了一个fe的方法，这个方法只能A自己调用
+
+  console.log(new A().a); // new A() 输出AAA  属性a的值是1
+  console.log(new B().a); // {a: undefined} undefined
+  console.log(new C(2).a); // {a: 2} 2
+
+  // new 函数; 函数就会执行，如果不需要传参，就可以不写函数后面的小括号
+  const n = new A.prototype.say; // A.prototype.say say函数被new；输出 say 得到一个实例 {a: 15}
+  const m = new A().say; // m 是一个函数
+  console.log(n instanceof A);// false n是new的A的prototype上的say方法，所以n应该是A的prototype的say的实例
+  console.log(n instanceof A.prototype.say); // true
+
+  const a1 = new A; // 'AAA' a1 = {}
+  const a2 = new A.fe; // a2是A.fe的实例
+  console.log(a1 instanceof A); // true
+  console.log(a2 instanceof A.fe); // true
+  // 函数只要被new调用时就是构造函数，new 谁，最后得到的对象就是谁的实例；*/
+
+  // 4
+  function Fn() {
+    this.x = 100;
+    this.y = 200;
+    this.getX = function () {
+      console.log(this.x);
+    }
+  }
+
+  Fn.prototype.getX = function () {
+    console.log(this.x); // Fn.prototype.x
+  };
+  Fn.prototype.getY = function () {
+    console.log(this.y);
+  };
+
+  var f1 = new Fn; // {x:100, y: 200, getX: fun....}
+  var f2 = new Fn; // {x: 100, y: 200, getX: fun....}
+
+  console.log(f1.getX === f2.getX); // false f1和f2是两个不同的实例，所以f1.getX和f2.getX没有关系
+  console.log(f1.getY === f2.getY); // true f1和f2的getY都是Fn原型上的getY方法，所以相等
+  console.log(f1.__proto__.getY === Fn.prototype.getY); // true
+  console.log(f1.__proto__.getX === f2.getX); // false f2有私有的getX，所以和Fn.prototype.getX没有关系
+  console.log(f1.__proto__.getX === Fn.prototype.getX); // true
+  console.log(f1.constructor); // Fn f1本身没有私有属性constructor，所以去f1所属类Fn的原型上查找constructor属性，在原型上有天生自带的constructor的属性，值就是当前构造函数本身
+
+  console.log(Fn.prototype.__proto__.constructor); // Object Fn.prototype是一个对象，__proto__是找实例所属类原型，对象是Object的实例，__proto__ 找的就是Object的原型，Object的prototype中的constructor指向Object
+  f1.getX(); // 100
+  f1.__proto__.getX(); // undefined Fn.prototype.getX()
+  f2.getY(); // 200
+  Fn.prototype.getY(); // undefined
+
+
+  /*// 5
+  var n = 10,
+  obj = {
+    n: 20
+  };
+  let fn = obj.fn = (function () {
+    this.n++;
+    n++;
+    return function (m) {
+      n += 10 + (++m);
+      this.n += n;
+      console.log(n);
+    }
+  })(obj.n);
+  fn(10);
+  obj.fn(10);
+  console.log(n, obj.n); */
+
+
+  // 6
+  /* var name = 'window';
+   var Tom = {
+     name: "Tom",
+     show: function () {
+       console.log(this.name);
+     },
+     wait: function () {
+       var fun = this.show;
+       fun();
+     }
+   };
+   Tom.wait();*/
+
+  // 7
+  /* var fullName = 'language';
+   var obj = {
+     fullName: 'javascript',
+     prop: {
+       getFullName: function () {
+         return this.fullName;
+       }
+     }
+   };
+   console.log(obj.prop.getFullName());
+   var test = obj.prop.getFullName;
+   console.log(test());*/
+
+  // 8.
+  /* function Foo() {
+     getName = function () {
+       console.log(1);
+     };
+     return this;
+   }
+
+   Foo.getName = function () {
+     console.log(2);
+   };
+   Foo.prototype.getName = function () {
+     console.log(3);
+   };
+   var getName = function () {
+     console.log(4);
+   };*/
+
+  // 9
+  /*function getName() {
+    console.log(5);
+  }
+
+  Foo.getName();
+  getName();
+  Foo().getName();
+  getName();
+  var f = new Foo();
+  f.getName();*/
+</script>
+</body>
+
+</html>

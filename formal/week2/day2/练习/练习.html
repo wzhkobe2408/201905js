@@ -78,7 +78,7 @@
   console.log(a2 instanceof A.fe); // true
   // 函数只要被new调用时就是构造函数，new 谁，最后得到的对象就是谁的实例；*/
 
-  // 4
+  /*// 4
   function Fn() {
     this.x = 100;
     this.y = 200;
@@ -108,41 +108,61 @@
   f1.getX(); // 100
   f1.__proto__.getX(); // undefined Fn.prototype.getX()
   f2.getY(); // 200
-  Fn.prototype.getY(); // undefined
+  Fn.prototype.getY(); // undefined*/
 
 
-  /*// 5
-  var n = 10,
-  obj = {
-    n: 20
-  };
-  let fn = obj.fn = (function () {
-    this.n++;
-    n++;
-    return function (m) {
-      n += 10 + (++m);
-      this.n += n;
-      console.log(n);
-    }
-  })(obj.n);
-  fn(10);
-  obj.fn(10);
-  console.log(n, obj.n); */
+  // 5
+  /* var n = 10, // window.n = 10 11 12 33 66 87
+   obj = {
+     n: 20 // 107
+   }; // var a = 1, b = 2; 相当于var a = 1; var b = 2; 就是a和b共用一个var
 
+   /!*let fn = obj.fn = (function () {
+     // 无形参赋值：因为自执行函数没有设置形参
+     // 无变量提升：
+     this.n++; // 自执行函数的this是window
+     n++;
+     return function (m) {
+       n += 10 + (++m);
+       this.n += n;
+       console.log(n);
+     }
+   })(obj.n);*!/
+
+   obj.fn = (function () {
+     // 无形参赋值：因为自执行函数没有设置形参
+     // 无变量提升：
+     this.n++; // 自执行函数的this是window
+     n++;
+     return function (m) {
+       // fn(10) m = 10 11
+       // obj.fn(10) m = 10 11
+       n += 10 + (++m); // += 的优先级小于 +
+       this.n += n;
+       console.log(n);
+     }
+   })(obj.n);
+   let fn = obj.fn; // 这两行赋值写法和上面的 连续赋值是等价的
+
+   fn(10); // 66 fn(10) 前面没有 . 所以函数中的this是window
+   obj.fn(10); // 87 obj.fn(10) 有. 有点，函数执行时this就是obj
+   console.log(n, obj.n); // 87 107
+ */
 
   // 6
-  /* var name = 'window';
-   var Tom = {
-     name: "Tom",
-     show: function () {
-       console.log(this.name);
-     },
-     wait: function () {
-       var fun = this.show;
-       fun();
-     }
-   };
-   Tom.wait();*/
+  /*var name = 'window'; // window.name
+  var Tom = {
+    name: "Tom",
+    show: function () {
+      console.log(this.name); // window.name
+    },
+    wait: function () {
+
+      var fun = this.show;
+      fun();
+    }
+  };
+  Tom.wait(); // 'window'*/
 
   // 7
   /* var fullName = 'language';
@@ -150,43 +170,44 @@
      fullName: 'javascript',
      prop: {
        getFullName: function () {
+         // obj.prop.getFullName this -> obj.prop
+         // test()
          return this.fullName;
        }
      }
    };
-   console.log(obj.prop.getFullName());
+   console.log(obj.prop.getFullName()); // undefined 方法执行时看方法名前有没有点，就看方法名前面的一个点，这个点前面的是一个整体，方法名中的this就是这个整体
    var test = obj.prop.getFullName;
-   console.log(test());*/
+   console.log(test()); // 'language'*/
 
   // 8.
-  /* function Foo() {
-     getName = function () {
-       console.log(1);
-     };
-     return this;
-   }
+  function Foo() {
+    getName = function () { // 执行过这一行后，全局变量getName就被修改成这个log(1)的函数
+      console.log(1);
+    };
+    return this;
+  }
 
-   Foo.getName = function () {
-     console.log(2);
-   };
-   Foo.prototype.getName = function () {
-     console.log(3);
-   };
-   var getName = function () {
-     console.log(4);
-   };*/
+  Foo.getName = function () {
+    console.log(2);
+  }; // Foo.getName 把Foo当成一个对象，给它添加一个getName的属性，这个属性和实例和原型都没关系
+  Foo.prototype.getName = function () {
+    console.log(3);
+  };
+  var getName = function () { // 在这一行之前 getName代表的是log(5)的函数
+    console.log(4);
+  };
 
-  // 9
-  /*function getName() {
+  function getName() {
     console.log(5);
   }
 
-  Foo.getName();
-  getName();
-  Foo().getName();
-  getName();
-  var f = new Foo();
-  f.getName();*/
+  Foo.getName(); // 2
+  getName(); // 4
+  Foo().getName(); // 1 Foo() 前面没有点，Foo里面的this就是window，Foo() 在执行时把全局变量getName修改成了log1的函数
+  getName(); // 1
+  var f = new Foo(); // f 是一个空对象，并且是Foo一个实例
+  f.getName(); // 3
 </script>
 </body>
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<script>
+	function fn(i) {
+	  return function (n) {
+	    console.log(n + i++);
+	  }
+	}
+	fn(20)(40);
+	fn(30)(50);
+</script>
+</body>
+</html>

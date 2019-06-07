@@ -18,11 +18,21 @@ window.utils = (function () {
       return ary;
     }
   }
-  function toJson() {
-
+  /**
+   * @desc JSON格式字符串转对象
+   * @param jsonstr JSON格式字符串
+   * @returns {Object} 对象
+   */
+  function toJSON(jsonstr) {
+    if ('JSON' in window) { // 'JSON' in window 返回false表示JSON的方法不可以用
+      return JSON.parse(jsonstr);
+    } else {
+      return eval('(' + jsonstr + ')');
+    }
   }
   return {
-    arrLikeToAry: arrLikeToAry
+    arrLikeToAry: arrLikeToAry,
+    toJSON: toJSON
     // arrLikeToAry
   }
 })();

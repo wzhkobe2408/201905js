@@ -93,6 +93,23 @@ var ary5 = [
   }
 ];
 
+// 类数组转数组时？
+var box2 = document.getElementById('box2');
+var lis = box2.getElementsByTagName('li');
+console.log(lis); // DOM元素集合都是类数组
+
+lis[1].style.backgroundColor = 'red'; // lis类数组集合中都是li元素对象
+
+var lisAry = utils.arrLikeToAry(lis);
+console.log(lisAry);
+// ? 数组中数组项是什么？
+lisAry[0].style.backgroundColor = '#00b38a'; // 操作lisAry，liAry是通过类数组lis转成的数组；
+
+// lis集合中每个li元素对象，对应的都是页面中一个li；而元素对象也是对象，所以lis这个集合中存储的li元素对象的堆内存地址：
+// lis = {0: aaafff000, 1: aaafff222, 2: ....length: 4}
+// 然后类数组转数组，只不过是把类数组集合中存储的堆内存地址复制到了数组中。并没有重新再造一份li元素对象，这个数组中元素就是页面中的元素对象。
+// 转成的数组：[aaafff000, aaafff222, ....]
+
 
 
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<ul id="ulWrapper">
+  <li>23</li>
+  <li>15</li>
+  <li>17</li>
+  <li>8</li>
+  <li>9</li>
+  <li>1</li>
+  <li>0</li>
+  <li>100</li>
+  <li>123</li>
+  <li>105</li>
+</ul>
+
+<ul id="ul"></ul>
+
+<!--<script src="js/utils.js"></script> &lt;!&ndash;我们要使用utils中的方法，首先在使用之前引入js文件；如果我们使用多个js文件，并且后面的对前面的js文件中的变量、方法有依赖时，确保在使用之前引入被依赖的文件&ndash;&gt;-->
+
+<!--<script src="js/test.js"></script>
+<script>
+  console.log(ary100);
+  getName();
+</script>-->
+<script src="js/utils.js"></script>
+<script>
+  /* 这个script标签中的内容可以放到一个js文件中*/
+  // 1. 获取页面中的所有li
+  let liList = document.querySelectorAll('#ulWrapper > li');
+  // console.log(liList);
+  // console.log(Array.isArray(liList));
+  // console.log(window.utils);
+  // let listAry = window.utils.arrLikeToAry(liList);
+  let listAry = utils.arrLikeToAry(liList); // 所有定义在window对象上的属性或者方法，在使用时可以省略window.
+  // setTimeout() -> window.setTimeout()
+  // setInterval() -> window.setInterval()
+  console.log(listAry);
+  console.log(Array.isArray(listAry));
+</script>
+</body>
+</html>

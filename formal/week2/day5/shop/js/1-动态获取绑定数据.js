@@ -50,9 +50,12 @@ xhr.send(); // 发送请求
   p.innerHTML = item.title;
   let span = document.createElement('span');
   span.innerHTML = '￥' + item.price;
+  // img/p/span 都是a标签的子元素
   a.appendChild(img);
   a.appendChild(p);
   a.appendChild(span);
+
+  // a标签是li子元素
   li.appendChild(a);
   listBox.appendChild(li); // 每插入一次就会引起一次DOM回流
 }*/
@@ -62,7 +65,8 @@ xhr.send(); // 发送请求
 
 // 文档碎片：存放DOM元素的临时容器；专门用来减少DOM回流次数的
 // document.createDocumentFragment() 创建一个文档碎片
-/*let frg = document.createDocumentFragment();
+/*
+let frg = document.createDocumentFragment();
 for (let i = 0; i < productData.length; i++) {
   let item = productData[i];
   let li = document.createElement('li');
@@ -82,7 +86,9 @@ for (let i = 0; i < productData.length; i++) {
   li.appendChild(a);
   frg.appendChild(li); // 把每次创建出来的li插入到文档碎片中，以求减少DOM回流次数
 }
-listBox.appendChild(frg); // 把文档碎片插入ul中，一次性把10个li插入页面中；这样做只会引发一次DOM回流*/
+listBox.appendChild(frg); // 把文档碎片插入ul中，一次性把10个li插入页面中；这样做只会引发一次DOM回流
+frg = null; // 临时对象用完之后记得手动释放内存（手动释放内存是良好代码习惯之一）。
+*/
 
 
 // 字符串拼接+innerHTML
@@ -103,6 +109,7 @@ for (let i = 0; i < productData.length; i++) {
 // console.log(str);
 listBox.innerHTML = str;*/
 
+// 模板引擎：原理也是字符串拼接
 
 let str = ``;
 for (let i = 0; i < productData.length; i++) {

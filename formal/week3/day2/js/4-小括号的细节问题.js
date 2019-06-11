@@ -3,43 +3,46 @@
 *   1. 理解正则中小括号的作用
 * */
 
+// 小括号的细节问题
+// () 分组捕获
+
 // 1. 分组捕获
+let str = 'hello2019 zhufeng2018abc zhufeng2019xyz';
+let reg = /zhufeng(\d+)[a-z]{3}/g;
+// console.log(reg.exec(str)[1]); // exec方法的返回值是一个数组，索引为1的项表示分组捕获的内容，所以可以通过索引取得分组捕获内容
 
-let str = 'hello2019 zhufeng2019 zhufeng9021';
-let reg = /zhufeng(\d+)/g; // () 是分组，相当于小正则
-// console.log(reg.exec(str)); // 使用exec方法符合条件的字符串捕获到
+// 2. 分组引用: \数字 表示引用数字代表的分组的内容；
+// 需求：写一个正则，匹配两位数，要求十位上的数字和个位上的数字相同；
+let reg2 = /^(\d)\1$/;
+// console.log(reg2.test('22'));
+// console.log(reg2.test('33'));
+// console.log(reg2.test('23'));
 
-// 2. 分组引用 \数字 表示引用前面分组某个分组的内容
+// 写一个正则，匹配第二个字母和第四个相同
+let reg3 = /^[a-z]([a-z])[a-z]\1$/;
+// console.log(reg3.test('data'));
+// console.log(reg3.test('java'));
+// console.log(reg3.test('papa'));
+// console.log(reg3.test('tara'));
+// console.log(reg3.test('last'));
 
-let reg2 = /^(\d)\1$/; // 匹配一个数字，个位数和十位数相同; \1 表示引用第一个分组中的内容
-console.log(reg2.test('11'));
-console.log(reg2.test('99'));
-console.log(reg2.test('12'));
-
-// 练习：写一个正则匹配四个字母的单词，其中第二个和第四个字母相同；
-let reg3 = /[a-z]([a-z])[a-z]\1/;
-console.log(reg3.test('tara'));
+// 13344445555
+let reg4 = /^1\d{2}(\d)\1{3}(\d)\2{3}$/;
+// console.log(reg4.test('13344445555')); // true
 
 // 3. 改变优先级
-// 写一个正则匹配18或者19
-let reg4 = /^18|19$/;
-console.log(reg4.test('18')); // true
-console.log(reg4.test('19')); // true
-console.log(reg4.test('189')); // true
-console.log(reg4.test('1819')); // true
-console.log(reg4.test('181223419')); // true
-// ? 思考：为什么会这样？因为这个正则不是被识别成一18开头或者以19结尾；
+// let reg5 = /^18|19$/;
+// console.log(reg5.test('18')); // true
+// console.log(reg5.test('19')); // true
+// console.log(reg5.test('1819')); // true
+// console.log(reg5.test('183456719')); // true
 
-let reg5 = /^(18|19)$/;
-console.log(reg5.test('18')); // true
-console.log(reg5.test('19')); // true
-console.log(reg5.test('189')); // false
-console.log(reg5.test('1819')); // false
-console.log(reg5.test('181223419')); // false
+let reg6 = /^(?:18|19)$/; // 增加小括号把(18|19)当成一个整体
 
-
-
-
+console.log(reg6.test('18')); // true
+console.log(reg6.test('19')); // true
+console.log(reg6.test('1819')); // false
+console.log(reg6.test('183456719')); // false
 
 
 

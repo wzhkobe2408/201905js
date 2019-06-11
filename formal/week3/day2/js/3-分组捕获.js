@@ -5,33 +5,31 @@
 *
 * */
 
-// 正则捕获：正则除了匹配还可以把符合条件的捕获到；
-let str = 'hello2019 zhufeng2019 zhufeng9021';
-let reg = /zhufeng(\d+)/g; // () 是分组，相当于小正则
+// () 正则分组，就相当于一个小正则；结合exec方法可以捕获分组内容
 
-// 正则捕获方法：RegExp.prototype.exec() 方法
-console.log(reg.exec(str));
-//  ["zhufeng2019", "2019", index: 10, input: "hello2019 zhufeng2019 zhufeng9021", groups: undefined]
+let str = 'hello2019 zhufeng2018abc zhufeng2019xyz';
+let reg = /zhufeng\d+/g;
+let reg2 = /zhufeng(\d+)([a-z]{3})/g;
 
-console.log(reg.exec(str)); // ["zhufeng9021", "9021", index: 22, input: "hello2019 zhufeng2019 zhufeng9021", groups: undefined]
+// console.log(reg.exec(str));
+// console.log(reg2.exec(str)); // ["zhufeng2018", "2018", index: 10, input: "hello2019 zhufeng2018 zhufeng2019", groups: undefined]
+// console.log(reg2.exec(str));
+// 正则的捕获内容是一个数组，数组的第一项是大正则捕获到的内容，从第二项起，就是正则分组捕获到的内容，有几个分组，后面就有几项；所以捕获来的数组形如:["大正则捕获的内容","分组1捕获", "分组2捕获".....]
 
-// 捕获到的内容是一个数组，数组的第一项是大正则匹配到的内容，如果有分组的话从第二项开始就是分组正则捕获到的内容；所以捕获的内容返回值：
-// ["大正则捕获到的", "分组1捕获内容", "分组2捕获内容".....]
+// 取消分组捕获：即该分组不捕获 (?:)
+let reg3 = /zhufeng(?:\d+)(?:[a-z]{3})/g; // (?:) 取消分组捕获，该匹配匹配，捕获时小分组里面的内容不必再单独捕获
+// console.log(reg3.exec(str));
 
-
-// 字符串的match方法，匹配符合规则的字符串， 但是match方法不能进行分组匹配
-console.log(str.match(reg)); // ["zhufeng2019", "zhufeng9021"]
-
-// 取消分组：(?:) 表示当前小括号改变优先级，而不用作用分组捕获
-let reg2 = /zhufeng(?:\d+)/;
-console.log(reg2.exec(str)); // ["zhufeng2019", index: 10, input: "hello2019 zhufeng2019 zhufeng9021", groups: undefined] 取消分组捕获后，exec的返回值中不再包含分组捕获的内容
-
-// ? 的作用
-// ? 表示量词元字符 出现0次到1次 可以有可以没有
+// ? 作用：
+// ? 表示出现0次到1次的量词元字符
 // (?:) 取消分组捕获
+// (?=) 正向预查
+// (?!) 负向预查
 
-
-
+// match 方法不会理会正则的分组，match方法的返回值没有分组捕获的内容；
+let str2 = 'hello2019 zhufeng2018abc zhufeng2019xyz';
+let reg4 = /zhufeng(\d+)[a-z]{3}/g;
+console.log(str2.match(reg4));
 
 
 

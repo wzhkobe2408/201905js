@@ -27,4 +27,4 @@ function offset(ele) { // jQuery offset的源码
     top // top: top
   }
 }
-offset(center); // {left: xxx, top: xxx}
+console.log(offset(center)); // {left: xxx, top: xxx}

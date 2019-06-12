@@ -1,72 +1,48 @@
-// JS盒模型：通过JS中的属性和方法获取元素的属性信息
+// JS盒子模型：通过js的方法或者属性获取的元素对象的一系列描述盒子模型的属性；
 
 let box = document.getElementById('box');
 
-// client
-// 1. clientWidth / clientHeight
-// clientWidth 内容宽度 + 左右padding
-// clientHeight 内容高度 + 上下padding
-console.log(box.clientWidth);
+// 内容的高度：是我们css样式设置的高度，和溢出不溢出没关系
+// 真实的高度：盒子的实际的高度，包含溢出的部分
 
-// 2. clientLeft / clientTop
-// clientLeft 左边框
-console.log(box.clientLeft);
-// clientTop 上边框
-console.log(box.clientTop);
+// client 系列
+// clientWidth / clientHeight
+// clientWidth = 内容的宽度 + 左右padding
+// clientHeight = 内容的高度 + 上下padding
 
-// 3. offsetWidth / offsetHeight
+// console.log(box.clientWidth);
+// console.log(box.clientHeight);
 
-// offsetWidth = clientWidth(内容宽+左右padding) + 左右边框
-console.log(box.offsetWidth);
+// clientLeft / clientTop
+// clientLeft：元素的左边框的宽度
+// clientTop：上边框的宽度
+// console.log(box.clientLeft);
+// console.log(box.clientTop);
 
-// offsetHeight = clientHeight(内容高+上下padding) + 上下边框
-console.log(box.offsetHeight);
+// offset 系列:
+// offsetWidth / offsetHeight
+// offsetWidth = clientWidth（内容宽度+左右padding） + 左右边框
+// offsetHeight = clientHeight + 上下边框；
+// console.log(box.offsetWidth);
+// console.log(box.offsetHeight);
 
+// offsetLeft / offsetTop
+// offsetLeft相对于父级偏移参照物左偏移距离
+// offsetTop 相对于父级偏移参照物上偏移距离
 
-// 4. scroll系列
-// scrollLeft(横向滚动条卷去的距离) / scrollTop(纵向滚动条卷去的距离)
-// 滚动条 卷去的距离，默认是0，具体是多少要看滚动条滚动了多少
-// 获取浏览器的窗口滚动的距离
-let sc = document.documentElement.scrollTop || document.body.scrollTop;
-console.log(sc);
+// scroll 系列
+// onscroll 事件，监听滚动条的滚动事件
+// scrollLeft 横向滚动条卷去的距离
+// scrollTop 就是纵向的滚动条卷去的距离
 
-// scrollHeight/scrollWidth
-// 没有溢出时，scrollHeight/scrollWidth 等于 clientHeight/clientWidth
-// 内容溢出时：scrollHeight = clientHeight + 溢出内容高度;
-// 内容溢出时：scrollWidth= clientWidth + 溢出内容高度;
+// scrollLeft和scrollTop不仅可以读取还可以设置；
+// box.scrollTop = 125;
 
-// 获取浏览器的窗口的盒模型属性：
-let winW = document.documentElement.clientWidth || document.body.clientWidth;
-let winH = document.documentElement.clientHeight || document.body.clientHeight;
+// scrollWidth / scrollHeight
+// scrollWidth: 内容不溢出的时候，和clientWidth相等；当溢出时，就是真实宽度（clientWidth + 溢出部分【滚动条可以滚动的最大距离】）
+console.log(box.scrollWidth);
+// scrollHeight: 内容不溢出时候和clientHeight相等；当溢出时，就是真实高度（clientHeight + 溢出部分【纵向滚动条可以滚动的最大距离】）
+console.log(box.scrollHeight);
 
-function win(attr, val) {
-	if (typeof val !== "undefined") {
-		document.documentElement[attr] = document.body[attr] = val;
-	}
-	return document.documentElement[attr] || document.body[attr];
-}
-console.log(win('scrollTop'));
-console.log(win('screenTop', 1000));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ? 这个scrollTop的最大值是多少？怎么求？
+// scrollHeight = clientHeight + scrollTop(最大值)

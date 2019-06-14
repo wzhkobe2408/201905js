@@ -65,11 +65,34 @@ window.utils = (function () {
     }
   }
 
+  /**
+   * @desc 获取元素的计算生效的样式值
+   * @param ele 元素对象
+   * @param attr css属性
+   * @returns {*} css样式计算生效后的值
+   */
+  function getCss(ele, attr) {
+    var value;
+    // 1. 判断是否是 IE 浏览器
+    if ('getComputedStyle' in window) { // 判断window对象上有getComputedStyle吗
+      value = window.getComputedStyle(ele, null)[attr];
+    } else {
+      // 执行else的时候说明是IE低版本，使用currentStyle属性
+      value = ele.currentStyle[attr];
+    }
+    // 把单位去掉：把数字且带单位的，把单位去掉
+    var reg = /^-?\d+(\.\d+)?px|rem|em|pt$/g;
+    if (reg.test(value)) {
+      value = parseFloat(value);
+    }
+    return value
+  }
   return {
-    arrLikeToAry: arrLikeToAry,
-    toJSON: toJSON,
+    arrLikeToAry,
+    toJSON,
     win,
-    offset
+    offset,
+    getCss
   }
 })();
 

@@ -1,37 +1,29 @@
-;var box = document.getElementById('box');
+var box = document.getElementById('box');
 
-/*
+// 封装一个getCss方法，获取元素计算生效后样式，兼容IE
+
 function getCss(ele, attr) {
-	if ('getComputedStyle' in window) {
-		return window.getComputedStyle(ele, null)[attr];
-	}
-	return ele.currentStyle[attr]
+  var value;
+  // 1. 判断是否是 IE 浏览器
+  if ('getComputedStyle' in window) { // 判断window对象上有getComputedStyle吗
+    value = window.getComputedStyle(ele, null)[attr];
+  } else {
+    // 执行else的时候说明是IE低版本，使用currentStyle属性
+    value = ele.currentStyle[attr];
+  }
+  // 把单位去掉：把数字且带单位的，把单位去掉
+  var reg = /^-?\d+(\.\d+)?px|rem|em|pt$/g;
+  if (reg.test(value)) {
+    value = parseFloat(value);
+  }
+  return value
 }
-console.log(getCss(box, 'width'));
-console.log(getCss(box, 'height'));
-*/
 
-// 优化：去除单位、同一 透明度样式：
-function getCss(ele, attr) {
-	var value;
-	if ('getComputedStyle' in window) {
-		value = window.getComputedStyle(ele, null)[attr];
-	} else {
-		// 判读获取的属性是否是透明度，如果是需要给IE的透明度属性进行特殊处理
-		if (attr === 'opacity') {
-			value = ele.currentStyle['filter'];
-			var reg2 = /^alpha\(opacity=(.+)\)$/;
-			value = reg2.exec(value)[1] / 100;
-		} else {
-			value = ele.currentStyle[attr];
-		}
-	}
-
-	// 去除单位: 只有是数字带单位的情况下才需要去除单位
-	var reg = /^-?\d+(\.\d+)?(px|pt|rem|em)$/i;
-	if (reg.test(value)) {
-		value = parseFloat(value);
-	}
- }
-console.log(getCss(box, 'width'));
+console.log(getCss(box, 'width')); // 300px -> 300
+console.log(getCss(box, 'height')); // 300px -> 300
 console.log(getCss(box, 'opacity'));
+
+// 优化点：
+// 1. 要把px单位去掉
+
+// window.getComputedStyle(box, null).backgroundColor = 'red'; 报错，不能修改计算生效的样式

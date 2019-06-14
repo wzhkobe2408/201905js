@@ -1,14 +1,23 @@
-let ul = document.querySelector('#ulBox');
-let box = document.querySelector('.box');
+// 1. 获取元素
+let box = document.querySelector('#box');
+// console.log(box);
 
-ul.innerHTML += ul.innerHTML; // 为了实现无缝轮播需要把ul里面的所有li复制一份放到ul中；
+// 2. 复制一份li
+let ulBox = document.querySelector('#ulBox');
+ulBox.innerHTML += ulBox.innerHTML; // 复制一份html，并且插入到页面中
 
-ul.style.width = '1600px';
+// 3. 为了让这些图片在一行，重新调整ul的宽度
+ulBox.style.width = '1600px'; // 有单位px
 
+// 4. 滚动起来
 let timer = setInterval(() => {
-	box.scrollLeft += 1;
-	if (box.scrollLeft >= 800) {
-		// 当满足这个条件时，说明此时正好滚出去4个li，在box里展示的正是我们复制出来的4个li，这个时候需要把box.scrollLeft设置成0，但是因为设置成0时展示的也是这4张图片，给人的感觉好像没有换，所以还是无缝的轮播的
-		box.scrollLeft = 0;
-	}
-}, 10);
+  box.scrollLeft += 1;
+  if (box.scrollLeft >= 800) {
+    box.scrollLeft = 0;
+  }
+}, 16);
+
+// 当浏览器窗口处于最小化时，浏览器中定时器计时可能会出现问题。是因为最小化的过程中，浏览器进入了节能的状态，计算会出现偏差。
+// 切换页卡也可能会导致这种情况；
+
+// webWorker 可以启动另一个线程，某些情况下可以用这个解决这些问题；

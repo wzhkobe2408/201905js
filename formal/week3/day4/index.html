@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#box {
+			margin: 10px 11px 12px 13px;
+			width: 200px;
+			height: 200px;
+			padding: 10px 20px;
+			background: red;
+			border: 15px solid blue;
+			opacity: 0.5;
+			filter: alpha(opacity=50); /*IE低版本设置透明度*/
+		}
+		#box:before {
+			content: 'hello';
+			color: rgb(0, 255, 255);
+		}
+	</style>
+</head>
+<body>
+<div class="box" id="box" style="height: 300px"></div>
+<script src="js/3-封装getCss并处理兼容.js"></script>
+</body>
+</html>

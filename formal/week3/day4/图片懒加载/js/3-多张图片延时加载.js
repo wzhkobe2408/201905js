@@ -13,7 +13,8 @@ window.onscroll = function () {
   // 2.2 遍历集合中每一张图片，判断每一个图片是否进入浏览器可视区域
   for (let i = 0; i < imgList.length; i++) {
     let img = imgList[i]; // 这个集合中的每一张图片
-    if (img.src) {
+    if (img.src) { // if 条件的小括号里面不是布尔值，浏览器会对小括号中的值进行布尔运算：除了 0 NaN '' null undefined false都是true；求完值以后，如果求出来的值是true就执行条件中的代码，如果是false就不执行。
+
       // img标签如果没有加载过，src属性值为空，空就是false。如果加载过了，img的src属性就不为空，不为空就是true，此时不需要重复加载，需要跳过该张图片，所以使用continue
       continue;
     }

@@ -10,7 +10,7 @@
 // 所以就是在页面的onscroll事件中去计算剩余高度，当剩余高度为0就表示要到底了。
 
 // 1. 导入工具方法：
-const { offset, win, arrLikeToAry, toJSON } = window.utils;
+const {offset, win, arrLikeToAry, toJSON} = window.utils;
 
 // 2. 获取元素
 let flowBox = document.getElementById('flowBox');
@@ -19,6 +19,7 @@ let flowList = flowBox.getElementsByTagName('li'); // 集合，类数组
 // 3. 动态获取数据
 let imgData = null;
 let page = 0;
+
 function queryData() {
   // 因为滑动到底还需要去加载第二页，而服务器需要咱们告诉它我需要第几页的数据，然后服务器接收到这个页数，它会返回给你想要的页数对应的数据。（这种技术叫做分页）一般GET请求通过在url末尾拼接查询参数的方式把这些数据传递给服务器
   // AJAX四步：
@@ -32,6 +33,7 @@ function queryData() {
   };
   xhr.send();
 }
+
 queryData();
 // console.log(imgData);
 
@@ -53,37 +55,103 @@ function bindHTML() {
     // 2. 为了保证这三列的高度相差不大，在给每一列插数据之前先给这三列按照高度进行排序；
     let flowListAry = arrLikeToAry(flowList); // 把这三个li的集合转成数组
     // 按照真实高度升序排序
+
     flowListAry.sort((a, b) => a.offsetHeight - b.offsetHeight); // 此时排过序后，flowListAry中第一项最矮的，第二个是第二矮的，第三个是最高的
 
     // 3. 绑定数据、按照排好的顺序插入每一列中
     if (item1) { // item1 不存在时是undefined，undefined转成布尔值是false
-      flowListAry[0].innerHTML += `<a href="${item1.link}">
-      <div><img src="${item1.pic}" alt=""></div>
-      <span>${item1.title}</span>
-    </a>`
+      flowListAry[0].innerHTML += queryHTML(item1);
     }
 
     if (item2) { // item2 不存在时是undefined，undefined转成布尔值是false
-      flowListAry[1].innerHTML += `<a href="${item2.link}">
-      <div><img src="${item2.pic}" alt=""></div>
-      <span>${item2.title}</span>
-    </a>`
+      flowListAry[1].innerHTML += queryHTML(item2);
     }
 
     if (item3) { // item1 不存在时是undefined，undefined转成布尔值是false
-      flowListAry[2].innerHTML += `<a href="${item3.link}">
-      <div><img src="${item3.pic}" alt=""></div>
-      <span>${item3.title}</span>
-    </a>`
+      flowListAry[2].innerHTML += queryHTML(item3);
     }
   }
 }
+
 bindHTML();
+lazyLoad(); // 第一次插入数据后，就有数据展示在第一屏，所以手动触发延时加载的方法
+
+function queryHTML({link, pic, title}) { // {link, pic, title} 是对传过来的实参进行结构赋值
+  // 这个函数专门拼接HTML字符串
+  return `<a href="${link}">
+      <div><img data-src="${pic}" alt=""></div>
+      <span>${title}</span>
+    </a>`
+}
+
+// 5. 加载更多：
+let timer = null;
+window.onscroll = function () { // 只要页面中滚动条滚动就会触发onscroll事件，事件函数就会从头到尾的执行一遍。因此我们可以在滚动时去计算页面有没有滚动到底。
+  // 判断页面有没有滚动到底：页面的scrollHeight - 页面的scrollTop - 浏览器可视窗口的高度 <= 0 时就表示滚动到底了
+  lazyLoad(); // 边滚动边计算哪些图片该加载了
+
+  let pageH = win('scrollHeight'); // 获取页面的高度
+  let scrollTop = win('scrollTop'); // 获取页面滚动条卷去的高度
+  let winH = win('clientHeight'); // 浏览器可视窗口的高度
+  
+  if (pageH - scrollTop - winH <= 100) {
+    // 满足这个条件时说明已经滚动到底了，应该去加载下一页；一般情况下，不会等到真的到底才去加载，一般PC端还会剩余一些的时候就去加载。（移动端一般都到底才加载，因为移动端的流量很值钱，要省着点）
+    // 把它改成小于等于100之后就会出现一个现象，只要小于100，比如98px，也满足这个条件，再往下滑就是96px，也满足条件。。。照这样下去，如果一直滑就会一直满足条件。而满足条件就会请求数据，带来多次请求的问题；
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      // console.log('123');
+      queryData(); // 获取数据
+      bindHTML(); // 把获取来的数据绑定到页面中
+      lazyLoad();
+    }, 300);
+  }
+};
+
+// 6. 图片延时加载 lazy-load
+
+function lazyLoad() {
+  // 1. 获取页面中所有的图片
+  let imgList = document.querySelectorAll('img');
+
+  // 2. 多张图片延时加载遍历图片集合，看每一张图片是否应该被加载
+  for (let i = 0; i < imgList.length; i++) {
+    let img = imgList[i]; // 每一张图片
+
+    if (img.src) {
+      continue; // 如果图片src属性有值，说明它被加载过了，不应该再重复加载，所以应该continue跳过这一张
+    }
+
+    // 判断当前图片是否应该出现在浏览器的可视区域
+    let imgOffsetTop = offset(img).top; // 图片距离body顶部的距离
+    let winScrollTop = win('scrollTop'); // 获取页面卷去的高度
+    let winH = win('clientHeight'); // 获取浏览器的可视窗口的高度
+
+    if (imgOffsetTop - winScrollTop - winH <= 100) {
+      // 满足这个条件说明图片该出来了，此时应该去加载它
+      let dataSrc = img.getAttribute('data-src');
+      let newImg = new Image(); // 新建一个img标签
+      newImg.src = dataSrc; // 把src给新的img标签尝试加载
+      newImg.onload = function () {
+        // 如果尝试加载成功，就会触发这个onload事件
+        img.src = dataSrc;
+        newImg = null; // 释放堆内存空间
+      };
+      newImg.onerror = function () {
+        // 如果尝试失败，就会触发onerror事件
+        // 如果要处理这错误，在这里处理就行
+      }
+    }
+
+  }
+}
 
 
 
+// 为什么页面中的图片插入的时候会偶尔乱序？因为for循环在向页面中的列插入时候是同步插入的，但是图片加载时异步的，就说向列中追加数据时，不会等着图片请求回来再插。这样做就会导致图片还没拿到时，图片高度就是0，这张图片所在的列就被当成最矮的列，在追加的时候又优先给这一列追加了一张。等那张图片加载完，高度就会被撑开，所以这一列很有可能比别人多了图片。
 
 
+// 函数的节流和防抖：降低js的执行频率；用一个定时器，来实现节流和防抖；
 
 
 

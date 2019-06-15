@@ -1,30 +1,37 @@
-// 多张图片延时加载：
-// 获取页面中所有的图片（或者某个容器元素下的所有需要延时加载的图片），
-// 监听页面中onscroll事件，在事件函数中，计算每张图片的是否即将出现在浏览器的可视窗口中
-// 如果当前图片即将进入，就进行该图片的加载。在加载之前需要判断该图片是否有src属性，如果有了src属性，说明该图片已经加载过了，不需要重新加载
+// 多张图片的延时加载：
+// 就是在页面滚动时，把所有的图片都获取到，然后遍历这些图片，对每一个图片进行判断，判断其是否进入了浏览器可视窗口，如果进入了，就去加载它，如果没进入就不加载。
+// 1. 导入工具方法
+const { offset, win } = window.utils;
 
-// 1. 获取图片集合
-let imgList = document.querySelectorAll('img');
-// 2. 获取当前浏览器可视窗口的高度
-let winH = utils.win('clientHeight');
-// 3. 监听窗口的滚动事件
+let winH = win('clientHeight'); // 获取浏览器可视窗口的高度
+
+// 2. 监听滚动条滚动
 window.onscroll = function () {
-	// 3.1 获取当前页面滚动条卷去的高度
-	let winSctp = utils.win('scrollTop');
+  // 2.1 获取所有的图片
+  let imgList = document.querySelectorAll('img');
 
-	// 3.2 遍历图片集合，在遍历过程中计算每张图片是否进入可视区域
-	for (let i= 0; i < imgList.length; i++) {
-		let imgItem = imgList[i];
-		if (imgItem.src) continue; // 如果图片的src属性存在且不为空，说明该图片已经加载过了，后面的加载不需要再执行了
+  // 2.2 遍历集合中每一张图片，判断每一个图片是否进入浏览器可视区域
+  for (let i = 0; i < imgList.length; i++) {
+    let img = imgList[i]; // 这个集合中的每一张图片
+    if (img.src) {
+      // img标签如果没有加载过，src属性值为空，空就是false。如果加载过了，img的src属性就不为空，不为空就是true，此时不需要重复加载，需要跳过该张图片，所以使用continue
+      continue;
+    }
+    let imgOffsetTop = offset(img).top; // 求出每一张图片到body上内边缘的距离
+    let winScrollTop = win('scrollTop'); // 获取页面卷去的高度
 
-		let imgOffsetTop = utils.offset(imgItem).top;
-		let dataSrc = imgItem.getAttribute('data-src');
-		if (imgOffsetTop - winH - winSctp <= 0) {
-			let newImg = new Image();
-			newImg.src = dataSrc;
-			newImg.onload = function () {
-				imgItem.src = dataSrc;
-			}
-		}
-	}
+    // 判断是否出现在可视区中
+    if (imgOffsetTop - winScrollTop - winH <= 0) {
+      // 满足这个条件说明图片已经要出来了，去加载这张图
+      let dataSrc = img.getAttribute('data-src');
+
+      // 动态创建img标签尝试加载
+      let newImg = new Image();
+      newImg.src = dataSrc; // 尝试加载
+      newImg.onload = function () { // 监听onload事件，如果加载成功就会触发这个事件
+        img.src = dataSrc;
+        newImg = null;
+      }
+    }
+  }
 };

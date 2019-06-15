@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin: 30px auto;
+      width: 600px;
+    }
+    .container .box {
+      width: 300px;
+      height: 300px;
+      margin: 10px auto;
+      overflow-y: scroll;
+      border: 1px solid #000;
+    }
+
+    .container .btn-wrapper {
+      width: 300px;
+      margin: 30px auto;
+    }
+
+    .btn-wrapper button {
+      width: 70px;
+      height: 40px;
+      text-align: center;
+      font-size: 20px;
+      border-radius: 5px;
+    }
+    .btn-wrapper button.cancel:hover {
+      background: #00b38a;
+      color: #ffff;
+    }
+    .btn-wrapper button.cancel:focus {
+      outline: none;
+      border: none;
+    }
+    .btn-wrapper button:visited {
+      outline: none;
+      border: none;
+    }
+    button:disabled:hover {
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="box" class="box">
+    鉴于目前安投融（北京）网络科技有限公司（爱投资平台运营主体）在北京市海淀区中科资源大厦原有办公场地租赁合同约定期限临近到期，因为持续有个别出借人在工作场地的过激行为造成物业侧不良影响，物业目前不同意续租，因此平台办公地点可能搬离，目前也在积极与物业协商续约可能。
+    同时，平台也在积极寻找附近新的合适办公场地，如确认搬迁，会在搬迁完毕后第一时间通过网站公布新办公场地。请各位出借人了解并悉知，切勿造成不必要的恐慌和听信谣言。
+    鉴于目前安投融（北京）网络科技有限公司（爱投资平台运营主体）在北京市海淀区中科资源大厦原有办公场地租赁合同约定期限临近到期，因为持续有个别出借人在工作场地的过激行为造成物业侧不良影响，物业目前不同意续租，因此平台办公地点可能搬离，目前也在积极与物业协商续约可能。
+
+    同时，平台也在积极寻找附近新的合适办公场地，如确认搬迁，会在搬迁完毕后第一时间通过网站公布新办公场地。请各位出借人了解并悉知，切勿造成不必要的恐慌和听信谣言。
+
+    鉴于目前安投融（北京）网络科技有限公司（爱投资平台运营主体）在北京市海淀区中科资源大厦原有办公场地租赁合同约定期限临近到期，因为持续有个别出借人在工作场地的过激行为造成物业侧不良影响，物业目前不同意续租，因此平台办公地点可能搬离，目前也在积极与物业协商续约可能。
+
+    同时，平台也在积极寻找附近新的合适办公场地，如确认搬迁，会在搬迁完毕后第一时间通过网站公布新办公场地。请各位出借人了解并悉知，切勿造成不必要的恐慌和听信谣言。
+
+  </div>
+  <div class="btn-wrapper">
+    <button class="cancel">取消</button>
+    <button class="confirm" disabled>确定</button>
+  </div>
+</div>
+
+<script>
+  let box = document.getElementById('box');
+  let confirm = document.getElementsByClassName('confirm')[0];
+  confirm.onclick = function () {
+    console.log('恭喜你成功注册');
+  };
+  
+  // 当用户协议滚动到底时，确认按钮可以点击
+  // 如何确定滚动到底了？ 监听box的滚动事件（onscroll），当滚动时就会触犯事件函数，在事件函数中计算是否滚动到第了。是否滚动到底的关键在于确定可以滚动的最大值是多少？
+  // 可以滚动的最大值就是溢出的部分，而scrollHeight = clientHeight + 溢出部分；所以溢出部分 = scrollHeight - clientHeight
+  let maxTop = box.scrollHeight - box.clientHeight;
+  box.onscroll = function () {
+    // console.log('滚了');
+    // 判断当前滚动条卷去的高度和最大值的关系，如果大于等于最大值说明已经滚动到底了
+    if (box.scrollTop >= maxTop) {
+      // 满足这个条件证明滚动到底了
+      confirm.disabled = false; // 解除按钮的禁用
+    } else {
+      confirm.disabled = true;
+    }
+
+  }
+</script>
+</body>
+</html>

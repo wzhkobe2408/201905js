@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		#box {
-			position: relative;
-			left: 100px;
-			width: 200px;
-			height: 200px;
-			background: darkcyan;
-		}
-	</style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      position: relative;
+      left: 100px;
+      top: 100px;
+      width: 200px;
+      height: 200px;
+      background: darkcyan;
+    }
+    .hide {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<div id="box" class="box">
+<button class="btn one two three" id="btn">确认</button>
 
-</div>
+<div id="box" class="box" style="left: 100px;"></div>
+<ul class="list" id="list">
+  <li>1</li>
+</ul>
 
-<script src="js2/utils.js"></script>
-<script src="js2/2-.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/1-固定步长动画.js"></script>
 </body>
 </html>

@@ -1,180 +1,206 @@
-window.utils = (() => {
-	/**
-	 * 作用：将类数组转化为数组
-	 * @param likeAry(类数组)
-	 * @return 转换后数组
-	 */
-	function arrLikeToAry(likeAry) {
-		try {
-			return [].slice.call(likeAry) // Array.from(likeAry)
-		} catch (e) {
-			let arr = []
-			for (let i = 0; i < likeAry.length; i++) {
-				arr[arr.length] = likeAry[i]
-			}
-			return arr
-		}
-	}
+// 封装一个工具集：增强代码的可复用性，提升开发效率；
+// utils 工具包，这里面提供了常用的方法；
 
-	/**
-	 * 作用：将json字符串转换为json对象
-	 * @param data
-	 * @return JSON对象
-	 */
-	function toJSON(data) {
-		return 'JSON' in window ? JSON.parse(data) : eval(`(${data})`)
-	}
+window.utils = (function () {
+  /**
+   * @desc 类数组转数组
+   * @param arrLike 类数组对象
+   * @returns {Array} 类数组对象转成的数组
+   */
+  function arrLikeToAry(arrLike) {
+    try {
+      return Array.from(arrLike);
+    } catch (e) {
+      var ary = []; //
+      for (var i = 0; i < arrLike.length; i++) {
+        ary.push(arrLike[i]);
+      }
+      return ary;
+    }
+  }
 
-	/**
-	 * 作用：获取、设置浏览器窗口的盒模型属性
-	 * @param attr
-	 * @param val
-	 */
-	function win(attr, val) {
-		if (typeof val === 'undefined') {
-			return document.documentElement[attr] || document.body[attr]
-		}
-		document.documentElement[attr] = document.body[attr] = val
-	}
+  /**
+   * @desc JSON格式字符串转对象
+   * @param jsonstr JSON格式字符串
+   * @returns {Object} 对象
+   */
+  function toJSON(jsonstr) {
+    if ('JSON' in window) { // 'JSON' in window 返回false表示JSON的方法不可以用
+      return JSON.parse(jsonstr);
+    } else {
+      return eval('(' + jsonstr + ')');
+    }
+  }
 
-	/**
-	 * 作用：获取当前元素距离body 左偏移和上偏移
-	 * @param ele
-	 * @return {left, top}
-	 */
-	const offset = ele => {
-		let left = ele.offsetLeft
-		let top = ele.offsetTop
-		let parent = ele.offsetParent
-		while (parent && parent.nodeName.toLowerCase() !== 'body') {
-			left += parent.offsetLeft + parent.clientLeft
-			top += parent.offsetTop + parent.clientTop
-			parent = parent.offsetParent
-		}
-		return {
-			left,
-			top
-		}
-	}
+  /**
+   * @desc 获取documentElement、document.body的盒子模型属性
+   * @param attr 盒子模型属性名
+   * @param val 设置的值
+   * @returns {*} 获取的盒子模型属性值
+   */
+  function win(attr, val) {
+    if (typeof val === 'undefined') {
+      // 如果val是undefined，证明第二个参数没传，没传就是获取
+      return document.documentElement[attr] || document.body[attr] // 如果函数法返回值是表达式，它会等着表达式求值，把求出来的值作为返回值返回
+    }
+    document.documentElement[attr] = document.body[attr] = val;
+  }
 
-	/**
-	 * @desc 获取元素计算生效样式
-	 * @param ele 元素对象
-	 * @param attr 属性名
-	 * @return value 样式值
-	 */
-	function getCss(ele, attr) {
-		var value;
-		if ('getComputedStyle' in window) {
-			value = window.getComputedStyle(ele, null)[attr];
-		} else {
-			// 判读获取的属性是否是透明度，如果是需要给IE的透明度属性进行特殊处理
-			if (attr === 'opacity') {
-				value = ele.currentStyle['filter'];
-				var reg2 = /^alpha\(opacity=(.+)\)$/;
-				value = reg2.exec(value)[1] / 100;
-			} else {
-				value = ele.currentStyle[attr];
-			}
-		}
+  /**
+   * @desc 获取当前元素相对于body的左上角点坐标（）
+   * @param ele 当前元素
+   * @returns {{left: number, top: number}} left:元素左外边到body左内边的距离; top: 元素的上外边距离body上内边的距离
+   */
+  function offset(ele) {
+    let left = ele.offsetLeft; // 当前元素的offsetLeft
+    let top = ele.offsetTop; // 当前元素的offsetTop
+    let parent = ele.offsetParent; // 获取当前元素的offsetParent
+    while (parent && parent.nodeName !== 'BODY') {
+      left += parent.clientLeft + parent.offsetLeft;
+      top += parent.clientTop + parent.offsetTop;
+      parent = parent.offsetParent;
+    }
+    return {
+      left,
+      top
+    }
+  }
 
-		// 去除单位: 只有是数字带单位的情况下才需要去除单位
-		var reg = /^-?\d+(\.\d+)?(px|pt|rem|em)$/i;
-		if (reg.test(value)) {
-			value = parseFloat(value);
-		}
-		return value
-	}
+  /**
+   * @desc 获取元素的计算生效的样式值
+   * @param ele 元素对象
+   * @param attr css属性
+   * @returns {*} css样式计算生效后的值
+   */
+  function getCss(ele, attr) {
+    var value;
+    // 1. 判断是否是 IE 浏览器
+    if ('getComputedStyle' in window) { // 判断window对象上有getComputedStyle吗
+      value = window.getComputedStyle(ele, null)[attr];
+    } else {
+      // 执行else的时候说明是IE低版本，使用currentStyle属性
+      value = ele.currentStyle[attr];
+    }
+    // 把单位去掉：把数字且带单位的，把单位去掉
+    var reg = /^-?\d+(\.\d+)?px|rem|em|pt$/g;
+    if (reg.test(value)) {
+      value = parseFloat(value);
+    }
+    return value
+  }
 
-	/**
-	 * @desc
-	 * @param ele
-	 * @param attr
-	 * @param value
-	 */
-	function setCss(ele, attr, value) {
-		if (attr === 'opacity') {
-			ele.style.filter = 'alpha(opacity=' + value * 100 + ')';
-		}
-		if (attr === 'float') {
-			ele.style.cssFloat = value; // 标准浏览器设置float属性
-			ele.style.styleFloat = value; // IE 设置float属性
-			return
-		}
-		// 把常见的带单位的属性增加单位
-		let reg = /^(width|height|(margin|padding)?(top|left|right|bottom)?)$/i;
-		if (reg.test(attr) && !isNaN(value)) {
-			// 如果传入的不是有效数字或者原来就带有单位时就不加单位了
-			// isNaN('10px') -> true
+  /**
+   * @desc 设置元素对象的样式
+   * @param ele 元素对象
+   * @param attr CSS属性
+   * @param val 样式的值
+   */
+  function setCss(ele, attr, val) {
+    let reg = /(fontSize|width|height|(margin|padding)?(top|right|bottom|left)?)/i;
+    if (reg.test(attr)) {
+      if (!isNaN(val)) val += 'px';
+    }
+    ele.style[attr] = val;
+  }
 
-			value += 'px'
-		}
-		ele.style[attr] = value;
-	}
+  /**
+   * @desc 批量设置CSS样式
+   * @param ele
+   * @param cssBatch
+   */
+  function setBatchCss(ele, cssBatch) {
+    // 批量设置css样式就是遍历传入的CSS对象，把样式和值依次设置给元素对象即可
+    // 检验cssBatch是不是一个对象
+    if (typeof cssBatch !== 'object') {
+      throw TypeError('cssBatch is not a object')
+    }
+    for (let key in cssBatch) {
+      // hasOwnProperty() 检测某个属性是不是对象私有的，是则true，不是返回false
+      if (cssBatch.hasOwnProperty(key)) { // 去复习for in循环、面向对象
+        setCss(ele, key, cssBatch[key]);
+      }
+    }
 
-	function setBatchCss(ele, batch) {
-		if (typeof batch !== 'object') return;
-		for (var key in batch) {
-			if (batch.hasOwnProperty(key)) {
-				setCss(ele, key, batch[key])
-			}
-		}
-	}
+  }
 
+  /**
+   * @desc 封装一个css的方法，根据参数不同有不同的功能
+   * @param ele 元素
+   * @param param CSS样式或者CSS样式对象
+   * @param val CSS样式值
+   * @returns {*} 获取时是CSS样式值
+   */
+  function css(ele, param, val) {
+    // 根据传参的不同调用不同的方法
+    // 第二个参数是字符串类型，不传val时，就是获取
+    // 第二个参数是字符串时，并且第三个参数传了，就是设置单个样式
+    // 第二个参数是对象时，就是批量设置CSS样式
+    if (typeof param === 'string' && typeof val === 'undefined') {
+      return getCss(ele, param);
+    }
+    if (typeof param === 'string' && typeof val !== 'undefined') {
+      setCss(ele, param, val);
+      return;
+    }
+    if (typeof param === 'object') {
+      setBatchCss(ele, param);
+    }
+  }
 
-	function css(ele, param, val) {
-		// 对传入不同参数时进行不同的处理——重载
-		if (typeof param === 'object') {
-			// 如果传入一个对象
-			setBatchCss(ele, param);
-		}
-		if (typeof param === 'string' && typeof val === 'undefined') {
-			// 此时param传了一个字符串，val没传，是要获取
-			return getCss(ele, param);
-		}
-		if (val !== 'undefined') {
-			setCss(ele, param, val)
-		}
-	}
+  /**
+   * @desc 判断当前元素有没有某个类名
+   * @param ele 元素对象
+   * @param className 类名
+   * @returns {boolean} 是否有类名
+   */
+  function hasClass(ele, className) {
+    let cN = className.trim();
+    // return ele.className.includes(cN);
+    return ele.className.indexOf(cN) !== -1;
+  }
 
-	// 增加类名
-	function addClass(ele, className) {
-		// 如果元素有这个类名了，则不添加
-		if (hasClass(ele, className)) return;
-		ele.className += ` ${className}`; // 添加时要在本次添加类名前面写一个空格
-	}
+  /**
+   * @desc 为元素添加类名
+   * @param ele 元素对象
+   * @param className 类名
+   */
+  function addClass(ele, className) {
+    let cN = className.trim();
+    if (hasClass(ele, cN)) return;
 
-	// 1. 判断元素是否有某一个类名
-	function hasClass(ele, className) {
-		// 获取该元素的所有类名，然后判断是否包含这个类名
-		let cN = className.trim();
-		return ele.className.includes(cN);
-	}
+    // 优化：如果原来的类名末尾有空格，就可以不拼接空格，如果没有时再拼接
+    let reg = / $/g;
+    // 'box '
+    if (reg.test(ele.className)) {
+      ele.className += `${cN}`;
+    } else {
+      ele.className += ` ${cN}`;
+    }
+  }
 
-	// 移除类名
-	function removeClass(ele, className) {
-		className = className.trim();
-		let ary = className.split(' ');
-		ary.forEach(item => {
-			item = item.trim();
-			let reg = new RegExp(`${item}`, 'g');
-			ele.className = ele.className.replace(reg, '')
-		})
-	}
+  /**
+   * @desc 移除类名
+   * @param ele 元素对象
+   * @param className 类名
+   */
+  function removeClass(ele, className) {
+    let cN = className.trim();
+    let reg = new RegExp(cN, 'g');
+    ele.className = ele.className.replace(reg, '');
+  }
 
-
-	return {
-		arrLikeToAry, // likeAryTo: likeAryTo
-		toJSON,
-		win,
-		offset,
-		getCss,
-		setCss,
-		setBatchCss,
-		css,
-		hasClass,
-		addClass,
-		removeClass
-	}
-
+  return {
+    arrLikeToAry,
+    toJSON,
+    win,
+    offset,
+    getCss,
+    setCss,
+    setBatchCss,
+    css,
+    hasClass,
+    addClass,
+    removeClass
+  }
 })();
+

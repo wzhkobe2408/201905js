@@ -4,28 +4,24 @@
 *
 * */
 
-// JS的动画：结合SJ的定时器不断的操作元素的某些属性，实现动画效果。
+// JS动画的原理：通过定时器去不断修改一个元素的某个属性，因为定时器每隔一段时间就会执行一次，元素的属性每隔一段时间就会被修改一次，元素就去了新的位置，人的眼睛看到的就是动画效果；
 
-// 让盒子在水平方向上动起来，操作盒子的left值
+// 固定步长的动画：每次定时器执行让这个元素改变固定的步长。
 
-const {win, css} = window.utils;
+const { win, css } = window.utils;
 let box = document.getElementById('box');
+let step = 10; // 设置步长
+let maxL = win('clientWidth') - css(box, 'width'); 
 
-let step = 2; // 每次动画移动2px
-
-// left的最大值：屏幕宽度 - 元素的宽度
-let maxL = win('clientWidth') - css(box, 'width');
-
-let timer = setInterval(function () {
-	let l = utils.css(box, 'left');
-	// 结束动画条件
-	if (l >= maxL) {
-		clearInterval(timer);
-		css(box, 'left', maxL);
-		return;
-	}
-	l += 2;
-	css(box, 'left', l)
+let timer = setInterval(() => {
+  // 固定步长的动画，在原有的基础上累加上步长，然后再设置回去
+  let preLeft = css(box, 'left'); // 获取原有的left值
+  let curLeft = preLeft + step;
+  // 动画过界判断: 判断元素是否运动到边界了，如果到达超过边界，先把定时器清除了，停止动画，并且把curLeft改成最大值
+  if (curLeft >= maxL) {
+    clearInterval(timer);
+    curLeft = maxL;
+  }
+  css(box, 'left', curLeft);
 }, 16);
 
-// 指定步长的动画原理：首先获取动动画距离，使用动画终点 - 动画起点；然后使用一个定时器，每隔一定毫秒数获取当前元素的当前位置累加上步长，再把累加后的位置设置回去。在累加之前判断一下，当前位置是否已经到达了终点，如果到达终点清除定时器，并终止后面的操作。

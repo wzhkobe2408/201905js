@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      margin: 30px auto;
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+    .hide {
+      display: none;
+    }
+    .btn {
+      display: block;
+      margin: 30px auto;
+      width: 100px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+<button class="btn" id="btn">来啊，快活啊</button>
+
+<div id="box" class="box"></div>
+
+<script src="js/utils.js"></script>
+<script>
+  const { hasClass, addClass, removeClass } = window.utils;
+  let btn = document.querySelector('#btn');
+  let box = document.getElementById('box');
+  btn.onclick = function () {
+    // 判断box有没有hide类名，如果有就说明当前元素处于隐藏状态，就应该让box出来；如果box没有hide类名，表示box是展示的，就应该消失；
+    if (hasClass(box, 'hide')) {
+      removeClass(box, 'hide');
+    } else {
+      addClass(box, 'hide');
+    }
+  }
+</script>
+</body>
+</html>

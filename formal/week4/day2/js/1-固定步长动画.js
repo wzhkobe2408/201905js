@@ -22,6 +22,6 @@ let timer = setInterval(() => {
     clearInterval(timer);
     curLeft = maxL;
   }
-  css(box, 'left', curLeft);
+  css(box, 'left', curLeft); // curLeft 是当前元素因下一帧的位置，要把curLeft设置给box的left属性，box才会去curLeft的位置
 }, 16);
 

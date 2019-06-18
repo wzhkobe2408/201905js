@@ -96,7 +96,7 @@ window.utils = (function () {
    * @param val 样式的值
    */
   function setCss(ele, attr, val) {
-    let reg = /(fontSize|width|height|(margin|padding)?(top|right|bottom|left)?)/i;
+    let reg = /^(fontSize|width|height|(margin|padding)?(top|right|bottom|left)?)$/i;
     if (reg.test(attr)) {
       if (!isNaN(val)) val += 'px';
     }

@@ -7,34 +7,40 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		.box {
-			height: 5000px;
-			background: -webkit-linear-gradient(left top, red,blue, green, orange);
-		}
-		.btn {
-			position: fixed;
-			bottom: 50px;
-			right: 50px;
-			width: 80px;
-			height: 80px;
-			background: #ccc;
-			color: #fff;
-			text-align: center;
-			line-height: 80px;
-			border-radius: 50%;
-			cursor: pointer;
-		}
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      height: 5000px;
+      background: -webkit-linear-gradient(top left, red, blue, green, orange);
+    }
+    .btn {
+      position: fixed;
+      right: 50px;
+      bottom: 50px;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background: #999;
+      line-height: 80px;
+      text-align: center;
+      color: #fff;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
 	</style>
 </head>
 <body>
 <div id="box" class="box"></div>
 <div class="btn" id="btn">回到顶部</div>
 
-<script src="js2/utils.js"></script>
-<script src="js2/4-.js"></script>
+<!--<a href="#box" class="btn">回到顶部</a>-->
+<!--锚点定位：把a标签的href设置成某个元素的id #元素id 点击a标签就可以回到顶部  -->
+
+<script src="js/utils.js"></script>
+<script src="js/4-回到顶部.js"></script>
 </body>
 </html>

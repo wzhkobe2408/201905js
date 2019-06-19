@@ -29,6 +29,6 @@ function bindHTML() {
   // 绑定数据：
 }
 ajax(function (ajaxData) {
-  console.log(ajaxData);
+  console.log(ajaxData)
 });
 bindHTML(); // ????? 在这里绑定数据能不能行？那么可以在哪里执行？

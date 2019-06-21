@@ -1,14 +1,20 @@
-$.ajax({
-	url: 'data/product.json',
-	method: 'GET',
-	dataType: 'json',
-	async: false, // 异步还是同步：
-	success: function (result) {
-		// 请求成功会执行这个函数
-	},
-	error: function () {
-		// 如果失败会执行这个函数
-	}
-});
+// ajax方法是jQ的静态方法；ajax定义在jQ自己身上，没有定义在原型上，只有jQuery自己能调用
 
-// $.ajax() 是通过$调用的，说明ajax是定义在jQuery自身上，而css、html等方法都是定义在jq原型上的方法
+$.ajax({
+  url: 'json/data.json', // 接口
+  method: 'GET', // http method 请求方式，默认'GET'
+  async: true, // 是否异步，默认值true,表示异步；
+  dataType: 'json', // 数据类型，因为jq的ajax帮我们格式化数据，所以告诉它数据类型
+  data: {
+    id: '17',
+    price: 1000
+  }, // POST请求的参数，是发送给服务器的数据
+  success (data) {
+    // 如果ajax请求成功会调用这个函数；这个data就是请求回来的数据，并且jq会帮我们处理成对象，不用我们再JSON.parse()
+    console.log(data);
+  },
+  error (err) {
+    // 如果ajax请求失败，会调用这个函数
+    console.log(err);
+  }
+});

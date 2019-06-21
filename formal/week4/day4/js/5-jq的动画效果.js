@@ -1,47 +1,40 @@
-/*
-// jq中内置了常见的动画
+// jq的动画：
 
-// 1. show() / hide() 显示或者隐藏，参数是动画持续时间
-$('#btn').click(function () {
-	$('.animate').hide(300);
+// 1. animate()
+// $(selector).animate(target, duration,easing动画效果, after)
+
+let $btn = $('.btn');
+/*$btn.click(function () {
+  // 这个事件函数中，如果你要用this，就不要用箭头函数
+  $('.animate').animate({
+    width: 400,
+    height: 400
+  }, 2000)
+});*/
+
+// 2. stop() 停止元素当前正在执行的动画，不管它是否执行完；（用来清除动画），一般用来动画开始前先清除之前的动画；
+/*$btn.click(function () {
+  // 这个事件函数中，如果你要用this，就不要用箭头函数
+  $('.animate').animate({
+    width: 400,
+    height: 400
+  }, 2000);
+  setTimeout(() => {
+    $('.animate').stop();
+  }, 1000);
+});*/
+
+// 3. finish() 结束当前动画，忽略当前动画的时间，直接到终点；
+
+$btn.click(function () {
+  // 这个事件函数中，如果你要用this，就不要用箭头函数
+  $('.animate').animate({
+    width: 400,
+    height: 400
+  }, 2000);
+  setTimeout(() => {
+    $('.animate').finish();
+  }, 800);
 });
 
-// 2. slideUp() slideDown() 滑动收起，下滑展开
-$('.btn').click(function () {
-	$('.animate').slideUp(3000);
-});
-
-$('.btn').click(function () {
-	$('.animate').slideDown();
-});
-
-// 3. fadeIn / fadeOut 淡入 / 淡出
-$('.btn').click(function () {
-	$('.animate').fadeOut();
-});
-$('.btn').click(function () {
-	$('.animate').fadeIn();
-});
-
-// 4. animate() 动画
-$('.btn').click(function () {
-	$('.animate').animate({height: 300}, 300);
-});
-*/
-
-// 5. stop方法，在动画开始前调用一次，可以清除上一次动画，不论是否抵达终点都要停止；
-$('.btn').click(function () {
-	$('.animate').animate({height: 300}, 3000);
-	setTimeout(() => {
-		$('.animate').stop();
-	}, 1000);
-});
-
-// 6. finish() 结束本次动画，忽略动画规定的事件，一下到终点
-
-$('.btn').click(function () {
-	$('.animate').animate({height: 400}, 30000);
-	setTimeout(() => {
-		$('.animate').finish();
-	}, 1000);
-});
+// 4.

@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		.animate {
-			width: 300px;
-			border: 1px solid #999999;
-			background: #00b38a;
-		}
-	</style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tabBox {
+      margin: 30px auto;
+      border: 1px solid #00b38a;
+    }
+    .animate {
+      width: 300px;
+      border: 1px solid #999999;
+      background: #00b38a;
+      /*height: 5000px;*/
+    }
+    button {
+      width: 100px;
+      height: 80px;
+      text-align: center;
+      line-height: 80px;
+      font-size: 40px;
+    }
+  </style>
 </head>
 <body>
-<div id="tabBox" class="tabBox">
-	<ul class="header">
-		<li>事实</li>
-		<li>实时</li>
-		<li>xy</li>
-	</ul>
-	<div></div>
-	<div></div>
-	<div></div>
+<button class="btn2">取消</button>
+<div id="tabBox" class="tabBox two">
+  <ul class="header">
+    <li>事实</li>
+    <li>实时</li>
+    <li>综艺</li>
+  </ul>
+  <div id="headerNext">
+    <div>123456</div>
+  </div>
+  <div></div>
+  <div></div>
 </div>
 <div class="next"></div>
 <p class="pp"></p>
 <div class="animate"></div>
+
 <div>
-	<button class="btn">动画</button>
+  <button class="btn">动画</button>
 </div>
 
+<div class="wrapper" id="wrapper"></div>
+
 <script src="js/jquery.js"></script>
-<script src="js/5-jq的动画效果.js"></script>
+<script src="js/7.jq的each方法.js"></script>
 </body>
 </html>

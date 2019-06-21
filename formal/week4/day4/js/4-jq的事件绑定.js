@@ -1,27 +1,22 @@
-// jq中提供了两种绑定事件的方法
+// jq绑定事件有两种方式：
 
-// 1. 将原生的事件名去掉on，例如onclick，变成jq的click方法，事件函数以回调函数的形式传给对应的事件方法
+// 1. 把事件名中的on去掉，变成jq对应的方法，事件函数以回调的形式传给对应的方法；如原生的onclick事件，在jq中变成 click(事件函数) 方法
+let $btn2 = $('.btn2');
+/*$btn2.click(function () {
+  console.log(this); // this还是绑定当前事件的元素，并且原生的元素对象；
+  $(this).css({
+    backgroundColor: 'red'
+  });
+});*/
 
-$('li.active').click(function () {
-	// 给类名为active的li元素绑定点击事件，当事件触发时执行这个匿名函数
-	// 事件函数中this的jq已经帮我们处理成了绑定当前事件的元素
-	console.log(this);
+// 2. jq中提供了一个on方法，on方法有两个参数，第一个是去掉on的事件名，第二个参数是事件函数
+$btn2.on('click', function () {
+  console.log(this); // this 是绑定当前事件的元素对象（原生）
 });
 
-// 2. on方法：on方法的参数：
-// 第一个：去掉on的事件名，字符串
-// 第二个：事件触发时需要执行的事件函数
+// 3. off() 方法，解绑事件（移除事件）
+// $btn2.off('click');
 
-$('div.active').on('click', function () {
-	console.log('一个点击事件');
-});
-
-// 3. 用代码触发事件函数执行
-// trigger()
-$('li.active').trigger('click');
-
-// 4. 移除事件：off(事件名)方法
-
-$('li.active').off('click');
-
+// 4. trigger() 用代码触发事件执行；
+$btn2.trigger('click');
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.tabBox {
+			width: 604px;
+			margin: 30px auto;
+		}
+		ul, li {
+			list-style: none;
+		}
+		.header {
+			border: 1px solid #000;
+			overflow: hidden;;
+		}
+		ul > li {
+			float: left;
+			width: 200px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+		}
+		ul > li:nth-child(2) {
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+			width: 198px;
+		}
+		.tabBox div {
+			display: none;
+			border: 1px solid #000;
+			height: 300px;
+			line-height: 300px;
+			text-align: center;
+			font-size: 40px;
+		}
+		li.active, div.active {
+			display: block;
+		}
+		li.active {
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+<div id="tabBox" class="tabBox">
+	<ul class="header">
+		<li class="active">事实</li>
+		<li>实时</li>
+		<li>综艺</li>
+	</ul>
+	<div class="active">
+		事实
+	</div>
+	<div>
+		实时
+	</div>
+	<div>
+		综艺
+	</div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/7.选项卡.js"></script>
+</body>
+</html>

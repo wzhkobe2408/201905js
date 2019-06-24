@@ -1,7 +1,12 @@
 // 原型式继承：只继承父类公有的；
 
 // 创建一个指定__proto__的对象
-// Object.create(作为原型的对象)
+// Object.create(protoObj) 返回一个新对象，这个新对象的__proto__ 指向protoObj；
+let obj2 = {
+  name: '100',
+  id: 17
+};
+let o2 = Object.create(obj2); // o2是新的对象，并且o2的__proto__属性指向obj2
 
 function A() {
   this.text = 'A类私有的text';
@@ -22,7 +27,7 @@ let obj = Object.create(A.prototype); // 创建一个对象obj，obj的__proto__
 
 // 原型式继承：
 B.prototype = obj; // obj -> {__proto__: A.prototype }
-B.prototype.constructor = B;
+B.prototype.constructor = B; // 把B原型上的constructor属性改写成B；
 
 B.prototype.getName = function () {
   console.log(this.name);

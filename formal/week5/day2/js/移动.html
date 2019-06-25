@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: deeppink;
+    }
+  </style>
+</head>
+<body>
+<!--按下键盘上的左键 <- box就要向左移动5px 右键 向右移动5px -->
+<div class="box" id="box" style="left: 0;top: 0;"></div>
+<script>
+  // 1. 获取元素
+  let box = document.querySelector('#box');
+
+  // 2. 监听document的onkeydown事件
+  document.onkeydown = function (e) {
+    // 2.1 获取当前box的left，并且还要转成数字
+    let left = parseFloat(box.style.left);
+
+    // 2.2 判断按下的是哪个键，使用e.keyCode 判断是左键还是右键
+    if (e.keyCode === 37) {
+      left -= 5;
+    }
+    if (e.keyCode === 39) {
+      left += 5;
+    }
+    // 2.3 把left设置给box，这个元素才会动
+    box.style.left = left + 'px';
+  }
+</script>
+</body>
+</html>

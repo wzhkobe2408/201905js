@@ -155,6 +155,5 @@ function handleFocus() {
 }
 handleFocus();
 
-
 autoTimer = setInterval(autoMove, interval);
 

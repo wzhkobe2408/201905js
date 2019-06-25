@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      margin: 50px;
+      width: 200px;
+      height: 200px;
+      background: #DB192A;
+    }
+
+    .btn {
+      margin: 30px;
+      width: 100px;
+      height: 50px;
+    }
+
+    #select {
+      width: 100px;
+      height: 50px;
+    }
+  </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+
+<button class="btn" id="btn">确认</button>
+
+<input type="text" id="input" placeholder="请输入银行卡余额">
+<textarea id="textArea" cols="30" rows="10" placeholder="请输入"></textarea>
+
+<select id="select"> <!--select 也有value属性，select的value值是下面的被选中的option的value-->
+  <option value="1">重庆小面</option>
+  <option value="2">孟记粥铺</option>
+  <!--option 添加selected属性，select默认选中它-->
+  <option value="3" selected>田老师</option>
+  <option value="4">张亮麻辣烫</option>
+</select>
+
+<label for="account">
+  账户：<!--label for的值和下面的表单的id一样时，点击汉字可以让表单获得焦点-->
+  <input type="text" placeholder="账户" id="account">
+</label>
+<label for="male">
+  男<input type="radio" name="sex" id="male">
+</label>
+<label for="female">
+  女<input type="radio" name="sex" id="female">
+</label>
+
+<label for="basketball">
+  篮球：<input type="checkbox" id="basketball">
+</label>
+<label for="football">
+  足球：<input type="checkbox" id="football">
+</label>
+
+<hr>
+<a href="https://www.baidu.com" id="baidu" target="_blank">百度</a>
+<hr>
+<button>按钮</button>
+<script src="js/6-onload和DOMContentLoaded.js"></script>
+</body>
+</html>

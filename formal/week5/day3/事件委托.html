@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      list-style: none;
+    }
+    .list {
+      margin: 30px auto;
+      width: 500px;
+      border: 1px solid #000;
+    }
+    .list li {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+    .list li:nth-child(odd) {
+      background: #00b38a;
+    }
+    .list li:nth-child(even) {
+      background: deeppink;
+    }
+    #btn {
+      width: 100px;
+      height: 50px;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+<button id="btn">增加</button>
+<ul class="list" id="list">
+  <li>大白菜真便宜 1</li>
+  <li>大白菜真便宜 2</li>
+  <li>大白菜真便宜 3</li>
+  <li>大白菜真便宜 4</li>
+</ul>
+
+<script src="js/1-事件委托.js"></script>
+</body>
+</html>

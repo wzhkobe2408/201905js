@@ -45,4 +45,3 @@ removeEvent(fn3);
 setTimeout(() => {
   fire(); // 3s以后发布事件
 }, 3000);
-

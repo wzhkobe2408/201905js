@@ -10,7 +10,7 @@
 /*
 * 解决方案：
 *  1. 把元素和鼠标绑定在一起 元素对象.setCapture() 方法；当拖拽结束后，再解绑 元素对象.releaseCapture(); 【Chrome不兼容、IE和FF(FireFox)可以使用】
-*  2. 事件委托
+*  2. 事件委托解决问题；因为元素很小，只有鼠标在元素上面移动的时候才会触发这个元素的onmousemove事件，只要动的快鼠标和元素分开后就不会再触发元素的onmousemove事件。所以我们把onmousemove和onmouseup事件绑定给document；
 *
 *
 * */
@@ -20,7 +20,7 @@ let box = document.getElementById('box');
 // 鼠标按下时开始拖拽
 box.onmousedown = dragStart;
 
-box.onmouseup = dragEnd;
+document.onmouseup = dragEnd;
 
 // dragStart 开始拖拽
 function dragStart(e) {
@@ -34,11 +34,13 @@ function dragStart(e) {
   this.startL = parseFloat(this.style.left);
   this.startT = parseFloat(this.style.top);
 
-  box.onmousemove = dragMove;
+  // document.onmousemove = dragMove; // 直接把事件绑定给document，导致了一个dragMove函数中的this变成了document（事件函数中的this指向绑定当前事件的元素），但是我们需要dragMove中的this被拖拽的元素；所以需要我们修改dragMove中的this；
+  document.onmousemove = dragMove.bind(this); // bind方法会返回一个修改this后的新函数【并不会让函数执行，call和apply修改this后会让函数执行】
 }
 
 // dragMove 拖拽中移动鼠标
 function dragMove(e) {
+  // console.log(this);
   // 在dragMove中要实现鼠标跟随
 
   // 1. 计算从鼠标按下到当前位置鼠标走过的路程
@@ -58,5 +60,5 @@ function dragMove(e) {
 function dragEnd(e) {
   // this.releaseCapture(); // Chrome不兼容
   // 鼠标抬起时执行dragEnd方法，鼠标抬起后移除盒子的onmousemove事件；因为我们onmousemove的事件函数中做的鼠标跟随，所以取消onmousemove事件，元素就不会再跟随鼠标了
-  box.onmousemove = null;
+  document.onmousemove = null;
 }

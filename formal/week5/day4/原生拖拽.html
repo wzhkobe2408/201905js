@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>原生拖拽</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .litBox {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+    .bigBox {
+      position: absolute;
+      top: 150px;
+      left: 500px;
+      height: 300px;
+      width: 300px;
+      border: 1px solid #00b38a;
+    }
+    #litBox2 {
+      top: 170px;
+    }
+  </style>
+</head>
+<body>
+<div class="litBox" id="litBox" draggable="true"></div>
+<div class="litBox" id="litBox2" draggable="true"></div>
+<div class="bigBox" id="bigBox"></div>
+
+<script src="js/6-原生拖拽例子.js"></script>
+</body>
+</html>

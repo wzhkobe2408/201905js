@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    input, button {
+      outline: none;
+      border: none;
+    }
+
+    .container {
+      position: relative;
+      margin: 30px auto;
+      width: 330px;
+      height: 36px;
+    }
+
+    .input {
+      border: 1px solid #555;
+      padding-left: 40px;
+      width: 290px;
+      height: 36px;
+      border-radius: 18px;
+      font-size: 20px;
+    }
+
+    .search-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      background: url("./img/search.png") no-repeat center;
+    }
+
+    .aTag {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 42px;
+      height: 20px;
+      border: 1px solid skyblue;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+      text-align: center;
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+    .slide-list {
+      display: none;
+      position: absolute;
+      width: 310px;
+      top: 50px;
+      border: 1px solid deeppink;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .slide-list li {
+      line-height: 35px;
+      cursor: pointer;
+    }
+
+    .slide-list li:hover {
+      color: skyblue;
+    }
+
+    .slide-list:before {
+      position: absolute;
+      top: -9px;
+      left: 80px;
+      display: block;
+      content: '';
+      width: 15px;
+      height: 15px;
+      border-left: 1px solid deeppink;
+      border-top: 1px solid deeppink;
+      background: #fff;
+      transform: rotate(45deg);
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+      color: #999;
+      font-size: 16px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <input type="text" class="input">
+  <button class="search-btn"></button>
+  <a href="javascript:;" class="aTag">T恤</a>
+  <ul class="slide-list">
+    <li>T-shirt</li>
+    <li>移动电源</li>
+    <li>卫衣</li>
+    <li>帆布鞋</li>
+    <li>保护套</li>
+  </ul>
+</div>
+
+<script>
+  let $ = selector => document.querySelector(selector);
+  let input = $('.input');
+  let aTag = $('.aTag');
+  let slideList = $('.slide-list');
+
+  input.onfocus = function () {
+    aTag.style.display = 'none';
+    slideList.style.display = 'block';
+    input.setAttribute('placeholder', '请输入搜索商品内容')
+  };
+  input.onblur = function () {
+    aTag.style.display = 'block';
+    slideList.style.display = 'none';
+    input.setAttribute('placeholder', '')
+  };
+
+  // 在input中输入内容时去请求一个接口，并且把输入数据传给服务器，把请求到的数据绑定到页面中ul中；
+  let originalInnerHTML = slideList.innerHTML;
+  input.oninput = function () {
+    // console.log(this.value);
+    // 1. 获取input框输入的值
+    let {value} = this;
+    // 2. 发送ajax请求
+    if (!value) {
+      slideList.innerHTML = originalInnerHTML;
+      return
+    }
+    let p = new Promise(function (resolve, reject) {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', `json/data.json?keyword=${value}`, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let data = JSON.parse(xhr.responseText);
+          resolve(data);
+        }
+      };
+      xhr.send(); // 真香
+    });
+    
+    // 3. 拿到数据后，把数据绑定到页面中
+    p.then((result) => {
+      let str = ``;
+      let {data} = result; // 从result中把data取出来
+
+      // 遍历数据拼接字符串
+      let highLightReg = new RegExp(value, 'ig');
+      data.forEach((item, index) => {
+        // 高亮 highlight: 用正则+replace
+        item = item.replace(highLightReg, function (a, b, c) {
+          return `<span style="color: red;">${a}</span>`
+        });
+        str += `<li>${item}</li>`
+      });
+
+      // 把拼接的结果插入到ul中
+      slideList.innerHTML = str;
+    }, (err) => {
+      
+    })
+  }
+</script>
+</body>
+</html>

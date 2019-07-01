@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      margin: 30px auto;
+      width: 300px;
+      height: 300px;
+      background: #00b38a;
+      transition: all 1s cubic-bezier(.06,.89,.83,.67) .5s; /*过渡效果：当属性发生变化的时候不是突然间到终点值，而是一点一点的到达终点值，给人一种平滑的感觉*/
+      /*transition 是合成属性：
+      transition-property: 过渡属性，默认值是all，可以单独设置某个属性，
+      transition-duration: 过渡时间，在这个时间内从初始值过渡到终点值
+      transition-timing-function: 过渡效果，默认linear，还有ease-in ease-out 贝塞尔曲线 cubic-bezier() https://cubic-bezier.com/
+      transition-delay: 等待时间，等待多长时间开始过渡动画
+      */
+    }
+
+    .box:hover {
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+<div class="box"></div>
+
+</body>
+</html>

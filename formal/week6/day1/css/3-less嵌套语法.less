@@ -1,0 +1,30 @@
+/*less的嵌套语法：*/
+@size: 300px;
+@m-bg: #00b38a;
+@color: red;
+
+
+.box {
+  @size: 200px;
+
+  width: @size;
+  height: @size;
+  background: @m-bg;
+
+  p { /*后代选择器 .box p*/
+    //color: @color;
+  }
+  & > p { /*子级选择器 .box > p*/
+    color: @color;
+  }
+
+  &.pub { /*交集选择器 .box.pub*/
+
+  }
+
+  &:hover { /*伪类的写法 .box:hover*/
+    background: skyblue;
+  }
+}
+
+/*less 的花括号会形成作用域，在使用变量时满足作用域链查找条件，当前作用域中有就使用当前作用域中的变量，如果没有再向上级作用域查找*/

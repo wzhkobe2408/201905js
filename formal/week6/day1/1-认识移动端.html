@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 移动端：
+  // 相对于PC（电脑）端而言的；
+  // 常见的移动设备：智能手机、平板（ipad）、阅读器（Kindle等）
+  // 智能手机：两大平台 IOS Android
+
+  // 原生APP：直接运行在操作系统中的程序；
+  // IOS: object-c （oc） 开发的
+  // Android: Java 开发的
+
+  // 原生APP的优点：
+  // 1. 性能好，流畅度高，可以不依赖于网络运行；
+  // 2. 原生app把需要的资源都打包到安装包里面，一次安装终身使用；
+
+  // 原生APP的缺点：
+  // 1. 不能跨平台运行，iOS 的app只能运行在ios设备中，Android的app只能在安卓系统运行；所以就需要开发两套，一般公司原生app开发团队有两拨人，一拨负责iOS开发，另一拨负责安卓；
+  // 2. 时效性差，app一旦安装到用户的设备中，更新与不更新用户有主动权；（服务供应商最多可以采用强制升级，强制升级用户体验差）
+
+
+  // 大前端：包含原生app开发在内的所有面向用户的一端；
+  // WebApp：运行在浏览器（以及app的webkit内核或者webview）中的html页面；
+  // 我们讨论的移动端运行在移动设备的浏览器（或者app中的webkit内核或者webview）中的html页面；
+  // WebApp 有什么优势：
+  // 1. 可以跨平台运行，web是运行浏览器中的，一套页面既可以在ios的浏览器中运行，也可以在安卓的浏览器运行；
+  // 2. 时效性强，更新版本直接修改html页面、js文件等，修改完以后直接发布到服务器上，用户看到的就是最新的，更新的主动权在服务供应商手里。
+
+  // WebApp的缺点：
+  // 1. 依赖于网络，没有网络或者网络特别差的时候，无法使用（PWA应用可以有效缓解这个问题: https://segmentfault.com/a/1190000012353473?utm_source=tag-newest）；
+  // 2. 每次使用都需要重新加载，用户需要等待；
+
+  // HybridApp 用原生app提供一个框架（webkit内核、webview），app大部分功能和逻辑用html+js写；
+
+  // ReactNative/Ionic/Flutter/Electron(写pc桌面程序) 可以把前端的html+js打包成原生的app。
+
+  // 开发移动端需要掌握的东西：
+  // 1. html5的新特性：websocket（双工通信）、geolocation（获取地理位置，获取你的经纬度；除了经纬度还可以使用ip地址定位位置）
+  // 2. HTML5新增的标签
+  // 3. CSS3部分新特性(过渡动画、变形动画2d/3d)
+  // 4. 移动端的事件、移动端常用类库
+  // 5. 本地存储localStorage
+  // 6. 音视频audio、video
+
+  // 在移动端没有IE的兼容性问题，可以使用新技术；
+
+  // 移动端的难点在于移动设备屏幕适配问题；
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--<link rel="stylesheet" href="css/font.css">-->
+  <link rel="stylesheet" href="css/iconfont.css">
+  <style>
+    /*使用图标字体：*/
+    /*使用Unicode*/
+    /*.box:before {
+      display: block;
+      font-family: iconfont; !*设置font-family: iconfont*!
+      content: '\f180'; !*伪元素的内容是图标的编码*!
+      font-size: 50px;
+      color: red;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 30px;
+    }*/
+
+    /*使用类名的方式使用图标字体*/
+    /*把和字体一起下载下来的css引入进来，然后在元素上添加iconfont 和对应图标的类名*/
+    .box {
+      font-size: 50px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<!-- icon-font i-weixin-border 要一起写，不写inconfont不行-->
+<div class="box icon-font i-weixin-border"></div>
+</body>
+</html>

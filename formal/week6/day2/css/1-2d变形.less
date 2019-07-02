@@ -1,0 +1,49 @@
+/* transform: 2D变形 */
+/*
+translate(x, y) 偏移
+translateX(X) 只在x轴方向偏移
+translateY(Y) 只在y轴方向偏移
+rotate(45deg) 旋转，度数为正值，顺时针旋转
+skew(x, y) 倾斜
+
+transform: 变形属性可以组合使用；
+
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
+@size: 300px;
+@m-color: #00b38a;
+.transition(@property: all, @duration: .5s, @timing-function: linear, @delay: 0s) {
+  transition: @arguments;
+}
+.box {
+  position: relative;
+  margin: 30px auto;
+  width: @size;  
+  height: @size;
+  background: @m-color;
+  overflow: hidden;
+  .transition;
+
+  p {
+    position: absolute;
+    bottom: -100px;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background: orangered;
+    .transition;
+  }
+  &:hover {
+    transform: translateY(-2px) rotate(45deg) skew(30deg);
+    //transform: skew(30deg);
+    //transform: skew(0, 30deg);
+    box-shadow: 0 0 5px 5px #999999;
+    p {
+      bottom: 0;
+    }
+  }
+}

@@ -21,6 +21,8 @@ let $current = $('.current');
 let $duration = $('.duration');
 let $already = $('.already');
 
+let autoTimer = null; // 存储定时器ID
+
 // 2. 动态设置main部分的高度
 // main部分的高度 = 浏览器可视窗口的高度 - header的高 - footer的高 - 0.6rem的padding值；
 function computedMain() {
@@ -36,6 +38,7 @@ function computedMain() {
     height: curH + 'rem'
   })
 }
+
 computedMain();
 window.addEventListener('resize', computedMain); // 当页面大小发生改变时重新计算main的高度
 
@@ -44,10 +47,10 @@ $.ajax({
   url: 'json/lyric.json',
   type: 'GET', // type 是http method ：get post put delete options
   async: false,
-  error (err) {
+  error(err) {
     console.log(err);
   },
-  success ({lyric}) {
+  success({lyric}) {
     // 处理数据的操作写在success中
     // console.log(lyric);
     bindHTML(lyric)
@@ -82,7 +85,7 @@ function bindHTML(data) {
     return res; // 注意，replace使用回调的返回值替换匹配到的内容，但是现阶段我们只处理 32 41 40 45 其他的不处理，所以需要原样返回；
   });
 
-  // 4.1 接着处理每一秒的歌词
+  // 4.2 接着处理每一秒的歌词
   // [00&#58;08&#46;73]一直地一直地往前走&#10;
   // 写在&#58;前的是分钟数
   // 写在&#46;前的是秒数
@@ -106,8 +109,111 @@ function bindHTML(data) {
     str += `<p data-min="${minute}" data-sec="${seconds}">${value}</p>`
   });
   $wrapper.html(str);
+
+  // 歌词就绪后播放音乐
+  musicAudio.play(); // audio元素自带的方法，播放；pause
+
+  // 叫音符按钮转起来
+  $musicBtn.addClass('select');
+
+  // 开启定时器，计算时间更新播放进度、高亮歌词
+  autoTimer = setInterval(computeTime, 1000);
+  // audio 标签有一个 ontimeupdate 事件，当currentTime 发生变更时，会触发这个事件，但是currentTime 特敏感，事件触发的特别频繁，如果要用注意使用防抖和节流处理；
 }
 
+// 5. 给音符按钮绑定事件，根据播放状态采取同的操作；
+// zepto 中有一个 tap方法，给元素绑定触摸事件
+$musicBtn.tap(function () {
+  // ? 如何知道音频是在播放还是暂停? audio元素上有一个paused属性，是否暂停，是一个布尔值，为true表示暂停，false表示正在播放；
+  // console.log(this); this 是绑定事件的元素，是原生对象
+  if (musicAudio.paused) {
+    // 处于暂停
+    musicAudio.play();
+    $(this).addClass('select');
+    autoTimer = setInterval(computeTime, 1000); // 播放后开启定时器
+  } else {
+    // 处于播放
+    musicAudio.pause();
+    clearInterval(autoTimer); // 暂停后要停止定时器
+    $(this).removeClass('select');
+  }
+});
+
+// 6. 根据播放进度，更新进度条、高亮歌词、已经播放的时间
+let step = 0; // 记录走过多少行
+let curTop = 0; // wrapper的初始top值
+function computeTime() {
+  // 1. 更新当前播放进度
+  // 获取当前音频播放进度、总时长，audio自带，
+  // console.log(musicAudio.currentTime); currentTime是当前已经播放了的时间，单位是秒
+  // console.log(musicAudio.duration); duration是音频的总时长；单位是秒
+  let {currentTime, duration} = musicAudio;
+  let curTime = formatTime(currentTime); // 格式化后的当前时间
+  let durTime = formatTime(duration); // 格式化后的总时间
+
+  // 插入到页面元素中
+  $current.html(curTime);
+  $duration.html(durTime);
+
+  // 更新进度条：
+  $already.css({
+    width: currentTime / duration * 100 + '%'
+  });
+
+  // 高亮歌词；从wrapper下的p标签中找到行内属性存储的分钟数和秒数和当前播放进度时间相同的p元素，设置它为选中（添加select类名），还要移除其兄弟们的选中样式；
+
+  let [min, sec] = curTime.split(':');
+
+  // 找data-min = min并且data-sec = sec的p标签；
+  /* let ps = document.querySelectorAll('.wrapper > p');
+   let right = null;
+   for (let i = 0; i < ps.length; i++) {
+     let m = ps[i].getAttribute('data-min');
+     let s = ps[i].getAttribute('data-sec');
+     if (+m === +min && +sec === +s) right = ps[i];
+    /!*+字符串 把字符串转成数字*!/
+   }
+   console.log(right);*/
+
+  //用 filter 方法
+  let highLight = $('.wrapper p').filter(`[data-min="${min}"]`).filter(`[data-sec="${sec}"]`);
+  
+  // console.log(highLight);
+  if (highLight.length) {
+    highLight.addClass('select').siblings().removeClass('select');
+
+    step++; // 找到一次和当前时间对应的歌词就给step++
+    if (step > 5) { // 前四行不动
+      curTop -= 0.84; // 0.84 rem是p标签的高度
+      $wrapper.css({
+        top: curTop + 'rem'
+      });
+    }
+  }
+
+  // 当前播放进度大于等于总时间时，就应该清除定时器
+  if (currentTime >= duration) {
+    clearInterval(autoTimer);
+    curTop = 0;
+    step = 0;
+  }
+}
+
+
+function formatTime(time) {
+  // 格式化时间 xx:xx 
+  let min = Math.floor(time / 60); // 获取分钟数
+  let sec = Math.round(time - min * 60); // 获取秒数
+
+  // 补零
+  if (min < 10) {
+    min = '0' + min;
+  }
+  if (sec < 10) {
+    sec = '0' + sec;
+  }
+  return `${min}:${sec}`;
+}
 
 
 

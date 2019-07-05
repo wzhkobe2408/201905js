@@ -100,6 +100,7 @@ body {
       top: 0;
       left: 0;
       width: 100%;
+      transition: all .5s linear 0s;
 
       p {
         height: .84rem;
@@ -141,7 +142,7 @@ body {
         background: rgba(255, 255, 255, 0.5);
         height: .04rem;
         .already {
-          width: 45%; /*宽度不是固定的，而是根据播放进度占总时长的比例来设置的*/
+          width: 0; /*宽度不是固定的，而是根据播放进度占总时长的比例来设置的*/
           height: 100%;
           background: @color-green;
         }

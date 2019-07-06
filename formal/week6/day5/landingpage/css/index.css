@@ -1,0 +1,44 @@
+html {
+  font-size: 100px;
+}
+
+.header-logo {
+  width: 100%;
+  height: .64rem;
+  overflow: hidden;
+}
+
+.header-logo .logo {
+  float: left;
+  width: 2.6rem;
+  height: .54rem;
+  margin-left: .19rem;
+  margin-top: .03rem;
+  font-size: 0; /*为了让h1标签中的消失*/
+}
+
+/*两倍图做图片用，设置父级盒子为1倍尺寸，让img充满容器*/
+.header-logo .logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.header-logo .tel {
+  float: right;
+  display: block;
+  width: 1.89rem;
+  height: .24rem;
+  margin-top: .19rem;
+  margin-right: .23rem;
+  /*二倍图做背景图*/
+  background: url("../img/电话@2x.png") no-repeat center;
+  background-size: 100% 100%; /*二倍图设置100%*/
+}
+
+.wayto-master {
+  width: 100%;
+  height: 5.63rem;
+  background: url("../img/首屏@2x.png") no-repeat center;
+  background-size: 100%;
+}
+

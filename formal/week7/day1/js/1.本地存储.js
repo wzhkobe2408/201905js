@@ -28,13 +28,64 @@
 
 localStorage.setItem('name', '马宾');
 localStorage.setItem('age', '18');
+localStorage.setItem('age', '19'); // 注意不能设置两个同名的属性，如果同名，后面的会覆盖前面的。
 localStorage.setItem('title', '宇宙集团军总司令');
 
+localStorage.setItem({name: 1}, {name: 2}); // '[object Object]' 如果你存的key和value不是字符串类型的，它会把他们转成字符串，调用toString() 方法，对象toString() -> '[object Object]';
 
+// localStorage.getItem(key) 根据key获取localStorage中存储的数据
+let title = localStorage.getItem('title');
+console.log(title);
 
+let sex = localStorage.getItem('sex');
+console.log(sex); // null 获取localStorage中不存在的key会返回null；
 
+// 真实项目经常会有把对象或者数组存储到localStorage中的需要，就是需要把对象或者数组变成JSON格式的字符串再存；
+// 等你想要用的时候要记得JSON.parse() 变成对象
 
+let auth = {
+  code: 0,
+  data: [
+    {
+      auth: 'operator',
+      auth_desc: '业务员',
+      path: '/list'
+    },
+    {
+      auth: 'operator',
+      auth_desc: '业务员',
+      path: '/orders'
+    }
+  ],
+  msg: 'ok'
+};
+// 把auth存储到ls（localStorage）中
+// JSON.parse() 把JSON字符串变成对象
+// JSON.stringify() 把对象变成JSON格式的字符串
 
+localStorage.setItem('auth', JSON.stringify(auth));
 
+// localStorage.removeItem(key) 删除指定key的数据
+localStorage.removeItem('title');
 
+// localStorage.clear() 清空localStorage，一般退出登录时可能需要你把ls中的东西都删了
+localStorage.clear();
+
+// sessionStorage 是客户端本地存储的一种，叫做会话存储
+// session 是服务端技术，存在服务器上的；
+
+// 打开一个页卡就是和服务器形成了一个会话；sessionStorage只在当前会话中有效；不能在其他会话中使用另外会话中的数据；
+
+// sessionStorage 的操作
+// setItem(key,value) 存储，key和value是字符串类型的
+// getItem(key) 获取指定key的值
+// removeItem(key) 删除指定key的数据
+
+// Unix 时间戳是以秒为单位的，js的时间戳是以毫秒为单位；PHP的时间戳就是unix时间戳；如果服务端让你传给它时间戳，要问一下是毫秒还是秒。如果服务端要秒，要用js时间戳除以1000；如果服务端返回给你的是时间戳，如果是unix时间戳，需要乘以1000转换js时间戳；【unix时间戳比js少三位，一看比较短就是unix的】；
+
+// 注意会话存储：刷新，并不会使sessionStorage失效，但是关闭页面后sessionStorage中的数据就没有了；
+
+// localStorage和sessionStorage的区别：
+// 1. localStorage(简写ls)是永久存储（如果用户或者我们删除了，就没有了），sessionStorage是会话存储，只在当前会话有效不能跨会话使用；
+// 2. 打开2个页卡（相同的源（也称域）就是一个网站），打开两个页面；如果用localStorage在A页卡中设置，在B页卡中可以获取到；但是sessionStorage不行；
 

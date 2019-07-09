@@ -44,7 +44,7 @@ x1.onreadystatechange = function () {
     let id = d1.id;
 
     let x2 = new XMLHttpRequest();
-    x2.open('GET', '2.json?id=id' + id, true);
+    x2.open('GET', '2.json?id=' + id, true);
     x2.onreadystatechange = function () {
       if (x2.readyState === 4 && x2.status === 200) {
 

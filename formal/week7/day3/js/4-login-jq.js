@@ -36,7 +36,7 @@ submit.click(function () {
       user_name: nameValue,
       password: passValue
     },
-    cache: false,
+    dataType: 'json',
     error(err) {
       // 这个error函数会在http-status-code为4xx或者5xx时才会执行
       console.log(err);

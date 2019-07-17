@@ -5,15 +5,16 @@
 // 前后端通过 http 协议通信，前端通过 http 发请求，向服务器要数据；服务端处理 http 请求，通过 http 协议向客户端发送数据；
 
 //  http 模块： http 是 Node.js 的内置模块；是用来处理客户端的 http 请求的；
+
 let http = require('http');
 let fs = require('fs');
 
 // 1. 处理客户端http请求，首先要创建一个服务；
 // http.createServer() 创建一个服务
 let server = http.createServer(function (request, response) {
-  // 具体的处理http请求的代码要写在这个回调函数中；只要客户端请求一次，这个回调函数就会执行一次；
+  // 具体的处理http请求的代码要写在这个回调函数中；只要客户端发送一个http请求，这个回调函数就会执行一次；
   // request 请求对象 这个对象中包含了客户端的请求中所有的信息；
-  // response 响应对象 这个对象中包含了所有用来响应客户端时所需要的方法和属性；
+  // response 响应对象 这个对象中包含了所有用来响应客户端所需要的方法和属性；
 
   console.log('请求来了');
 
@@ -23,7 +24,7 @@ let server = http.createServer(function (request, response) {
     if (err) {
       response.end('读取失败')
     } else {
-      response.end(data);
+      response.end(data); // 向客户端发送响应数据
     }
   });
 
@@ -43,5 +44,6 @@ server.listen(8000, () => console.log('port 8000 is on'));
 
 // 此时我们的电脑上既运行着客户端又运行着服务端；浏览器是客户端，用node启动的js脚本是服务端；
 
+// 修改了服务端的程序需要重启server
 
 

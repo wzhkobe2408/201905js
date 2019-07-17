@@ -14,6 +14,16 @@
 </body>
 
 <script>
-alert('真香')
+
+  /*因为 . 运算符的优先级比=号高，所以这个连续赋值是先给左边的a.x = a，然后再执行 a = {y: 2}*/
+  var a = {n:1};
+  var b = a;
+  a.x = a = {y:2}; // a -> {n: 1, x: a }  b -> {n: 1, x: a}
+  // a -> {y: 2}
+  console.log(a); // {y: 2}
+  console.log(a.x); // undefined
+  console.log(b); // {n: 1, x: {y: 2}}
+  console.log(b.x); // {y: 2}
+
 </script>
 </html>

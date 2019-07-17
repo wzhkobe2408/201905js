@@ -30,7 +30,7 @@ exports.abc = xxxx;
 // 2. 在js文件所在的目录中，按住shift键 点击鼠标右键 选择 在此处打开powershell窗口（win7 在此处打开命令窗口）
 // 3. 在命令行界面中输入：node 文件名 回车
 
-// 在websorm/vscode中使用terminal（终端运行）
+// 在webstorm/vscode中使用terminal（终端运行）
 // 1. 在项目中找到js所在的文件夹
 // 2. 在js所在文件夹右键，选择Open in terminal （在终端中打开）
 // 3. node 文件名 回车

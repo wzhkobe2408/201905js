@@ -11,7 +11,7 @@ let fs = require('fs'); // 导入内置模块和第三方的模块时都不需�
 // option: 设置读取的内容为哪种编码，option的默认值是buffer，存储二进制的数据，一般在机器之间传递可以直接传二进制；
 // callback: 回调函数 读取文件后异步执行的回调函数
 /*fs.readFile('./1.txt', function (err, data) {
-  // 当读取失败时err是一个对象，读取成功的是null
+  // 当读取失败时err是一个对象，读取成功时是null
 
   if (err) {
     console.log(err);

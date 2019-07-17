@@ -38,3 +38,8 @@ let server = http.createServer((req, res) => {
 
 // 2. 监听一个端口号
 server.listen(8000, () => console.log('port 8000 is on'));
+
+
+// 服务端响应如html、css、js、图片等文件服务称为静态资源服务，html、css、js等文件称为静态资源；
+
+// 如果pathname 类似 /home/help/search ，这种请求路径不是具体的文件，一般都是ajax接口；一般都是处理动态的请求，根据客户端传递的数据返回不同的内容；

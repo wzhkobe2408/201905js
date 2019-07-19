@@ -22,7 +22,7 @@ let server = http.createServer((req, res) => {
     let filePath = '';
     let contentType = '';
     if (pathname === '/') {
-      filePath = __dirname + '/index.html'; // 计算机读取文件时需要一个路径，可以使用绝对路径也可以相对路径；
+      filePath = __dirname + '/index.html'; // 计算机读取文件时需要一个路径，可以使用绝对路径也可以使用相对路径；
       contentType = 'text/html';
     } else {
       filePath = __dirname + pathname;
@@ -42,7 +42,7 @@ let server = http.createServer((req, res) => {
     // else 的情况就是ajax请求
     // 根据不同接口返回不同的内容，即根据pathname不同，做不同操作；这种机制叫做路由；
     // 因为现在ajax没有特殊情况返回的都是json，所以在这里设置
-    // ajax请求的接口也是pathname，因为这个请求这个pathname不再返回静态资源文件，而是根据客户端的请求返回不同的内容；
+    // ajax请求的接口也是pathname，因为请求这个pathname不再返回静态资源文件，而是根据客户端的请求返回不同的内容；
     res.setHeader('Content-Type', 'application/json;charset=UTF-8;');
 
     if (pathname === '/api/getBanner') {
@@ -52,12 +52,12 @@ let server = http.createServer((req, res) => {
 
       let {id} = query;
       // console.log(typeof id);
-      // id存在返回指定id的，不存在返回全部
+      // id存在返回指定id的数据，不存在返回全部
       if (id) {
         // 如果id存在
         let con = fs.readFileSync(__dirname + '/banner.json', 'utf8'); // 读取回来的结果是JSON格式的字符串；（现在没有数据库，真实项目中这里要查数据库）
         let dataArr = JSON.parse(con);
-        let itemById = dataArr.find(item => +item.id === +id); // 传过来的id是string类型的，而数组项中的id是number类型的；需要
+        let itemById = dataArr.find(item => +item.id === +id); // 传过来的id是string类型的，而数组项中的id是number类型的；需要转一下number
 
         // find的结果有可能不存在，不存在的时候是undefined
         let d = {
@@ -102,7 +102,7 @@ let server = http.createServer((req, res) => {
         data: null,
         msg: 'ok'
       };
-      // 2. 获取客户端post过来的数据；因为post请求传递的数据比较大，客户端会切片，一片一片的传递，而服务器也是一片一片的接收；所以Node.js是靠两个事件来接收post数据
+      // 2. 获取客户端post过来的数据；因为post请求传递的数据比较大，客户端会切片，一片一片的传递，而服务器也是一片一片的接收；所以Node.js是靠两个事件来接收post数据的
       let dataStr = '';
       req.on('data', (chunk) => {
         // 服务端在接收客户端post过来的数据的时候，每接收一次会触发一次data事件，触发一次data事件就会执行一次这个回调函数；

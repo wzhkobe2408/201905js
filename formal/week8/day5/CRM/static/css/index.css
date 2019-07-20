@@ -36,8 +36,13 @@ ul li {
 
 .head span, li span {
   float: left;
+  text-align: center;
 }
 
 li:nth-child(even) { /*odd 奇数 even 是偶数*/
   background: #eee;
+}
+li:hover {
+  background: lightseagreen;
+  color: #fff;
 }

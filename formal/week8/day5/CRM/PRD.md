@@ -7,12 +7,14 @@
 
 let obj = {
   code: 0,
-  data: {} | null,
+  data: [],
   msg: 'ok'
 }
 
 1. 获取列表接口
+GET
 /api/getList
+参数：无
 
 2. 新增客户信息接口
 POST
@@ -24,6 +26,7 @@ phone
 address
 
 3. 根据用户id返回指定客户的信息接口
+GET
 /api/getInfo 参数：id
 
 4. 修改客户信息的接口

@@ -52,7 +52,7 @@ let server = http.createServer((req, res) => {
 
       let {id} = query;
       // console.log(typeof id);
-      // id存在返回指定id的数据，不存在返回全部
+      // id存在返回指定id的数据，不存在返回全部                                                                              
       if (id) {
         // 如果id存在
         let con = fs.readFileSync(__dirname + '/banner.json', 'utf8'); // 读取回来的结果是JSON格式的字符串；（现在没有数据库，真实项目中这里要查数据库）

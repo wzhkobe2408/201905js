@@ -126,3 +126,12 @@ let server = http.createServer((req, res) => {
 
 // 3. 监听端口号
 server.listen(8000, () => console.log('port 8000 is on'));
+
+/*
+* 1. 进入到这个项目目录中
+* 2. 用node启动server：node 服务脚本名
+* 3. 进入浏览器访问localhost:端口号
+*
+* !!! vscode 不要再用go live ; webstorm 不要用点击右上角的浏览器的方式打开
+*
+* */

@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  background: lightseagreen;
+}
+
+ul, li {
+  list-style: none;
+}
+.box1 {
+  width: 400px;
+  margin: 30px auto;
+  padding: 15px;
+  border: 2px solid #00b38a;
+}
+
+.list {
+  margin-top: 15px;
+}
+
+.box2 {
+  width: 400px;
+  margin: 30px auto;
+  padding: 15px;
+  border: 2px solid #00b38a;
+}

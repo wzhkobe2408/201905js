@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <div>
+    <!--当checkbox只有一个的时候，vue会把val默认转成布尔值，如果转完之后是true，checkbox就是选中状态，否则不选中-->
+    <!--当checkbox选中状态发生变化的时候会触发onchange事件；-->
+    爱好：<label>吃饭：<input type="checkbox"
+                        v-model="val"
+                        @change="fn"
+                        value="1"></label>
+  </div>
+  {{val}}
+  <div>
+    <!--多个checkbox要v-model一个数组，当选中某一个checkbox，这个checkbox的value会进到数组中，如果你取消某一个checkbox，这个checkbox的value会自动从数组中移除掉-->
+    爱好：
+    <label>
+      唱
+      <input type="checkbox"
+             v-model="hobby"
+             @change="checkChange"
+             value="1">
+    </label>
+    <label>
+      跳
+      <input type="checkbox" v-model="hobby" value="2"  @change="checkChange">
+    </label>
+    <label>
+      RAP
+      <input type="checkbox" v-model="hobby" value="3"  @change="checkChange">
+    </label>
+    <label>
+      篮球
+      <input type="checkbox" v-model="hobby" value="4"  @change="checkChange">
+    </label>
+
+  </div>
+  {{hobby}}
+</div>
+
+<script src="vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      val: 1,
+      hobby: ['3', '4']
+    },
+    methods: {
+      fn() {
+        console.log(this.val);
+      },
+      checkChange() {
+        console.log(this.hobby);
+      }
+    }
+  })
+</script>
+</body>
+</html>

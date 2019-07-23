@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>simple todolist</title>
+</head>
+<body>
+<div id="app">
+  <input type="text"
+         id="todoInput"
+         @keydown.enter="add"
+         v-model="todo">
+  <ul id="list">
+    <li v-for="(item, index) in todoList" :key="index">
+      {{item}}
+      <button @click="remove(index)">删除</button>
+    </li>
+  </ul>
+</div>
+
+<script>
+ /* let input = document.getElementById('todoInput');
+  let list = document.getElementById('list');
+  input.onkeydown = function (e) {
+    if (e.keyCode === 13) {
+      let str =  `<li>${this.value} <button>删除</button></li>`;
+      list.innerHTML += str;
+    }
+  };
+  list.onclick = function (e) {
+    if (e.target.nodeName.toUpperCase() === 'BUTTON') {
+
+      list.removeChild(e.target.parentNode)
+    }
+  }*/
+</script>
+
+<script src="vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      todo: '',
+      todoList: []
+    },
+    methods: {
+      remove(index) {
+        this.todoList.splice(index, 1);
+      },
+      add() {
+        // this.todo 和 input双向数据绑定的，我们在input中输入内容，vue会把input中的值保存到this.todo 上
+        this.todoList.push(this.todo);
+        this.todo = ''; // 添加到todoList后，清空input
+      }
+    }
+  });
+
+  // Vue是数据驱动，不需要我们操作DOM；我们只需要操作数据，当Vue发现数据变化了，它会把页面中用到这个数据的所有地方按照数据的最新值重新渲染；
+  // 视图(HTML)是数据的映射，所谓映射是一个改另一个跟着改；当数据发生变更后，视图也会跟着改； By-闫老师
+</script>
+</body>
+</html>

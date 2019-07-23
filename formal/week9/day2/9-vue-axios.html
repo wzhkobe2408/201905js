@@ -31,14 +31,14 @@
       getData() {
         axios.get('list.json').then(({data}) => {
           // console.log(data);
-          this.result = data; // 拿到服务端返回的的数据后，直接修改result，然后vue就知道result发生了变更，vue就会按照最新的值渲染页面；
+          this.result = data; // 拿到服务端返回的数据后，直接修改result，然后vue就知道result发生了变更，vue就会按照最新的值渲染页面；
         })
       }
     },
     created() {
       // created是Vue生命周期的钩子函数；
       // Vue里面绝大多数的ajax请求都是在这里发送的
-      // 一般是把请求封装成一个方法放到methods里面，然后再created里面调用；
+      // 一般是把请求封装成一个方法放到methods里面，然后在created里面调用；
       this.getData(); // 要通过this访问methods里面的方法
     }
   })

@@ -51,7 +51,7 @@
         this.todoList.splice(index, 1);
       },
       add() {
-        // this.todo 和 input双向数据绑定的，我们在input中输入内容，vue会把input中的值保存到this.todo 上
+        // this.todo 和 input是双向数据绑定的，我们在input中输入内容，vue会把input中的值保存到this.todo 上
         this.todoList.push(this.todo);
         this.todo = ''; // 添加到todoList后，清空input
       }

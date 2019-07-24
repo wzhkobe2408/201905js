@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    button:disabled {
+      cursor: not-allowed;
+      background: red;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <button v-on:click="fn(1, 2)">点我</button>
+  <button @click="fn($event, 1, 2)">点我</button>
+  <a href="https://www.baidu.com" @click.prevent="fn">百度</a>
+  <input type="text" v-model="title" @keydown.enter="add">
+  <input type="number" v-model="num" min="1">
+  <br>
+  {{price | toFixed | toRMB }}
+  <!-- | 管道符，把管道符前面的值传给后面的过滤器-->
+  <!--过滤器可以连续使用，后面过滤器函数第一个参数收到的是前面的过滤器的处理结果-->
+  <div>
+    <input type="text" v-model="msg"> {{msg}}<br>
+  </div>
+  <div>
+    <!--多个radio同时v-model同一个属性，这些radio就成为一组了，在这一组中每次只能有一个选中-->
+    性别：
+    <label> 男：<input type="radio"
+                     @change="radioChange"
+                     v-model="sex"
+                     value="1"></label>
+    <label> 女：<input type="radio"
+                     v-model="sex"
+                     @change="radioChange"
+                     value="2"></label>
+    <label> 未知：<input type="radio"
+                      v-model="sex"
+                      @change="radioChange"
+                      value="3"></label>
+    <div v-show="sex == 1">
+      发型：<span>光头</span>
+    </div>
+    <div v-show="sex == 2">
+      发型：<span>大波浪</span>
+    </div>
+  </div>
+  <div>
+    同意：<input type="checkbox" v-model="isAgree">
+    <button :disabled="!isAgree" @click="next">下一步</button>
+    <!--disabled 属性：为true时按钮会被禁用；为false是可用状态-->
+    <!--disabled 属性是特殊的属性，存在就是true；v-bind以后，vue发现它绑定值是false的时候，会移除这个属性；-->
+  </div>
+  <div>
+    爱好：
+    <label>Node.js <input type="checkbox"
+                          @change="checkboxChange"
+                          v-model="hobby"
+                          value="1"></label>
+    <label>Vue.js <input type="checkbox"
+                         @change="checkboxChange"
+                         v-model="hobby"
+                         value="2"></label>
+    <label>React.js <input type="checkbox"
+                           v-model="hobby"
+                           @change="checkboxChange"
+                           value="3"></label>
+    <br>
+    {{hobby}}
+  </div>
+  <div>
+    今天中午吃啥？
+    <select v-model="lunch" @change="selectChange">
+      <option value="1">孟记粥铺</option>
+      <option value="2">张亮麻辣烫</option>
+      <option value="3">田老师</option>
+    </select>
+  </div>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+  // 1. Vue 绑定事件；v-on:不带on的事件名="方法名"; v-on: 可以简写成@
+
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      title: '',
+      num: 1,
+      price: 12.23456,
+      msg: '123',
+      sex: 1,
+      hobby: [],
+      isAgree: true,
+      lunch: 2,
+    },
+    methods: {
+      getData() {
+        // 发送ajax请求
+      },
+      fn(e, a, b) {
+        // 1. 绑定事件时不传参，事件函数的第一个参数是事件对象
+        // 2. 如果传参，事件函数收到的参数就是绑定事件小括号中传入的参数
+        // 3. 如果既需要传参有需要事件对象，就需要在小括号里面写一个$event
+        console.log('aaaaa');
+      },
+      add() {
+
+      },
+      radioChange() {
+        console.log(this.sex);
+      },
+      checkboxChange() {
+        console.log(this.hobby);
+      },
+      next() {
+        console.log('next');
+      },
+      selectChange() {
+        console.log(this.lunch);
+      }
+    },
+    filters: {
+      toFixed(val, num = 2) {
+        return val.toFixed(num)
+      },
+      toRMB(val) {
+        return '￥' + val;
+      }
+    },
+    created() {
+      // 在Vue的实例创建后会执行这个钩子
+      // 我们一般在这个函数中发请求
+      this.getData(); // 在这里面调用请求数据的方法
+
+    }
+  });
+
+  // 2. 事件修饰符
+  // 2.1 .prevent 阻止元素的默认行为
+  // 2.2 .stop 阻止冒泡
+  // 2.3 .capture 在捕获阶段触发
+  // 2.4 .once 只触发一次
+  // 2.5 .self 当自身事件触发时才执行事件函数
+
+  // 键盘事件修饰符：指定按下哪个按键时才触发事件函数
+  // .enter 回车键
+  // .esc esc键
+  // .tab tab键
+  // .delete 删除键
+  // .space 空格键
+  // .up 上
+  // .down 下
+  // .left 左
+  // .right 右
+
+  // 简易todoList(事件)：数据驱动，页面所有的变更都是基于数据的；视图是数据的映射，想让视图发生变化，我们要做的就是让数据发生变化，数据发生变化以后，vue会自动按照最新的数据渲染视图；
+
+  // Tab (选项卡)
+
+  // 过滤器：用来格式化数据的，但是不会改变原数据；
+  // 1. 全局过滤器
+  // Vue.filter(过滤器名，(val) => {})
+
+  // 2. 局部过滤器: filters
+
+  // v-model 和 表单元素
+
+
+
+
+
+</script>
+
+</body>
+</html>

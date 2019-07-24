@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>{{ reverseMsg }}</p>
+  <p>{{msg}}</p>
+</div>
+
+<script src="vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello'
+    },
+    computed: {
+      reverseMsg() {
+        return this.msg.split('').reverse().join('')
+      }
+    }
+  });
+  // 计算属性：处理某个或某些属性复杂展示逻辑，不会改变源数据；目的就是不要再模板中写太多的逻辑；
+</script>
+
+</body>
+</html>

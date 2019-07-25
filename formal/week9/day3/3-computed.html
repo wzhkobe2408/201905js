@@ -113,7 +113,7 @@
         set(val) {
           // 当修改checkAll属性的时候，会触发set方法，并且val会接收到checkAll的新值；
 
-          // console.log(val); // val就是修改checkAll时候传过来的值
+          // console.log(val); // val就是修改checkAll的时候传过来的值
           this.carts.forEach(item => item.isSelected = val)
         }
       }

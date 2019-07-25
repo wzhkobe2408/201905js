@@ -50,7 +50,7 @@
   <div>
     同意：<input type="checkbox" v-model="isAgree">
     <button :disabled="!isAgree" @click="next">下一步</button>
-    <!--disabled 属性：为true时按钮会被禁用；为false是可用状态-->
+    <!--disabled 属性：为true时按钮会被禁用；为false时是可用状态-->
     <!--disabled 属性是特殊的属性，存在就是true；v-bind以后，vue发现它绑定值是false的时候，会移除这个属性；-->
   </div>
   <div>
@@ -104,7 +104,7 @@
       fn(e, a, b) {
         // 1. 绑定事件时不传参，事件函数的第一个参数是事件对象
         // 2. 如果传参，事件函数收到的参数就是绑定事件小括号中传入的参数
-        // 3. 如果既需要传参有需要事件对象，就需要在小括号里面写一个$event
+        // 3. 如果既需要传参又需要事件对象，就需要在小括号里面写一个$event
         console.log('aaaaa');
       },
       add() {

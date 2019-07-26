@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <div>
+    <input type="text" v-model="keywords" @keydown.enter="search">
+  </div>
+  <ul class="ulList">
+    <li v-for="(item, index) in result" :key="index">
+      <p @click="showHide(index)">{{item.title}}</p>
+      <div v-html="item.content" v-show="item.flag"></div>
+    </li>
+  </ul>
+</div>
+
+<script src="axios.js"></script>
+<script src="vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      result: [],
+      flag: false,
+      keywords: ''
+    },
+    methods: {
+      queryData() {
+        // 字符串.trim() 去除字符串首尾空格的
+        if (!this.keywords.trim()) return;
+
+        axios.get('itz.json?keywords=' + this.keywords).then((res) => {
+          // console.log(res.data.data.listInfo);
+          let {data: {data: { listInfo }}} = res;
+
+          // 为了实现点击当前的问题，只让当前的答案展示出来，其他不受影响，我们扩展listInfo，给listInfo中的每一项增加一个flag；
+          listInfo.forEach(item => item.flag = false);
+          console.log(listInfo);
+          this.result = listInfo;
+        });
+      },
+      showHide(index) {
+        // this.flag = !this.flag;  // 所有的div都用了一个flag，导致点击一个，所有的都展开，再点就都收起来了。如果每个div都有自己的flag，点击事件发生时，我们只修改自己的flag，就和别人没关系了；
+        // 怎么让每个div有自己的flag？
+
+        // 我们去扩展源数据，给listInfo中的每一项扩展一个flag；
+        this.result[index].flag = !this.result[index].flag;
+      },
+      search() {
+        this.queryData()
+      }
+    },
+    created() {
+      // this.queryData();
+    }
+
+  })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      width: 400px;
+      margin: 30px auto;
+      border: 2px solid lightgreen;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="box">
+    <h2>用户信息登记</h2>
+    <div><label>姓名</label><input type="text" v-model="fields.name"></div>
+    <div><label>电话</label><input type="text" v-model="fields.phone"></div>
+    <div>性别：
+      <label>男：<input type="radio" value="1" v-model="fields.sex"></label>
+      <label>女：<input type="radio" value="2" v-model="fields.sex"></label>
+      <label>未知：<input type="radio" value="3" v-model="fields.sex"></label>
+    </div>
+    <div>
+      爱好：
+      <!--checkbox v-model同一个数组-->
+      <label>唱 <input type="checkbox" value="1" v-model="fields.hobby"></label>
+      <label>跳 <input type="checkbox" value="2" v-model="fields.hobby"></label>
+      <label>RAP <input type="checkbox" value="3" v-model="fields.hobby"></label>
+      <label>篮球 <input type="checkbox" value="4" v-model="fields.hobby"></label>
+    </div>
+    <div>
+      年级：
+      <select v-model="fields.grade">
+        <option value="">请选择</option>
+        <option value="1">初一</option>
+        <option value="2">初二</option>
+        <option value="3">初三</option>
+        <option value="4">高一</option>
+        <option value="5">高二</option>
+        <option value="6">高三</option>
+      </select>
+    </div>
+    <div>
+      备注：
+      <textarea cols="50" rows="20" v-model="fields.tips"></textarea>
+    </div>
+    <div>
+      <button @click="submit">提交</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="axios.js"></script>
+<script src="vue.js"></script>
+<!--有src的script标签不能写内嵌式js-->
+
+<script>
+  // input
+  // radio
+  // checkbox
+  // select
+  // textarea
+  // 把表单的值都获取到，然后在按钮的点击事件中把数据都post给服务端；
+
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      fields: {
+        name: '',
+        phone: '',
+        sex: '1',
+        hobby: [],
+        grade: '',
+        tips: ''
+      }
+    },
+    methods: {
+      submit() {
+        // 在这里把数据post给服务端
+        // 双向数据绑定，上面的表单都已经v-model 了data中的属性；现在需要获取这些表单的值，不需要再获取表单元素，当页面中表单的值发生变化时，自动绑定到data中的值了，所以我们直接拿data里面的属性就可以了
+       /* let data = {
+          name: this.name,
+          phone: this.phone,
+          sex: this.sex,
+          hobby: this.hobby,
+          grade: this.grade,
+          tips: this.tips
+        };*/
+        // console.log(data);
+        axios.post('/api/addUser', this.fields).then((res) => {
+          console.log(res);
+          if (res.data.code === 0) {
+            alert('保存成功')
+          } else {
+            alert(res.data.msg)
+          }
+        })
+      }
+    }
+  })
+
+</script>
+
+
+</body>
+</html>

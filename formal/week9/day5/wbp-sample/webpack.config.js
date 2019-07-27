@@ -5,6 +5,12 @@
 // 学习webpack，就是学习webpack配置文件的编写；webpack需要基于CommonJS风格导出一个配置对象；
 
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractText = require('extract-text-webpack-plugin');
+
+let extractCSS = new ExtractText('style.css');
+let extractLess = new ExtractText('style2.css');
+
+
 module.exports = {
   // 把所有的配置写在这个对象中
   entry: __dirname + '/app/main.js', // entry 入口 是webpack打包的起点，从这个文件开始查找依赖关系
@@ -12,6 +18,7 @@ module.exports = {
     // path: __dirname + '/public', // 打包后文件输出的路径
     path: __dirname + '/dist', // 打包后文件输出的路径
     filename: 'bundle1.js' // 打包后输出的文件名
+
   }, // output 是webpack打包以后输出的文件路径和文件名
   devtool: 'eval-source-map', // 生成source-map
   devServer: {
@@ -52,15 +59,22 @@ module.exports = {
       {
         // 配置css-loader
         test: /\.css$/,
-        use: [
+       /* use: [
           {loader: 'style-loader'},
           {loader: 'css-loader'}
-        ]
+        ]*/
+       use: extractCSS.extract({
+         fallback: 'style-loader',
+         use: 'css-loader'
+       })
       },
       {
         // 配置 less loader
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: extractLess.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'less-loader']
+        })
       },
       {
         // 配置 url-loader 加载图片
@@ -76,6 +90,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + '/public/index.html' // 指定一个模板，webpack按照这个模板生成一个html，并且把打包后的js引入进去
-    })
+    }),
+    extractCSS,
+    extractLess
   ]
 };
+
+// extract-text-webpack-plugin 现在的版本不支持webpack4，要安装beta版本
+// npm install extract-text-webpack-plugin@next​

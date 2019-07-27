@@ -20,3 +20,29 @@
 // 在package.json scripts下面的start比较特殊，执行start不需要写run，直接写 npm start
 // 其他的命令要npm run 命令
 
+
+// source-map
+// 代码打包之后，代码的可读性变的非常差，不利于调试。而浏览器有一种叫做source-map的机制，可以根据我们提供的source-map把打包之后代码虚拟还原成打包之前的样子，方便开发调试；
+// webpack可以自动生成source-map，配置即可
+// source-map 有很多种，source-map越详细，打包的速度就会越慢；
+// source-map虚拟还原出来的js，可以像调试真实的js一样，可以打断点；
+
+
+// webpack-dev-server
+// webpack 可以启动一个本地服务，主要有以下功能：
+// 1. 静态资源服务
+// 2. 让浏览器能够监听文件的变化，如果文件变化，页面自动刷新
+// 3. 可以代理客户端的请求，实现开发环境跨域
+// 使用前安装webpack-dev-server
+
+// loader ：帮助webpack处理非js的文件，因为webpack原则上webpack只处理js，处理其他文件就需要loaders；
+// webpack 中一切皆模块，都可以import，不是js的就需要loader的力量：
+
+// babel-loader(ES6/7 转 ES5 或者 JSX 转 JS )
+
+// css-loader style-loader (处理css文件)
+
+// less-loader 处理less，把less文件转成css
+
+// url-loader 处理图片
+

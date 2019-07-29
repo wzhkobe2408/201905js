@@ -6,7 +6,7 @@ module.exports = {
     path: __dirname + '/public', // 指定打包以后文件的输出路径
     filename: 'bundle[hash:5].js' // 打包以后输出后的文件名，后面如果有[hash:5]，表示文件名后面跟5位的md5戳记，为了区别上一次打包的文件，如果被打包的文件没有发生变更，hash不变（hash是由文件内容计算出来的）
   },
-  devtool: 'eval-source-map', // source-map 是浏览器的机制，可以把打包以后的文件虚拟还原成打包之前的样子，source-map越详细，打包的速度越慢； webpack可以生成source-map
+  devtool: 'eval-source-map', // source-map 是浏览器的机制，可以把打包以后的文件虚拟还原成打包之前的样子，source-map打包的越详细，打包的速度越慢； webpack可以生成source-map
   devServer: { // webpack-dev-server 是webpack在开发中开启的本地服务
     contentBase: './public', // 启动server加载html所在的路径
     port: 8080, // dev-server 启动的端口

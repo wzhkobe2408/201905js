@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app" :style="{color: xColor}">
+  <p ref="p1">{{msg}}</p>
+  <ul>
+   <!-- <li v-for="(item, index) in ary"
+        v-if="index % 2 != 0"
+        ref="listItem"
+        :key="index">{{item}}</li>-->
+    <li v-for="(item, index) in oddIndex"
+        ref="listItem"
+        :key="index">{{item}}</li>
+  </ul>
+</div>
+
+<script src="vue.js"></script>
+<script>
+  // Vue是数据驱动的，不提倡操作DOM；但是必要的时候还是需要操作DOM的；Vue为我们提供了专门的方式获取DOM；
+  // ref属性 和 vm.$refs
+
+  // 如果这个列表不需要全部渲染，可以写一个计算属性，v-for 这个计算属性
+  // 或者，v-if 条件渲染
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello',
+      ary: [1, 2, 3, 4],
+      xColor: ''
+    },
+    computed: {
+      oddIndex() {
+        return this.ary.filter((item, index) => index % 2 !== 0);
+      }
+    },
+    mounted() {
+      // console.log(this.$refs);
+      console.log(this.$refs.p1);
+      console.log(this.$refs.listItem);
+      // 我们通过this.$refs获取DOM元素；
+      this.$refs.p1.style.color = 'red'; // 可以实现，但是不推荐操作DOM；
+
+      // 首先要在获取的元素添加 ref="标识符" 的行内属性
+      // 获取的时候this.$refs.标识符 获取元素；
+      // 如果相同的ref有一个，获取到的就是带这个ref的原生元素对象
+      // 如果相同ref的有多个，获取到的所有带有这个ref的元素组成的数组
+    }
+  })
+
+</script>
+</body>
+</html>

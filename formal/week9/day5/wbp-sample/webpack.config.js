@@ -23,7 +23,7 @@ module.exports = {
   devtool: 'eval-source-map', // 生成source-map
   devServer: {
     // 配置webpack-dev-server
-    contentBase: './public',
+    contentBase: './public', // 启动服务器时，加载页面的路径
     historyApiFallback: true, // 单页面应用路由切换时不跳转页面，这个东西很重要
     inline: true, // 当文件变化时，浏览器实时刷新
     proxy: {

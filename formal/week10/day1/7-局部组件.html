@@ -57,10 +57,11 @@
     el: '#app2',
     data: {},
     components: { // 在vm2中要使用cxk和mabin，需要再次注册；不注册不能用
-      cxk,
+      cxk, // 被注册的组件如cxk、mabin叫做子组件；注册时所在的实例（或组件）叫做父组件
       mabin
     }
   });
+  //
 
 </script>
 

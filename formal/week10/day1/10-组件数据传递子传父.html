@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="vue.js"></script>
+<script>
+  let son = {
+    template: `<div>{{outermsg}} | {{double}}<button @click="fn">修改</button></div>`,
+    data() {
+      return {
+        msg: 'hello'
+      }
+    },
+    props: ['outermsg', 'double'],
+    methods: {
+      fn() {
+        // 在这里通知父组件修改数据，即在这里触发事件
+        this.$emit('change-msg', '呵呵哒'); // this.$emit(事件名, 传递给父组件的数据)
+      }
+    }
+  };
+  let vm = new Vue({
+    template: `<div><input type="text" v-model="pmsg">
+<son :outermsg="pmsg" double="pmsg" @change-msg="changeMsg"></son></div>`,
+    el: '#app',
+    data: {
+      pmsg: 'msg from parent'
+    },
+    components: {
+      son
+    },
+    methods: {
+      changeMsg(val) {
+        // val 子组件触发事件时传入的数据
+        this.pmsg = val;
+        // console.log(val);
+      }
+    }
+  });
+
+  // 当子组件要修改父组件数据时，要通知父组件，让父组件修改数据；
+
+  // 子传父：
+  // 1. 父组件在引用子组件的地方，要监听一个自定义事件（事件名可以用连字符，但是尽量不用驼峰命名法），并且给这个事件绑定一个事件函数，这个函数有一个形参，用来接收子组件传递过来的数据；
+  // 2. 子组件中，当子组件想要修改来自父组件的数据时，用this.$emit() 触发父组件监听的自定义事件，同时传入数据；
+  // 3. 当自定义事件被子组件触发时，会执行事件函数，我们把修改数据的逻辑写在这个函数就可以了；
+
+  // 子传父通过事件，父组件监听事件，子组件触发事件；
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <child :msg="pmsg"></child>
+</div>
+
+<script src="vue.js"></script>
+<script>
+  let child = {
+    template: `<div>{{msg}}</div>`,
+    data() {
+      return {}
+    },
+    // 使用带校验的props，props的值不再是数组而是一个对象，对象的属性名就是注册的prop，属性值是一个对象，这个对象中包含了校验规则，如果不符合规则会引发警告；
+    props: {
+      msg: {
+        type: Number, // 校验类型
+        required: true, // 如果为true必传，不传就会报错
+        // default: 200, // 默认值
+        default() {
+          // 如果默认值是一个对象或者数组，default要写成一个函数，在函数中return 这个对象或者数组
+          return {
+            name: '马宾',
+            age: 18
+          }
+        },
+        validator(val) {
+          // validator 是自定义的校验函数
+          // val 就是这prop 收到的值
+          // 自定义校验规则，如果校验通过return true，否则抛出异常或者return false
+          if (val >= 250) {
+            // throw new Error('你真是个250');
+            console.error('你真是250');
+            return false;
+          } else {
+            return true
+          }
+        }
+      }
+    }
+  };
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      pmsg: 250
+    },
+    components: {
+      child
+    }
+  })
+</script>
+</body>
+</html>

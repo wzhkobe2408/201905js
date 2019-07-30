@@ -30,7 +30,7 @@
       console.log(1);
       // console.log(this);
       console.log(this.msg); // undefined
-      console.log(this.$el); // this.$el 是根DOM节点，此时还没挂载，所以undefined
+      console.log(this.$el); // this.$el 是根DOM节点，此时还没挂载，所以是undefined
     },
     created() {
       // 在实例创建完成后被调用，此时数据观测、计算属性、事件绑定、watch都已配置完成；可以通过this访问data中的数据；

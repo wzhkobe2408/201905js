@@ -1,5 +1,9 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
+
+// Vue + webpack 单页面应用需要安装：vue-loader 、 vue-template-compiler
+let VueLoaderPlugin = require('vue-loader/lib/plugin'); // 引入 vue-loader plugin
+
 module.exports = {
   entry: './src/main.js', // 配置打包的入口
   output: {
@@ -46,6 +50,10 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|woff|ttf)$/,
         use: 'url-loader'
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
       }
     ]
   },
@@ -53,6 +61,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
+    new VueLoaderPlugin() // 除了上面配置loader，这里还要用一个插件
   ]
 };

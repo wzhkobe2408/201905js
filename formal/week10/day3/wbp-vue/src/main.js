@@ -18,5 +18,12 @@ new Vue({
   router
 });
 
+// 现阶段目标：main.js app.vue router.js 这三者是如何联系起来的；
+
+// main.js 是创建一个vue实例，最终只把 app.vue 这个组件挂载到 DOM 节点上； 而app.vue 中有 router-view ，而router-view 可以根据路由展示组件；组件通过路由映射表和路由关联起来，最后把路由映射表传给new VueRouter；
+
+// 最后把VueRouter的实例传给 Vue的实例；
+
+
 
 

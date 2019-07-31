@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/home">首页</router-link>
+  <router-link to="/about/12">关于12</router-link>
+  <router-link to="/about/13">关于13</router-link>
+
+  <router-view></router-view>
+</div>
+
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+
+<script>
+  let home = {
+    template: `<div>HOME</div>`
+  };
+
+  let about = {
+    template: `<div>About</div>`,
+    beforeRouteEnter(to, from, next) {
+      // 在渲染路由对应的该组件前被调用，
+      // 不！能！访问this，因为此时vue实例尚未创建
+      // to/from/next 和全局守卫一样的意义
+      // next();
+      // next(false);
+      // next('/home')
+      next();
+    },
+    beforeRouteUpdate(to, from, next) {
+      // 当前路由发生改变，但是组件被复用（没销毁）时被调用；适用于动态路由的参数发生变化时
+      // 要去往的路由参数 to.params
+      // 正要离开的路由的参数 from.params
+      console.log(to.params.id);
+      console.log(from.params.id);
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      // 导航要离开当前组件对应的路由时调用，从当前页去往其他页面的时候调用；可以用来做离开时提示用户信息没保存；
+      let doLeave = confirm('信息尚未保存，确定要离开吗？');
+      if (doLeave) {
+        next()
+      }
+    }
+  };
+
+  // 配置路由映射表
+  let routes = [
+    {
+      path: '/',
+      component: home
+    },
+    {
+      path: '/home',
+      component: home
+    },
+    {
+      path: '/about/:id',
+      component: about,
+    }
+  ];
+
+  // 创建VueRouter实例
+  let router = new VueRouter({
+    routes
+  });
+
+  let vm = new Vue({
+    el: '#app',
+    router
+  })
+</script>
+
+</body>
+</html>

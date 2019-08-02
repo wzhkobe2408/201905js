@@ -31,4 +31,30 @@ app.get('/api/books', (req, res) => {
   res.send(con)
 });
 
+// 删除图书
+app.get('/api/delete', (req, res) => {
+  let { id } = req.query;
+  let con = jdb(bookData);
+  con = con.filter(item => +item.bookId !== +id); // 删除
+  fs.writeFileSync(bookData, JSON.stringify(con), 'utf8');
+  res.send({
+    code: 0,
+    data: null,
+    msg: 'ok'
+  })
+});
+
+// 收藏图书
+app.post('/api/collect', (req, res) => {
+  let data = req.body;
+  let con = jdb(collectData);
+  con.push(data);
+  fs.writeFileSync(collectData, JSON.stringify(con), 'utf8');
+  res.send({
+    code: 0,
+    data: null,
+    msg: 'ok'
+  })
+});
+
 app.listen(8000, () => console.log('port 8000 is on'));

@@ -26,6 +26,7 @@ let routes = [
   },
   {
     path: '/detail/:id',
+    name: 'detail',
     component: Detail
   },
   {

@@ -3,10 +3,9 @@
     <Header :back="true">列表页</Header>
     <div class="content">
       <ul class="container">
-        <router-link v-for="(item, index) in allBooks"
-                     tag="li"
-                     :to="{name: 'detail', params: {id: item.bookId}}"
-                     :key="index">
+        <li v-for="(item, index) in allBooks"
+            @click="go(item.bookId)"
+            :key="index">
           <img :src="item.bookCover" alt="">
           <div class="right">
             <h4>{{item.bookName}}</h4>
@@ -15,7 +14,7 @@
             <button class="btn" @click.stop="remove(item.bookId)">删除</button>
             <button class="btn" @click.stop="collect(item)">收藏</button>
           </div>
-        </router-link>
+        </li>
       </ul>
     </div>
   </div>

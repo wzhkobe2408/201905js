@@ -9,3 +9,6 @@
 
 + : A space is required after ',' (comma-spacing) at src\views\Home.vue:19:134:
 + 数据项中 , 后面要有一个空格
+
++ error: Elements in iteration expect to have 'v-bind:key' directives
++ 写v-for的时候没有写 :key

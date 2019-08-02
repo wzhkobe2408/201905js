@@ -6,7 +6,7 @@
       <div class="container">
         <h2>热门图书</h2>
         <ul>
-          <li v-for="(book, index) in hotBooks">
+          <li v-for="(book, index) in hotBooks" :key="index">
             <img :src="book.bookCover" alt="">
             <b>{{book.bookName}}</b>
           </li>

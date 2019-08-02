@@ -11,13 +11,14 @@ Vue.use(Router)
 let routes = [
   {
     path: '/',
-    name: 'home',
     component: Home
+    // alias: '/home'
   },
   {
     path: '/home',
     name: 'home',
     component: Home
+    // alias: '/home'
   },
   {
     path: '/list',

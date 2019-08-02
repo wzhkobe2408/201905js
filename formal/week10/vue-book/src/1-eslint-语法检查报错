@@ -1,0 +1,11 @@
++ error: Strings must use singlequote (quotes) at src\views\Add.vue:7:9:
++ 字符串必须使用单引号；在 Add.vue 的第7行，第9列
+
++ error: Trailing spaces not allowed (no-trailing-spaces) at src\views\Add.vue:2:1:
++ 后面跟着的空格不允许有
+
++ error: The template root requires exactly one element (vue/valid-template-root) at src\views\Add.vue:1:1:
++ template 标签里面只需要一个子元素
+
++ : A space is required after ',' (comma-spacing) at src\views\Home.vue:19:134:
++ 数据项中 , 后面要有一个空格

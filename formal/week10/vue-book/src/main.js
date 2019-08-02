@@ -5,6 +5,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import VueAwesomeSwiper from 'vue-awesome-swiper' // 导入第三方的插件不需要写路径
+import 'swiper/dist/css/swiper.css' // 导入swiper需要的样式
+
+// 使用vue-awesome-swiper要导入然后use
+Vue.use(VueAwesomeSwiper)
+
 Vue.config.productionTip = false
 
 new Vue({

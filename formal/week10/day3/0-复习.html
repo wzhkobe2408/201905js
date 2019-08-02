@@ -35,7 +35,7 @@
 /*  props: {
     open: {
       type: Boolean, // type 校验类型需要写对应的构造函数Array Date Object Function Number ..
-      required: true, // 必传，要求父组件使用子组件时必须配置这个该prop
+      required: true, // 必传，要求父组件使用子组件时必须配置这个prop
       default: false, // 当前prop的默认值，父组件不传的时候生效
       default() { // 如果默认值是一个对象或者数组，default需要设置成一个函数，return一个数组或者对象
         return []
@@ -48,7 +48,7 @@
     }
   }*/
 
-  // 3. 父子组件mounted：子组件的mounted先执行，方便父组件获取子组件的实例（通过 ref），ref写在原生HTML标签上，获取到的原生DOM对象，如果写在组件标签上，获取到的是对组件实例的一个引用；
+  // 3. 父子组件mounted：子组件的mounted先执行，方便父组件获取子组件的实例（通过 ref），ref写在原生HTML标签上，获取到的是原生DOM对象，如果写在组件标签上，获取到的是对组件实例的一个引用；
 
   // 4. 动态组件：<component :is="title"></component> component组件会动态渲染 is 属性绑定的值所代表的组件；被切走的组件，其实例会被销毁，存在里面的数据随之销毁，被切走的组件称为失活组件，而当前被渲染的组件称为激活组件；
 
@@ -56,7 +56,7 @@
 
   // 6. 事件总线 EventBus : 用来解决非父子组件通信
   // 6.1 创建一个空的 vue 实例：let eventBus = new Vue();
-  // 6.2 谁的数据被修改，谁监听事件，一般 created 中监听事件，eventBus.$on(自定义事件名, 事件函数)
+  // 6.2 谁的数据被修改，谁监听事件，一般在 created 中监听事件，eventBus.$on(自定义事件名, 事件函数)
   // 6.3 谁发起修改，谁触发事件: eventBus.$emit(事件名, 数据)
   // vuex 可以解决这个问题
 

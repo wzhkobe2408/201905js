@@ -79,6 +79,40 @@ app.post('/api/update', (req, res) => {
     data: null,
     msg: 'ok'
   })
-})
+});
+
+// 获取收藏夹图书列表
+app.get('/api/collect', (req, res) => {
+  let con = jdb(collectData);
+  res.send(con)
+});
+
+// 从收藏夹中删除指定id的图书
+app.get('/api/rmCollect', (req, res) => {
+  let { id } = req.query;
+  let con = jdb(collectData);
+  con = con.filter(item => +item.bookId !== +id);
+  fs.writeFileSync(collectData, JSON.stringify(con), 'utf8');
+  res.send({
+    code: 0,
+    data: null,
+    msg: 'ok'
+  })
+});
+
+// 新增图书
+app.post('/api/add', (req, res) => {
+  let data = req.body;
+  let con = jdb(bookData);
+  data.bookId = con.length ? +con[con.length - 1].bookId + 1 : 1;
+  con.push(data);
+
+  fs.writeFileSync(bookData, JSON.stringify(con), 'utf8');
+  res.send({
+    code: 0,
+    data: null,
+    msg: 'ok'
+  })
+});
 
 app.listen(8002, () => console.log('port 8002 is on'));

@@ -12,3 +12,6 @@
 
 + error: Elements in iteration expect to have 'v-bind:key' directives
 + 写v-for的时候没有写 :key
+
++ error: 'getOneBook' is defined but never used (no-unused-vars) at src\views\Add.vue:32:10
++ 变量 getOneBook 定义了，但是从来没用过

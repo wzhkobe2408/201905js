@@ -17,7 +17,7 @@
             <input type="text" v-model="book.bookPrice" />
           </li>
         </ul>
-        <button class="btn">确认修改</button>
+        <button class="btn" @click="updateBook">确认修改</button>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@
 
 <script>
 import Header from '../components/Header.vue'
+import { getOneBook, updateBook } from '../model/list'
 
 export default {
   name: 'Detail',
@@ -35,6 +36,16 @@ export default {
         bookInfo: '',
         bookPrice: ''
       }
+    }
+  },
+  async created () {
+    let { id } = this.$route.params
+    this.book = await getOneBook(id)
+  },
+  methods: {
+    async updateBook () {
+      let result = await updateBook(this.book)
+      if (result.code === 0) this.$router.push('/list')
     }
   },
   components: {

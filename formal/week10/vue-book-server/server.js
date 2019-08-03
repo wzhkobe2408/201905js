@@ -57,4 +57,28 @@ app.post('/api/collect', (req, res) => {
   })
 });
 
-app.listen(8000, () => console.log('port 8000 is on'));
+// 根据id获取指定的图书信息
+app.get('/api/getOne', (req, res) => {
+  let { id } = req.query;
+  let con = jdb(bookData);
+  let byId = con.find(item => +item.bookId === +id);
+  res.send(byId);
+});
+
+// 修改图书信息
+app.post('/api/update', (req, res) => {
+  let data = req.body;
+  let con = jdb(bookData);
+  let index = con.findIndex(item => +item.bookId === +data.bookId);
+  data.bookId = +data.bookId; // 保证data中的bookId是number
+  con[index] = data;
+
+  fs.writeFileSync(bookData, JSON.stringify(con), 'utf8');
+  res.send({
+    code: 0,
+    data: null,
+    msg: 'ok'
+  })
+})
+
+app.listen(8002, () => console.log('port 8002 is on'));

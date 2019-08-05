@@ -5,6 +5,7 @@ import List from './views/List.vue'
 import Detail from './views/Detail.vue'
 import Collect from './views/Collect.vue'
 import Add from './views/Add.vue'
+import HomeByVuex from './views/HomeByVuex.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ let routes = [
   {
     path: '/add',
     component: Add
+  },
+  {
+    path: '/home-vuex',
+    component: HomeByVuex
   }
 ]
 

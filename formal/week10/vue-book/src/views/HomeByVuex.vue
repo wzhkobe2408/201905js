@@ -42,7 +42,7 @@ export default {
       return this.$store.state.hotBooks
     }*/
     ...mapState(['slidesAry', 'hotBooks']) // 用 mapState 从store中获取数据，和上面的通过 this.$store.state.xxxx 的方式等价
-    // mapState 从 store 中获取 slidesAry 和 hotBook以后，会通过 ... 展开到计算属性中，
+    // mapState 从 store 中获取 slidesAry 和 hotBook 以后，会通过 ... 展开到计算属性中，
   },
   created () {
     // 请求数据要触发 action
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     // mapMutations 和 mapActions 要写在methods里面
-    ...mapActions(['getSlider', 'getHotBook']) // mapActions 从store 中获取到 getSlider和getHotBook，然后通过 ... 展开到 methods中，就会个 methods 中增加 getSlider 和 getHotBook 方法，这两个方法可以直接通过 this 调用
+    ...mapActions(['getSlider', 'getHotBook']) // mapActions 从 store 中获取到 getSlider 和 getHotBook，然后通过 ... 展开到 methods中，就会给 methods 中增加 getSlider 和 getHotBook 方法，这两个方法可以直接通过 this 调用
   },
   components: {
     Header,

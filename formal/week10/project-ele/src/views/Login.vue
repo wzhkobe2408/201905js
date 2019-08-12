@@ -42,7 +42,9 @@ export default {
   methods: {
     async login () {
       let res = await Auth.login(this.user)
+      // debugger
       if (res.code === 0) {
+        // 把token 存到 ls 中：ls 是永久存储的（退出时要删除token）
         localStorage.setItem('ACCESS_TOKEN', res.data.token)
         this.$store.commit('updateToken', { token: res.data.token })
         this.$router.push('/')

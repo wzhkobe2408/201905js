@@ -27,13 +27,13 @@ let router = new Router({
   ]
 })
 
-router.beforeEach((to, form, next) => {
-  let token = localStorage.getItem('ACCESS_TOKEN')
-  if (token || to.fullPath === '/login') {
-    next()
-  } else {
-    next('/login')
-  }
-})
+// router.beforeEach((to, form, next) => {
+//   let token = localStorage.getItem('ACCESS_TOKEN')
+//   if (token || to.fullPath === '/login') {
+//     next()
+//   } else {
+//     next('/login')
+//   }
+// })
 
 export default router

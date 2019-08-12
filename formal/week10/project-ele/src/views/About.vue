@@ -45,10 +45,10 @@
 
     <el-dialog title="用户信息" :visible.sync="dialogFormVisible">
       <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
+        <el-form-item label="活动名称" >
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
+        <el-form-item label="活动名称" >
           <el-input v-model="form.age" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -83,6 +83,8 @@ export default {
   },
   methods: {
     async queryData () {
+      // 分页大多数情况下都是服务端分好页，前端只负责展示；这就要求前端请求数据的时候把 展示的页码和一页展示多少条数据传递给服务端；
+      // 服务端收到请求以后，会返回给对应的列表数据、一共有多少条（必传），当前是第几页，一页展示多少条
       let { page = 1, limit = 20 } = this
       let res = await About.getList(page, limit)
       let { list, total } = res.data

@@ -14,4 +14,4 @@ import ReactDOM from 'react-dom'
 // callback: 把 ele 渲染到页面后执行的回调函数，在这个回调函数中可以操作 DOM
 
 // src/index.js 是程序的主入口
-import './courses/2-jsx语法'
+import './courses/6-createElement'

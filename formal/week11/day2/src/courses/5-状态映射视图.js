@@ -7,7 +7,12 @@ class Header extends Component {
   }
 
   render () {
-    return <h1>{this.props.content}</h1>
+    return <h1>
+      {this.props.content} |
+      NUM: <span>{this.props.num}|
+      X:{this.props.x}</span> |
+      OK:<span>{this.props.ok}</span>
+    </h1>
   }
 }
 
@@ -65,17 +70,19 @@ class Counter extends Component {
     console.log('render 执行了')
     // 在 render 方法中，可以把 state 中的状态绑定到 jsx 中；this.state.xxx 的方式可以获取 state 中的 xxx 状态
     return (<div>
-      <Header content="这是史上最简洁的计数器" />
+      {/*此时 Header 就是 Counter 的子组件，父组件中的数据（state/props）可以通过 props
+      的方式传递给子组件，并且组件中的数据发生变更时，子组件的收到的值会自动变更*/}
+      <Header content="这是史上最简洁的计数器" {...this.state} ok={this.props.toHeader} />
       <p>NUM:{this.state.num}</p>
       <p>X:{this.state.x}</p>
 
       {/*给 jsx 元素绑定事件，需要在行内写驼峰命名的事件名，如 onClick onMouseOver onMouseOut ....*/}
       {/*事件函数写在原型上，但是要注意处理 this */}
       {/*<button onClick={this.handleClick.bind(this)}>加1</button>*/}
-
+      <p>{this.props.toHeader}</p>
       <button onClick={this.handleClick2}>加1</button>
     </div>)
   }
 }
 
-ReactDOM.render(<Counter />, document.getElementById('root'))
+ReactDOM.render(<Counter toHeader="ok" />, document.getElementById('root'))

@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import  './courses/4-属性映射视图' // 相当于把 0-复习.js 引入过来
+import  './courses/5-状态映射视图' // 相当于把 0-复习.js 引入过来
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 

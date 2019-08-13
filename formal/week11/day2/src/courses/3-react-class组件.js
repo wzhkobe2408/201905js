@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 // 用 class 声明组件；
 // 1. 声明 class 时要继承 React 上的 Component 类
-// 2. 在这个类的原型上，需要有一个 render 方法，并且 render 方法要返回一个根 jsx 元素
+// 2. 在这个类的原型上，需要有一个 render 方法，并且 render 方法要返回一个根 jsx 元素；写在 render 方法 return 后面的 jsx 相当于 .vue 文件 template 标签里面的内容
 // 3. 用 class 声明的组件，声明后就可以当做标签使用
 
 class Header extends React.Component {

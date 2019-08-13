@@ -8,7 +8,7 @@ function Welcome(props) {
 function tick() {
   let time = new Date().toLocaleTimeString()
 
-  ReactDOM.render(<Welcome time={time} />, document.getElementById('root'))
+  ReactDOM.render(<Welcome time={time} x='1' y='2' />, document.getElementById('root'))
 }
 // tick()
 // setInterval(tick, 1000)

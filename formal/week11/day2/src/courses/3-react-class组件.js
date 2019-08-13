@@ -52,6 +52,15 @@ ReactDOM.render(<Hello date={new Date().toLocaleTimeString()} />, document.getEl
 // 3. 把虚拟 DOM 转换成真实的 DOM，然后插入到页面中
 
 
+// function 和 class 声明的组件有什么区别：
 
+// React 也是数据驱动的。React 的组件数据来源有两个：props（属性） 和 state（状态）；
+// 用 class 声明的组件，有 state、props、this、生命周期的钩子
+// 而 function 声明的组件只有 props
+
+// props 是在组件被使用的时候写在其行内的属性，是从外部传给组件的数据
+// state 是用 class 声明的组件私有的数据，需要定义组件时就要声明状态
+
+// props 和 state 都是组件的数据来源，如果 props 或者 state 发生变化，对应的视图会自动更新
 
 

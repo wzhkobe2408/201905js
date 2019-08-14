@@ -4,8 +4,10 @@ import React, { Component } from 'react'
 export default class SliderArrow extends Component {
   render () {
     return (<div className="slider-arrow">
-      <span className="left">&lt;</span>
-      <span className="right">&gt;</span>
+      <span className="left"
+            onClick={() => this.props.turn(-1)}>&lt;</span>
+      <span className="right"
+            onClick={() => this.props.turn(1)}>&gt;</span>
     </div>)
   }
 }

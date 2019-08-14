@@ -75,4 +75,10 @@ ul, li {
   line-height: 30px;
   border-radius: 50%;
   background: #eee;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+.slider-dots span.active {
+  background: #00b38a;
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './courses/2-非受控组件'
+import './courses/3-生命周期'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './courses/3-生命周期'
+// import './courses/3-生命周期'
+
+import './slider'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 

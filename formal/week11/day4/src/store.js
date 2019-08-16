@@ -1,17 +1,11 @@
 // 1. 引入 createStore 方法，createStore 是用来创建 store 的方法
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 import * as Types from './action-types' // {ADD: 'ADD', MINUS: 'MINUS'}
 
+// counter 是托管和修改计数器的状态的 reducer
+function counter(state = {num: 9}, action) {
 
-// 2. 创建 store，需要告诉 store 托管的数据和修改这些数据的方法；
-// 告知 store 托管的数据和修改数据方法通过一种叫做 reducer 的函数完成；
-
-// 被 redux 托管的状态（数据）不允许直接修改，如果要修改通过 reducer；
-
-function reducer(state = {num: 9}, action) {
-  // state 是当前redux托管的数据，state 在 reducer 函数中的默认值就是 state 的初始值
-  // action 是修改状态具体的动作以及修改状态需要的参数；action 是一个带有 type 属性的对象，而 reducer 就是根据不同的 action.type 返回一个新的状态对象，以此实现修改状态的目的
   switch (action.type) {
     case Types.ADD:
       return {
@@ -27,16 +21,38 @@ function reducer(state = {num: 9}, action) {
   return state
 }
 
-// 创建 store ：给 createStore 传入 reducer
-let store = createStore(reducer)
+// todo 是托管任务列表状态的 reducer
+let initState = {
+  list: ['今天吃药了吗', '今天吃饭了吗'],
+  filter: 'all'
+} // initState 是 redux 托管的任务列表状态的初始值
+function todo(state = initState, action) {
+  switch (action.type) {
+    case Types.ADD_TODO:
+      return {
+        ...state,
+        list: [ // 这个 list 会覆盖掉上面 ... 展开出来的 list
+          ...state.list,
+          action.text // action.text 是dispatch的时候传来的载荷
+        ]
+      }
+  }
+  return state
+}
+
+// redux 是单一状态树，整个应用中只能有一个 store，但是有一个组件就有一个reducer，而 createStore 只能接收一个 reducer，此时我们需要合并这些 reducer，合并 reducer 需要一个 combineReducers 方法，这个方法在 redux 上，导入即可
+
+// 使用 combineReducers
+// 1. combineReducers 接收一个对象，对象中的属性名将会成为对应被托管状态的命名空间，如果获取状态需要通过命名空间获取：store.getState().命名空间
+// 2. combineReducers 会返回一个整合后的 reducer
+let zhengheReducers = combineReducers({
+  counter: counter,
+  todo: todo
+})
+
+
+// 创建 store ：给 createStore 传入整合后的 reducer
+let store = createStore(zhengheReducers)
 
 // 导出 store
 export default store
-
-// reducer 是修改状态的方法，但是不是用来直接执行的，如果需要修改 状态，我们需要 dispatch(actionObj)，传给 dispatch 的对象叫做 action，action 是一个必须带有 type 字段的对象，这个 action 将来会传给 reducer 函数；
-
-/*store.dispatch({
-  type: 'MINUS',
-  // 除了 type 以外的其他属性称为 payload （载荷）
-  amount: 1
-})*/

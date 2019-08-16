@@ -6,18 +6,27 @@ import store from '../store'
 import * as Types from '../action-types'
 window.__store = store
 
+
+
+// 在组件中使用 store
+// 1. 导入 store
+// 2. 用 store 中的数据初始化组件的 state，store.getState() 方法可以获取 store 中托管的数据
+// 3. 当要修改数据(store中的状态)的时候需要 dispatch action
+// 4. 如果需要视图更新，或者在 store 中的状态发生变化时有其他的操作，我们需要订阅状态变化
+
 export default class Counter extends Component {
   constructor (props, context) {
     super()
     this.state = {
-      // 使用 combineReducers 之后获取状态需要通过命名空间
-      num: store.getState().counter.num
+      num: store.getState().num
     }
   }
   componentDidMount () {
     this.unsub = store.subscribe(() => {
+      // 这个函数是添加到 store 更新后的订阅，当 store 中状态更新后，会自动执行这个回调函数
+      // 如果要更新视图，只能通过修改组件的数据的方式
       this.setState({
-        num: store.getState().counter.num
+        num: store.getState().num // 要把当前组件的 state 更新成 store 中的新值
       })
     })
   }

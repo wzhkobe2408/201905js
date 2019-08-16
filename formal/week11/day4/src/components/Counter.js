@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import Computed from './Computed'
 
 import store from '../store'
+
+import * as Types from '../action-types'
 window.__store = store
+
+
 
 // 在组件中使用 store
 // 1. 导入 store
@@ -32,12 +36,12 @@ export default class Counter extends Component {
   render () {
     return (<div className="container">
       <button onClick={(e) => store.dispatch({
-        type: 'ADD',
+        type: Types.ADD,
         amount: 2
       })}>+2</button>
       <span>{this.state.num}</span>
       <button onClick={(e) => store.dispatch({
-        type: 'MINUS',
+        type: Types.MINUS,
         amount: 3
       })}>-3</button>
       <Computed />

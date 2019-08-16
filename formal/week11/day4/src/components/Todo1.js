@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import store from '../store'
+import * as Types from '../action-types'
 
-// 从 store/action/ 中导入 actionCreator
-import actions from '../store/action/todo'
+function addTodo(text) {
+  return {
+    type: Types.ADD_TODO,
+    text
+  }
+}
 
 export default class Todo extends Component {
   constructor () {
@@ -24,7 +29,7 @@ export default class Todo extends Component {
     return (<div>
       <input type="text" onKeyDown={(e) => {
         if (e.keyCode === 13) {
-          store.dispatch(actions.addTodo(e.target.value))
+          store.dispatch(addTodo(e.target.value))
           e.target.value = ''
         }
       }

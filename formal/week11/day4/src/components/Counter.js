@@ -3,7 +3,9 @@ import Computed from './Computed'
 
 import store from '../store'
 
-import * as Types from '../action-types'
+// 创建 action 对象的函数，叫做 actionCreator，导入
+import actions from '../store/action/counter'
+
 window.__store = store
 
 export default class Counter extends Component {
@@ -26,15 +28,12 @@ export default class Counter extends Component {
   }
   render () {
     return (<div className="container">
-      <button onClick={(e) => store.dispatch({
-        type: Types.ADD,
-        amount: 2
-      })}>+2</button>
+      {/*如果某个 action 会被 dispatch 多次，用 actionCreator 可以简化代码；在需要action 的地方，调用 actionCreator 函数，并且传入 payload */}
+      <button onClick={(e) => store.dispatch(actions.add(1))}>+1</button>
+      <button onClick={(e) => store.dispatch(actions.add(2))}>+2</button>
+      <button onClick={(e) => store.dispatch(actions.add(3))}>+3</button>
       <span>{this.state.num}</span>
-      <button onClick={(e) => store.dispatch({
-        type: Types.MINUS,
-        amount: 3
-      })}>-3</button>
+      <button onClick={(e) => store.dispatch(actions.minus(3))}>-3</button>
       <Computed />
     </div>)
   }

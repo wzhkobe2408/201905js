@@ -8,7 +8,7 @@ export default function counter (state = {num: 9}, action) {
       }
     case Types.MINUS:
       return {
-        num: state.num - action.amount
+        num: state.num - action.payload
       }
   }
   return state

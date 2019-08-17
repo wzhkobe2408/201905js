@@ -1,29 +1,14 @@
 import React, { Component } from 'react'
 
-import store from '../store'
+import { connect } from 'react-redux'
 
-
-export default class Computed extends Component {
-  constructor () {
-    super()
-    this.state = {
-      num: store.getState().counter.num
-    }
-  }
-  componentDidMount () {
-    this.unsub = store.subscribe(() => {
-      this.setState({
-        num: store.getState().counter.num
-      })
-    })
-  }
-  componentWillUnmount () {
-    this.unsub()
-  }
+class Computed extends Component {
 
   render () {
     return (<h2>
-      {this.state.num % 2 === 0 ? '偶数': '奇数'}
+      {this.props.num % 2 === 0 ? '偶数': '奇数'}
     </h2>)
   }
 }
+
+export default connect(state => ({...state.counter}))(Computed)

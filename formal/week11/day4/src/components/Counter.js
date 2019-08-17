@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Computed from './Computed'
 
-import store from '../store'
-
 // 使用 react-redux 来优化使用 redux 的过程，使用 connect 来实现
 
 // 1. 导入 connect 方法
@@ -56,10 +54,16 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter)
 
 // connect 的用法：
 // connect 是一个高阶函数：let connect = (ms, md) => (component) => {}
 // connect 后面可以跟两个执行：
 // 第一个执行要传递两个参数：mapStateToProps, mapDispatchToProps
 // 第二个执行传入需要被连接的组件
+
+// mapStateToProps、mapDispatchToProps 的简化用法
+// mapStateToProps 可以简化成一个箭头函数，通过 ... 展开 state 中的状态
+// mapDispatchToProps 可以简化成一个 actionCreator 对象，此时 actionCreator 对象中的属性名就成了组件的 props
+
+export default connect(state => ({...state.counter}), actions)(Counter)

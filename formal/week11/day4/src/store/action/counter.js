@@ -16,6 +16,6 @@ function minus(amount) {
 }
 
 export default {
-  add,
-  minus
+  add: add,
+  minus: minus
 }

@@ -8,6 +8,9 @@ import Todo from './components/Todo'
 
 import ContextTest from './courses/4-context'
 
+import Username from './courses/5-Username'
+import Password from './courses/5-Password'
+
 function App() {
   let header = <h1>这是个Heading</h1>
   let body = <p>这是一段文本主题</p>
@@ -31,7 +34,9 @@ function App() {
         </section>
       </Panel>*/}
       {/*<Todo></Todo>*/}
-      <ContextTest></ContextTest>
+      {/*<ContextTest></ContextTest>*/}
+      <Username />
+      <Password />
     </div>
   );
 }

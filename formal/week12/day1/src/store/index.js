@@ -3,7 +3,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import todoReducer from './reducer/todo'
 
-let store = createStore(todoReducer)
+import reduxLogger from 'redux-logger'
+
+let store = createStore(todoReducer, applyMiddleware(reduxLogger))
 
 export default store
 

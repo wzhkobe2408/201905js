@@ -8,7 +8,10 @@
 // 6. 当组件要销毁时，取消订阅
 
 // react-redux
-// 1. 把 store 引入组件树
+// 1. 通过 Provider 组件把 store 引入组件树
+// 2. 用 connect 改造组件，mapStateToProps、mapDispatchToProps，以及二者的简化写法
+// 3. 导出 connect 连接后的组件
+
 
 // redux 中间件
 

@@ -6,6 +6,8 @@ import Panel from './courses/2-组合'
 
 import Todo from './components/Todo'
 
+import ContextTest from './courses/4-context'
+
 function App() {
   let header = <h1>这是个Heading</h1>
   let body = <p>这是一段文本主题</p>
@@ -21,14 +23,15 @@ function App() {
         <h1>这是个panel</h1>
         <p>这是p标签</p>
       </Panel>*/}
-      <Panel head={header}
+      {/*<Panel head={header}
              body={body}
              footer={footer}>
         <section>
           <p>p1</p>
         </section>
-      </Panel>
-      <Todo></Todo>
+      </Panel>*/}
+      {/*<Todo></Todo>*/}
+      <ContextTest></ContextTest>
     </div>
   );
 }

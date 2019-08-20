@@ -33,10 +33,10 @@ function createStore(reducer) {
 
 function combineReducers(reducers) {
   // reducers: {counter: counter, todo: todo }
-  // 合并之前:
+  // 合并之前的状态:
   // counter: {num: 1}
   // todo: {list: [], filter: 'all'}
-  // 合并之后：
+  // 合并之后的状态：
   // {counter: {num: 1}, todo: {list: [], filter}}
 
   // combineReducers 函数的返回值可以直接传给 createStore，说明它 combineReducer 的返回值是一个新的 reducer；而 reducer 是会返回状态对象的函数；

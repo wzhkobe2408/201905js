@@ -15,6 +15,8 @@ import ThemeContext from './courses/ThemeContext'
 import Username from './courses/Username'
 import Password from './courses/Password'
 
+import Counter from './rdx/Counter'
+
 function App() {
   return (
     <ThemeContext.Provider value={{theme: 'danger'}}>
@@ -24,8 +26,13 @@ function App() {
         {/*<Button />*/}
       </div>
       <div>
-        <Username />
-        <Password />
+        {/*<Username />*/}
+        {/*<Password />*/}
+      </div>
+      <div className='container'>
+        <div className="col-md-3 col-md-offset-4">
+          <Counter />
+        </div>
       </div>
 
     </ThemeContext.Provider>

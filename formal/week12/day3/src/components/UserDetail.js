@@ -12,6 +12,7 @@ export default class UserDetail extends Component {
 
   componentWillMount () {
     // props.match.params 属性时动态路由参数对象，属性名是动态路由设置的时候 : 后面的值，值动态路由具体的值；
+    console.log(this.props.match.params)
     let { id } = this.props.match.params
     let listStr = localStorage.getItem('list')
     let list = JSON.parse(listStr)

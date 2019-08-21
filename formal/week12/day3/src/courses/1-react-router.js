@@ -29,9 +29,6 @@
 // 当我们需要它匹配到一个路由后，后面的就不要再匹配了，此时我们需要一个  Switch 组件；Switch 组件也是 react-router-dom 的内置组件，导出才能使用；
 // Route 组件要放在 Switch 组件的里面；
 
-
-
-
-
-
+// 设置 NotFound 页面：
+// 设置 Route 组件，但是不设置 path 属性；只设置 component 属性；当所有其他带有 path 的 Route 都没能匹配到当前页面的路径时，就会渲染这没有 path 的 Route 对应的 component
 

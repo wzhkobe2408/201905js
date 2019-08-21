@@ -1,0 +1,7 @@
+li.active {
+  background: red;
+  color: #fff;
+}
+li.active a {
+  color: #fff;
+}

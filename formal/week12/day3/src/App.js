@@ -9,6 +9,7 @@ import User from "./components/User";
 import Profile from "./components/Profile"
 import Login from './components/Login'
 import PrivateRoute from './components/Protected'
+import NotFound from './components/NotFound'
 
 class App extends React.Component {
   render () {
@@ -39,6 +40,7 @@ class App extends React.Component {
           <PrivateRoute path='/user' component={User}></PrivateRoute>
           <PrivateRoute path='/profile' component={Profile}></PrivateRoute>
           <Route path='/login' component={Login}></Route>
+          <Route component={NotFound}></Route>
         </Switch>
       </div>
     </div>)

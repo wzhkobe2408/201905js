@@ -6,10 +6,10 @@
 
 import * as Types from '../action-types'
 
-import { getSliders } from '../../api/home'
+import { getSliders, fetchLessons } from '../../api/home'
 
 let actions = {
-  setLesson () {
+  setCurrentLesson () {
     // 筛选
   },
   setSliders () {
@@ -21,6 +21,16 @@ let actions = {
       dispatch({
         type: Types.GET_SLIDERS_SUCCESS,
         payload: getSliders()
+      })
+    }
+  },
+  setLessons () {
+    return (dispatch, getState) => {
+      let { currentLesson, lessons: { limit, offset }} = getState().home
+      dispatch({type: Types.GET_LESSONS})
+      dispatch({
+        type: Types.GET_LESSONS_SUCCESS,
+        payload: fetchLessons(limit, offset, currentLesson)
       })
     }
   }

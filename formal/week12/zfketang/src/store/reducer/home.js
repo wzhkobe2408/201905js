@@ -5,6 +5,12 @@ let initHomeState = {
   sliders: {
     loading: false,
     list: []
+  },
+  lessons: {
+    loading: false,
+    limit: 5,
+    offset: 0,
+    list: []
   }
 }
 
@@ -29,6 +35,27 @@ export default function home(state = initHomeState, action) {
         sliders: {
           loading: false,
           list: action.payload
+        }
+      }
+    case Types.GET_LESSONS:
+      return {
+        ...state,
+        lessons: {
+          ...state.lessons,
+          loading: true
+        }
+      }
+    case Types.GET_LESSONS_SUCCESS:
+      return {
+        ...state,
+        lessons: {
+          ...state.lessons,
+          loading: false,
+          offset: state.lessons.list.length + action.payload.list.length,
+          list: [
+            ...state.lessons.list,
+            ...action.payload.list
+          ]
         }
       }
   }

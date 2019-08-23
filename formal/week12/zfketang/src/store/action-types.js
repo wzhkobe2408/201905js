@@ -7,3 +7,7 @@ export const GET_SLIDERS = 'GET_SLIDERS'
 
 // 2. 请求轮播图图片成功
 export const GET_SLIDERS_SUCCESS = 'GET_SLIDERS_SUCCESS'
+
+// 请求课程列表：
+export const GET_LESSONS = 'GET_LESSONS'
+export const GET_LESSONS_SUCCESS = 'GET_LESSONS_SUCCESS'

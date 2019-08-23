@@ -3,7 +3,15 @@ import HomeHeader from './HomeHeader'
 
 import './index.less'
 
-export default class Home extends Component {
+import actions from '../../store/actions/home'
+
+import { connect } from 'react-redux'
+
+class Home extends Component {
+  componentDidMount () {
+    // 请求轮播图需要的数据
+    this.props.setSliders()
+  }
   changeType = (val) => {
     console.log(val)
   }
@@ -14,3 +22,5 @@ export default class Home extends Component {
     </div>)
   }
 }
+
+export default connect(state => ({...state.home}), actions)(Home)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HomeHeader from './HomeHeader'
 import HomeSlider from './HomeSlider'
 import HomeList from './HomeList'
+import Loading from '../../components/Loading/Loading'
 
 import './index.less'
 
@@ -32,13 +33,22 @@ class Home extends Component {
     return (<div>
       <HomeHeader changeType={this.changeType} />
       <div className='content' ref={el => this.el = el}>
-        <HomeSlider list={this.props.sliders.list} />
+        {
+          this.props.sliders.loading
+            ? <Loading />
+            : <HomeSlider list={this.props.sliders.list} />
+        }
         <div className="container">
           <h3>
             <i className="iconfont icon-wode_kecheng"></i>
             我的课程
           </h3>
           <HomeList list={this.props.lessons.list} />
+          {
+            this.props.lessons.loading
+              ? <Loading />
+              : null
+          }
         </div>
       </div>
     </div>)

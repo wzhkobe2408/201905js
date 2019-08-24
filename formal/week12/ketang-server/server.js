@@ -18,6 +18,7 @@ app.get('/api/lessons', (req, res) => {
   limit = +limit
   offset = +offset
   let data = JSON.parse(fs.readFileSync('./database/lessons.json', 'utf8'))
+
   let list = data.slice(offset, limit + offset)
   res.send({
     list

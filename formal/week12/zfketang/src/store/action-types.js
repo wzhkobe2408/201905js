@@ -11,3 +11,6 @@ export const GET_SLIDERS_SUCCESS = 'GET_SLIDERS_SUCCESS'
 // 请求课程列表：
 export const GET_LESSONS = 'GET_LESSONS'
 export const GET_LESSONS_SUCCESS = 'GET_LESSONS_SUCCESS'
+
+// 清空课程
+export const CLEAR_LESSONS = 'CLEAR_LESSONS'

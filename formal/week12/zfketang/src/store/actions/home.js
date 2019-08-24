@@ -9,8 +9,27 @@ import * as Types from '../action-types'
 import { getSliders, fetchLessons } from '../../api/home'
 
 let actions = {
-  setCurrentLesson () {
+  setCurrentLesson (lesson, cb) {
     // 筛选
+    return (dispatch, getState) => {
+      dispatch({type: Types.SET_CURRENT_LESSON, lesson})
+      // 清空原有的课程列表
+      dispatch({type: Types.CLEAR_LESSONS})
+      // 重新请求课程列表: 两种解决方案：
+      // 1.
+      // actions.setLessons()(dispatch, getState)
+      cb()
+    }
+  },
+  reRefresh () {
+    // 刷新课程列表
+
+    return (dispatch, getState) => {
+      // 1. 清空原有的课程列表
+      dispatch({type: Types.CLEAR_LESSONS})
+      // 2. 重新请求课程列表
+      actions.setLessons()(dispatch, getState)
+    }
   },
   setSliders () {
     return (dispatch, getState) => {
@@ -26,7 +45,8 @@ let actions = {
   },
   setLessons () {
     return (dispatch, getState) => {
-      let { currentLesson, lessons: { limit, offset }} = getState().home
+      let { currentLesson, lessons: { limit, offset, loading }} = getState().home
+      if (loading) return // 如果正在加载，先不要请求
       dispatch({type: Types.GET_LESSONS})
       dispatch({
         type: Types.GET_LESSONS_SUCCESS,

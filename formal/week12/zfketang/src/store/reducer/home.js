@@ -58,6 +58,16 @@ export default function home(state = initHomeState, action) {
           ]
         }
       }
+    case Types.CLEAR_LESSONS:
+      return {
+        ...state,
+        lessons: {
+          ...state.lessons,
+          loading: false,
+          offset: 0,
+          list: []
+        }
+      }
   }
   return state
 }

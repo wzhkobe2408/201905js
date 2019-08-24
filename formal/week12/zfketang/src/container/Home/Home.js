@@ -8,6 +8,7 @@ import './index.less'
 import actions from '../../store/actions/home'
 
 import { connect } from 'react-redux'
+import { loadMore, pullRefresh } from '../../utils'
 
 class Home extends Component {
   componentDidMount () {
@@ -16,14 +17,21 @@ class Home extends Component {
 
     // 请求课程列表数据
     this.props.setLessons()
+
+    // 滑动到底加载更多
+    loadMore(this.el, this.props.setLessons)
+
+    // 下拉刷新
+    pullRefresh(this.el, this.props.reRefresh)
   }
   changeType = (val) => {
     console.log(val)
+    this.props.setCurrentLesson(val, this.props.setLessons)
   }
   render () {
     return (<div>
       <HomeHeader changeType={this.changeType} />
-      <div className='content'>
+      <div className='content' ref={el => this.el = el}>
         <HomeSlider list={this.props.sliders.list} />
         <div className="container">
           <h3>
